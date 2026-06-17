@@ -1,0 +1,4057 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>教育行业直播代播资源梳理</title>
+<style>
+    :root {
+      --primary: #1a73e8;
+      --primary-dark: #1557b0;
+      --primary-light: #e8f0fe;
+      --bg: #f0f2f5;
+      --card-bg: #ffffff;
+      --text: #2c3e50;
+      --text-light: #5f6b7a;
+      --border: #e1e4e8;
+      --edu-bg: #e8f5e9;
+      --edu-border: #66bb6a;
+      --edu-text: #2e7d32;
+      --edu-deep: #1b5e20;
+      --tag-bg: #eef2f7;
+      --highlight: #fff3e0;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.06);
+      --shadow-md: 0 4px 16px rgba(0,0,0,0.08);
+      --radius: 12px;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      padding: 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    /* ===== Header ===== */
+    .header {
+      text-align: center;
+      padding: 40px 20px 30px;
+      background: linear-gradient(135deg, #1a73e8 0%, #0d47a1 100%);
+      color: white;
+      border-radius: var(--radius);
+      margin-bottom: 24px;
+      box-shadow: 0 8px 32px rgba(26,115,232,0.25);
+    }
+    .header h1 { font-size: 2em; font-weight: 700; margin-bottom: 6px; }
+    .header p { font-size: 1em; opacity: 0.9; }
+    .legend {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--edu-bg); border: 1px solid var(--edu-border);
+      color: var(--edu-text); padding: 6px 14px; border-radius: 8px;
+      font-size: 0.85em; margin-top: 12px;
+    }
+    .legend-dot { width: 10px; height: 10px; background: var(--edu-border); border-radius: 50%; display: inline-block; }
+
+    /* ===== Search Box ===== */
+    .search-container {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--bg);
+      padding: 16px 0 12px;
+      margin-bottom: 8px;
+    }
+    .search-box {
+      display: flex;
+      align-items: center;
+      background: var(--card-bg);
+      border: 2px solid var(--border);
+      border-radius: 50px;
+      padding: 10px 20px;
+      box-shadow: var(--shadow-md);
+      transition: border-color 0.3s, box-shadow 0.3s;
+    }
+    .search-box:focus-within {
+      border-color: var(--primary);
+      box-shadow: 0 4px 20px rgba(26,115,232,0.2);
+    }
+    .search-icon {
+      width: 22px; height: 22px;
+      color: var(--text-light);
+      margin-right: 12px;
+      flex-shrink: 0;
+    }
+    .search-input {
+      flex: 1;
+      border: none;
+      outline: none;
+      font-size: 1em;
+      color: var(--text);
+      background: transparent;
+      line-height: 1.5;
+    }
+    .search-input::placeholder { color: #b0b8c4; }
+    .search-clear {
+      display: none;
+      width: 22px; height: 22px;
+      border: none;
+      background: #e8eaed;
+      border-radius: 50%;
+      cursor: pointer;
+      color: var(--text-light);
+      font-size: 14px;
+      line-height: 22px;
+      text-align: center;
+      flex-shrink: 0;
+      transition: background 0.2s;
+    }
+    .search-clear:hover { background: #dadce0; }
+    .search-clear.show { display: block; }
+    .search-stats {
+      text-align: center;
+      font-size: 0.85em;
+      color: var(--text-light);
+      padding: 6px 0 0;
+      display: none;
+    }
+    .search-stats.show { display: block; }
+    .search-stats strong { color: var(--primary); }
+    .accordion-item.search-hidden { display: none; }
+    .accordion-item.search-match .accordion-header { background: linear-gradient(90deg, rgba(26,115,232,0.06) 0%, transparent 100%); }
+
+    /* ===== Accordion ===== */
+    .accordion-item {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      margin-bottom: 10px;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--border);
+      overflow: hidden;
+      transition: box-shadow 0.3s;
+    }
+    .accordion-item:hover { box-shadow: var(--shadow-md); }
+    .accordion-item.open { box-shadow: 0 6px 24px rgba(0,0,0,0.1); }
+
+    .accordion-header {
+      display: flex; align-items: center; gap: 14px;
+      padding: 14px 90px 14px 20px;
+      cursor: pointer; user-select: none;
+      transition: background 0.2s;
+    }
+    .accordion-header:hover { background: #f8f9fa; }
+    .accordion-arrow {
+      width: 20px; height: 20px;
+      transition: transform 0.3s ease;
+      flex-shrink: 0; color: var(--primary);
+    }
+    .accordion-item.open .accordion-arrow { transform: rotate(90deg); }
+
+    .company-name-inline {
+      font-size: 1.05em; font-weight: 600; color: var(--primary-dark);
+      white-space: nowrap; flex-shrink: 0;
+    }
+    .company-tags-inline {
+      display: flex; flex-wrap: wrap; gap: 6px; margin-left: 8px;
+    }
+    .tag {
+      background: var(--tag-bg); color: var(--text-light);
+      padding: 2px 10px; border-radius: 14px; font-size: 0.78em; font-weight: 500;
+    }
+    .tag.edu { background: var(--edu-bg); color: var(--edu-text); border: 1px solid var(--edu-border); }
+    .company-brief {
+      margin-left: auto; font-size: 0.82em; color: #5a6a7a;
+      white-space: nowrap; flex-shrink: 0;
+      background: #f0f4f8; padding: 3px 14px; border-radius: 6px;
+      font-weight: 500;
+    }
+
+    /* ===== Accordion Body ===== */
+    .accordion-body {
+      max-height: 0; overflow: hidden;
+      transition: max-height 0.4s ease;
+    }
+    .accordion-item.open .accordion-body { max-height: none; }
+    .accordion-content { padding: 0 24px 24px; }
+
+    /* ===== Section ===== */
+    .detail-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 12px; margin-top: 16px;
+    }
+    .detail-grid .detail-section {
+      width: 100%;
+    }
+    .detail-section {
+      background: #fafbfc; border-radius: 10px; padding: 16px;
+      border: 1px solid var(--border);
+    }
+    .section-title {
+      font-size: 0.92em; font-weight: 600; color: var(--primary-dark);
+      margin-bottom: 8px; display: flex; align-items: center; gap: 6px;
+    }
+    .section-title::before {
+      content: ""; display: inline-block; width: 3px; height: 14px;
+      background: var(--primary); border-radius: 2px;
+    }
+    .section-body { font-size: 0.88em; color: var(--text-light); }
+    .section-body p { margin-bottom: 6px; }
+    .section-body ul { padding-left: 16px; }
+    .section-body li { margin-bottom: 4px; }
+
+    /* ===== Case Items ===== */
+    .full-width { grid-column: 1 / -1; }
+    .case-item {
+      background: white; border-radius: 10px; padding: 14px 16px;
+      margin-bottom: 10px; border-left: 4px solid var(--primary);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    }
+    .case-item.edu-case {
+      border-left-color: var(--edu-border); background: var(--edu-bg);
+    }
+    .case-title { font-weight: 600; color: var(--text); margin-bottom: 5px; font-size: 0.93em !important; letter-spacing: 0; }
+    .case-detail { font-size: 0.85em; color: var(--text-light); line-height: 1.65; }
+    .case-metrics { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
+    .metric {
+      background: var(--tag-bg); padding: 3px 10px; border-radius: 6px;
+      font-size: 0.8em; color: var(--text);
+    }
+    .metric.hl { background: var(--tag-bg); padding: 3px 10px; border-radius: 6px; font-size: 0.8em; color: var(--text); }
+
+    /* ===== Client Tags ===== */
+    .client-list { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+    .client-tag {
+      background: #e3f2fd; color: #1565c0;
+      padding: 3px 10px; border-radius: 14px; font-size: 0.8em;
+    }
+    .client-tag.edu-client {
+      background: var(--edu-bg); color: var(--edu-text);
+      border: 1px solid var(--edu-border);
+    }
+
+    /* ===== Pricing ===== */
+    .pricing-box {
+      background: linear-gradient(135deg, #fff8e1 0%, #ffecb3 100%);
+      border: 1px solid #ffc107; border-radius: 10px;
+      padding: 16px; margin-top: 8px;
+    }
+    .pricing-title { font-weight: 600; color: #f57c00; margin-bottom: 6px; font-size: 0.92em; }
+    .pricing-item { font-size: 0.88em; color: var(--text); padding: 3px 0; }
+
+    /* ===== Document Viewer ===== */
+    .doc-viewer {
+      margin-top: 16px; border: 1px solid var(--border);
+      border-radius: 10px; overflow: hidden; background: #f5f5f5;
+    }
+    .doc-viewer-header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 10px 16px; background: #fafafa; border-bottom: 1px solid var(--border);
+    }
+    .doc-viewer-title { font-size: 0.88em; font-weight: 600; color: var(--text); }
+    .doc-viewer-btn {
+      padding: 5px 14px; border-radius: 6px; border: 1px solid var(--primary);
+      color: var(--primary); background: white; font-size: 0.82em;
+      cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 4px;
+    }
+    .doc-viewer-btn:hover { background: var(--primary-light); }
+    .doc-viewer-frame {
+      width: 100%; height: 500px; border: none;
+    }
+
+    /* ===== Responsive ===== */
+    @media (max-width: 768px) {
+      body { padding: 10px; }
+      .detail-grid { gap: 10px; }
+      .accordion-header { flex-wrap: wrap; padding: 12px 70px 12px 14px; }
+      .company-brief { margin-left: 0; margin-top: 4px; width: 100%; text-align: center; }
+      .company-tags-inline { margin-left: 0; margin-top: 4px; }
+    }
+  
+    /* ===== Category Navigation ===== */
+    .category-nav {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+    }
+    .category-tab {
+      padding: 8px 20px;
+      border-radius: 50px;
+      border: 2px solid var(--border);
+      background: var(--card-bg);
+      cursor: pointer;
+      font-size: 0.9em;
+      font-weight: 500;
+      transition: all 0.25s;
+      color: var(--text);
+    }
+    .category-tab:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+    .category-tab.active {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: #fff;
+    }
+    .category-tab .tab-count {
+      display: inline-block;
+      background: rgba(255,255,255,0.3);
+      border-radius: 10px;
+      padding: 1px 7px;
+      font-size: 0.8em;
+      margin-left: 4px;
+    }
+    .category-tab.active .tab-count {
+      background: rgba(255,255,255,0.25);
+    }
+    /* ===== Category Group ===== */
+    .category-group {
+      margin-bottom: 32px;
+    }
+    .category-header {
+      padding: 16px 24px;
+      border-radius: var(--radius);
+      margin-bottom: 16px;
+      color: inherit;
+      font-size: 1.2em;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .category-header .cat-desc {
+      font-size: 0.75em;
+      font-weight: 400;
+      opacity: 0.7;
+    }
+    .category-header.cat-agent {
+      background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+      color: #1565c0;
+    }
+    .category-header.cat-daibo {
+      background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+      color: #2e7d32;
+    }
+    .category-header.cat-saas {
+      background: linear-gradient(135deg, #f3e5f5 0%, #e1bee7 100%);
+      color: #6a1b9a;
+    }
+    .category-group.category-hidden {
+      display: none;
+    }
+    /* ===== Sub-sector Tags ===== */
+    /* ===== Category Badge on Card ===== */
+    .accordion-item {
+      position: relative;
+    }
+    .accordion-item[data-category="代理商"]::before {
+      content: "代理商";
+      position: absolute;
+      top: 0; right: 16px;
+      padding: 2px 10px;
+      border-radius: 0 0 8px 8px;
+      font-size: 0.7em;
+      font-weight: 600;
+      color: #fff;
+      background: #1565c0;
+      z-index: 2;
+    }
+    .accordion-item[data-category="三方代播公司"]::before {
+      content: "代播公司";
+      position: absolute;
+      top: 0; right: 16px;
+      padding: 2px 10px;
+      border-radius: 0 0 8px 8px;
+      font-size: 0.7em;
+      font-weight: 600;
+      color: #fff;
+      background: #2e7d32;
+      z-index: 2;
+    }
+    .accordion-item[data-category="直播SaaS服务商"]::before {
+      content: "SaaS";
+      position: absolute;
+      top: 0; right: 16px;
+      padding: 2px 10px;
+      border-radius: 0 0 8px 8px;
+      font-size: 0.7em;
+      font-weight: 600;
+      color: #fff;
+      background: #6a1b9a;
+      z-index: 2;
+    }
+    /* ===== No Education Case Notice ===== */
+    .no-edu-case-notice {
+      background: #fff8e1;
+      border: 1px solid #ffe082;
+      color: #795548;
+      padding: 10px 16px;
+      border-radius: 8px;
+      font-size: 0.9em;
+      text-align: center;
+    }
+
+    /* ===== Page Hero ===== */
+    .page-hero {
+      background: linear-gradient(135deg, #1a73e8 0%, #0d47a1 60%, #1565c0 100%);
+      padding: 32px 28px 26px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .page-hero::before {
+      content: '';
+      position: absolute; top: -50%; right: -10%;
+      width: 300px; height: 300px;
+      background: radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+    .page-hero-title {
+      font-size: 1.6em; font-weight: 700; color: #fff;
+      margin: 0 0 8px; letter-spacing: 1px; position: relative;
+    }
+    .page-hero-subtitle {
+      font-size: 0.92em; color: rgba(255,255,255,0.82);
+      margin: 0; position: relative;
+    }
+
+    /* ===== Advanced Search Panel ===== */
+    .adv-toggle-btn {
+      display: inline-flex; align-items: center; gap: 4px;
+      padding: 6px 14px; border-radius: 20px; border: 1.5px solid var(--primary);
+      color: var(--primary); background: white; font-size: 0.82em;
+      cursor: pointer; font-weight: 500; transition: all 0.25s; flex-shrink: 0;
+      margin-left: 10px;
+    }
+    .adv-toggle-btn:hover { background: var(--primary-light); }
+    .adv-toggle-btn.active { background: var(--primary); color: #fff; }
+    .adv-toggle-btn svg { width: 14px; height: 14px; }
+
+    .adv-panel {
+      max-height: 0; overflow: hidden;
+      transition: max-height 0.4s ease, opacity 0.3s ease, padding 0.3s ease;
+      opacity: 0; background: var(--card-bg); border-radius: 0 0 var(--radius) var(--radius);
+      border: 1px solid var(--border); border-top: none;
+      margin-bottom: 12px;
+    }
+    .adv-panel.open {
+      max-height: 90vh; opacity: 1;
+      padding: 0;
+      display: flex; flex-direction: column;
+    }
+    .adv-panel-content {
+      flex: 1; overflow-y: auto; padding: 20px 24px 12px;
+      max-height: calc(90vh - 70px);
+    }
+    .adv-panel-footer {
+      flex-shrink: 0; padding: 12px 24px 16px;
+      border-top: 1px solid var(--border);
+      background: var(--card-bg);
+      border-radius: 0 0 var(--radius) var(--radius);
+    }
+
+    .adv-section { margin-bottom: 18px; }
+    .adv-section:last-child { margin-bottom: 0; }
+    .adv-label {
+      font-size: 0.85em; font-weight: 600; color: var(--primary-dark);
+      margin-bottom: 8px; display: flex; align-items: center; gap: 6px;
+    }
+    .adv-label::before {
+      content: ""; display: inline-block; width: 3px; height: 12px;
+      background: var(--primary); border-radius: 2px;
+    }
+
+    /* Type radio */
+    .type-radios { display: flex; flex-wrap: wrap; gap: 8px; }
+    .type-radio {
+      padding: 6px 16px; border-radius: 20px; border: 1.5px solid var(--border);
+      background: white; font-size: 0.85em; cursor: pointer; transition: all 0.2s;
+      font-weight: 500; color: var(--text);
+    }
+    .type-radio:hover { border-color: var(--primary); color: var(--primary); }
+    .type-radio.active { background: var(--primary); border-color: var(--primary); color: #fff; }
+
+    /* Capability chips */
+    .cap-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+    .cap-group-label {
+      font-size: 0.78em; font-weight: 500; color: var(--text-light);
+      margin-top: 8px; margin-bottom: 4px; padding-left: 2px;
+    }
+    .cap-group-label:first-of-type { margin-top: 0; }
+    .cap-chip {
+      padding: 4px 12px; border-radius: 16px; border: 1px solid var(--border);
+      background: white; font-size: 0.8em; cursor: pointer; transition: all 0.2s;
+      color: var(--text); user-select: none;
+    }
+    .cap-chip:hover { border-color: var(--primary); color: var(--primary); }
+    .cap-chip.active { background: var(--primary); border-color: var(--primary); color: #fff; }
+
+    .cap-input-row { display: flex; gap: 8px; margin-top: 8px; }
+    .cap-input {
+      flex: 1; border: 1px solid var(--border); border-radius: 8px;
+      padding: 6px 12px; font-size: 0.85em; outline: none; transition: border-color 0.2s;
+    }
+    .cap-input:focus { border-color: var(--primary); }
+    .cap-input::placeholder { color: #b0b8c4; }
+    .cap-add-btn {
+      padding: 6px 14px; border-radius: 8px; border: 1px solid var(--primary);
+      color: var(--primary); background: white; font-size: 0.82em;
+      cursor: pointer; transition: all 0.2s; white-space: nowrap;
+    }
+    .cap-add-btn:hover { background: var(--primary-light); }
+
+    /* Budget radios */
+    .budget-radios { display: flex; flex-wrap: wrap; gap: 8px; }
+    .budget-radio {
+      padding: 6px 14px; border-radius: 20px; border: 1.5px solid var(--border);
+      background: white; font-size: 0.85em; cursor: pointer; transition: all 0.2s;
+      font-weight: 500; color: var(--text);
+    }
+    .budget-radio:hover { border-color: #f57c00; color: #f57c00; }
+    .budget-radio.active { background: #f57c00; border-color: #f57c00; color: #fff; }
+
+    /* Weight inputs */
+    .weight-section { border-top: 1px solid var(--border); padding-top: 16px; }
+    .weight-row-inline {
+      display: flex; align-items: center; gap: 6px; flex-wrap: wrap;
+    }
+    .weight-name {
+      font-size: 0.78em; font-weight: 500; color: var(--text); flex-shrink: 0;
+    }
+    .weight-input {
+      width: 48px; padding: 3px 5px; border: 1px solid #d0d0d0; border-radius: 6px;
+      font-size: 0.85em; font-weight: 600; color: var(--primary); text-align: center;
+      outline: none; transition: border-color 0.2s;
+    }
+    .weight-input:focus { border-color: var(--primary); }
+    .weight-input.error { border-color: #e53935; color: #e53935; }
+    .weight-input.readonly {
+      background: #f5f5f5; color: #888; cursor: default; border-color: #e0e0e0;
+    }
+    .weight-unit {
+      font-size: 0.78em; color: var(--text-light); flex-shrink: 0;
+    }
+    .weight-sep {
+      color: #d0d0d0; font-size: 0.85em; margin: 0 2px; flex-shrink: 0;
+    }
+    .weight-hint {
+      font-size: 0.75em; color: #e53935; margin-top: 4px; display: none;
+    }
+    .weight-hint.show { display: block; }
+
+    .reset-weights-btn {
+      font-size: 0.8em; color: var(--text-light); cursor: pointer;
+      border: none; background: none; text-decoration: underline; padding: 0;
+    }
+    .reset-weights-btn:hover { color: var(--primary); }
+
+    /* Action buttons */
+    .adv-actions {
+      display: flex; gap: 10px;
+      align-items: center; flex-wrap: wrap;
+    }
+    .adv-search-btn {
+      padding: 8px 24px; border-radius: 24px; border: none;
+      background: linear-gradient(135deg, #1a73e8 0%, #0d47a1 100%);
+      color: white; font-size: 0.9em; font-weight: 600;
+      cursor: pointer; transition: all 0.25s; box-shadow: 0 2px 8px rgba(26,115,232,0.3);
+    }
+    .adv-search-btn:hover { box-shadow: 0 4px 16px rgba(26,115,232,0.4); transform: translateY(-1px); }
+    .adv-reset-btn {
+      padding: 8px 20px; border-radius: 24px; border: 1.5px solid var(--border);
+      background: white; color: var(--text-light); font-size: 0.85em;
+      cursor: pointer; transition: all 0.2s;
+    }
+    .adv-reset-btn:hover { border-color: #e53935; color: #e53935; }
+
+    .adv-result-hint {
+      font-size: 0.85em; color: var(--text-light); margin-left: auto;
+    }
+    .adv-result-hint strong { color: var(--primary); }
+
+    /* Filter status tag bar */
+    .filter-status-bar {
+      display: none; align-items: center; flex-wrap: wrap; gap: 6px;
+      margin-top: 8px; padding: 8px 14px;
+      background: #e8f0fe; border-radius: 20px;
+      font-size: 0.82em; color: var(--text);
+    }
+    .filter-status-bar.show { display: flex; }
+    .filter-status-icon { color: var(--primary); font-weight: 600; margin-right: 2px; }
+    .filter-status-tag {
+      display: inline-flex; align-items: center; gap: 2px;
+      background: #fff; border: 1px solid #c5d9f5; border-radius: 12px;
+      padding: 2px 10px; font-size: 0.92em; color: var(--primary-dark);
+    }
+    .filter-status-sep { color: #b0c4de; font-weight: 300; }
+    .filter-status-reopen {
+      margin-left: auto; background: none; border: 1px solid var(--primary);
+      color: var(--primary); border-radius: 12px; padding: 2px 12px;
+      font-size: 0.9em; cursor: pointer; font-weight: 500; transition: all 0.2s;
+    }
+    .filter-status-reopen:hover { background: var(--primary); color: #fff; }
+    .filter-status-close {
+      background: none; border: 1px solid #e53935; color: #e53935;
+      border-radius: 12px; padding: 2px 12px; font-size: 0.9em;
+      cursor: pointer; font-weight: 500; transition: all 0.2s; margin-left: 4px;
+    }
+    .filter-status-close:hover { background: #e53935; color: #fff; }
+
+    /* Help guide popup */
+    .help-guide-wrapper {
+      position: relative;
+    }
+    .help-guide-btn {
+      position: absolute; top: 50%; right: 16px; transform: translateY(-50%);
+      background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.35);
+      color: #fff; border-radius: 16px; padding: 4px 14px;
+      font-size: 0.82em; cursor: pointer; transition: all 0.25s;
+      font-weight: 500; z-index: 2;
+    }
+    .help-guide-btn:hover { background: rgba(255,255,255,0.35); }
+    .help-guide-popup {
+      max-height: 0; overflow: hidden; opacity: 0;
+      transition: max-height 0.3s ease, opacity 0.2s ease, padding 0.3s ease;
+      background: #f7f8fa; border: 1px solid #e1e4e8; border-radius: 0 0 10px 10px;
+      font-size: 0.88em; color: var(--text); line-height: 1.8;
+    }
+    .help-guide-popup.open {
+      max-height: 600px; opacity: 1; padding: 18px 22px;
+    }
+    .help-guide-title {
+      font-weight: 700; font-size: 1em; color: var(--primary-dark);
+      margin-bottom: 10px;
+    }
+    .help-guide-step {
+      margin-bottom: 6px; padding-left: 4px;
+    }
+    .help-guide-step strong {
+      color: var(--primary);
+    }
+    .help-guide-note {
+      background: #fff; border: 1px solid #e1e4e8; border-radius: 8px;
+      padding: 8px 14px; margin-top: 10px; font-size: 0.9em; color: var(--text-light);
+    }
+
+    /* Match badge - inline after company name */
+    .match-badge {
+      display: none;
+      align-items: center; gap: 4px;
+      margin-left: 10px;
+      font-size: 0.75em; font-weight: 600;
+      white-space: nowrap;
+      vertical-align: middle;
+    }
+    .match-badge.show { display: inline-flex; }
+    .match-badge-text {
+      color: var(--text-light);
+    }
+    .match-badge-pct {
+      font-weight: 700; font-size: 1.05em;
+    }
+    .match-badge-bar {
+      display: inline-block; width: 50px; height: 5px;
+      background: #e0e0e0; border-radius: 3px;
+      vertical-align: middle; margin-left: 4px; overflow: hidden;
+    }
+    .match-badge-fill {
+      display: block; height: 100%; border-radius: 3px;
+      transition: width 0.4s ease;
+    }
+
+    .match-detail {
+      display: none; position: absolute; top: 100%; left: 0;
+      background: white; border: 1px solid var(--border); border-radius: 8px;
+      padding: 10px 14px; font-size: 0.78em; box-shadow: var(--shadow-md);
+      z-index: 10; white-space: nowrap; min-width: 200px;
+    }
+    .match-badge:hover + .match-detail, .match-detail:hover { display: block; }
+    .match-detail-row { display: flex; justify-content: space-between; padding: 2px 0; }
+    .match-detail-label { color: var(--text-light); }
+    .match-detail-value { font-weight: 600; color: var(--text); }
+
+    @media (max-width: 768px) {
+      .adv-panel.open { max-height: 90vh; }
+      .adv-panel-content { padding: 16px; max-height: calc(90vh - 70px); }
+      .adv-panel-footer { padding: 10px 16px 14px; }
+      .weight-row-inline { gap: 4px; }
+      .weight-name { font-size: 0.72em; }
+      .weight-input { width: 42px; font-size: 0.8em; padding: 2px 3px; }
+      .adv-result-hint { margin-left: 0; width: 100%; margin-top: 6px; }
+    }
+
+    /* ===== View Switcher ===== */
+    .view-switcher {
+      display: flex; gap: 0; margin: 0 auto 20px;
+      background: #fff; border-radius: 14px; padding: 4px;
+      width: fit-content; box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+      border: 1px solid var(--border);
+    }
+    .view-switch-btn {
+      padding: 11px 32px; border: none; border-radius: 10px;
+      background: transparent; font-size: 0.95em; font-weight: 600;
+      cursor: pointer; transition: all 0.25s; color: var(--text-light);
+    }
+    .view-switch-btn:hover { color: var(--text); }
+    .view-switch-btn.active {
+      background: var(--primary); color: #fff; box-shadow: 0 2px 8px rgba(26,115,232,0.3);
+    }
+
+    /* ===== Kanban Board ===== */
+    .kanban-container { display: none; }
+    .kanban-container.kanban-visible { display: block; }
+    .kanban-header {
+      margin-bottom: 24px;
+    }
+    .kanban-title {
+      font-size: 1.15em; font-weight: 700; color: var(--primary-dark);
+      margin-bottom: 4px; text-align: center;
+    }
+    .kanban-update-time {
+      font-size: 0.8em; color: var(--text-light); margin-bottom: 16px; display: block; text-align: center;
+    }
+    .kanban-filter-bar {
+      display: flex; gap: 6px; flex-wrap: wrap; align-items: center;
+    }
+    .kanban-filter-chip {
+      padding: 5px 14px; border-radius: 20px;
+      border: 1px solid #e0e0e0; background: transparent;
+      font-size: 0.82em; cursor: pointer; transition: all 0.2s;
+      font-weight: 500; color: var(--text-light); user-select: none;
+    }
+    .kanban-filter-chip[data-filter="s-live"] { color: #2e7d32; border-color: #a5d6a7; }
+    .kanban-filter-chip[data-filter="s-live"] .chip-dot { color: #43a047; }
+    .kanban-filter-chip[data-filter="s-progress"] { color: #3949ab; border-color: #c5cae9; }
+    .kanban-filter-chip[data-filter="s-progress"] .chip-dot { color: #3949ab; }
+    .kanban-filter-chip[data-filter="s-paused"] { color: #757575; border-color: #e0e0e0; }
+    .kanban-filter-chip[data-filter="s-paused"] .chip-dot { color: #9e9e9e; }
+    .kanban-filter-chip:hover { border-color: var(--primary); color: var(--primary); }
+    .kanban-filter-chip.active {
+      background: var(--primary); border-color: var(--primary); color: #fff;
+    }
+    .chip-count {
+      display: inline-block; background: rgba(0,0,0,0.08); border-radius: 10px;
+      padding: 0 7px; margin-left: 5px; font-size: 0.88em; font-weight: 600;
+      line-height: 1.6;
+    }
+    .kanban-filter-chip.active .chip-count {
+      background: rgba(255,255,255,0.3);
+    }
+
+    /* Dashboard / 一览表 — 卡片式 */
+    .kanban-dashboard {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
+      margin: 0 0 24px 0;
+    }
+    .dashboard-card {
+      background: #fff; border: 1px solid #e8eaed; border-radius: 12px;
+      padding: 14px 18px; cursor: pointer; transition: all 0.2s;
+      position: relative; overflow: hidden;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    }
+    .dashboard-card:hover {
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      transform: translateY(-1px);
+    }
+    .dashboard-card::after {
+      content: ''; position: absolute; bottom: 0; left: 0; right: 0;
+      height: 3px;
+    }
+    .dashboard-card.card-live::after { background: #43a047; }
+    .dashboard-card.card-progress::after { background: #3949ab; }
+    .dashboard-card.card-paused::after { background: #9e9e9e; }
+    .dashboard-card-header {
+      display: flex; align-items: center; gap: 8px;
+    }
+    .dashboard-card-dot {
+      width: 10px; height: 10px; border-radius: 50%;
+    }
+    .dashboard-card-label {
+      font-size: 0.88em; font-weight: 600; color: #555;
+    }
+    .dashboard-card-number-inline {
+      font-size: 1.3em; font-weight: 800; margin-left: 6px;
+    }
+    .dashboard-card.card-live .dashboard-card-number-inline { color: #43a047; }
+    .dashboard-card.card-progress .dashboard-card-number-inline { color: #3949ab; }
+    .dashboard-card.card-paused .dashboard-card-number-inline { color: #9e9e9e; }
+    .dashboard-card-toggle {
+      margin-left: auto; font-size: 0.75em; color: #aaa;
+      transition: transform 0.2s;
+    }
+    .dashboard-card.collapsed .dashboard-card-toggle {
+      transform: rotate(-90deg);
+    }
+    .dashboard-card-clients {
+      font-size: 0.82em; color: #888; line-height: 1.7;
+      max-height: 200px; overflow: hidden; transition: max-height 0.3s ease, opacity 0.3s ease, margin 0.3s ease;
+      opacity: 1; margin-top: 12px;
+    }
+    .dashboard-card.collapsed .dashboard-card-clients {
+      max-height: 0; opacity: 0; margin-top: 0;
+    }
+    .dashboard-client-tag {
+      display: inline-block; padding: 2px 8px; margin: 2px 3px;
+      border-radius: 4px; font-size: 0.9em; background: #f5f5f5; color: #666;
+    }
+    .dashboard-card.card-live .dashboard-client-tag { background: #e8f5e9; color: #2e7d32; }
+    .dashboard-card.card-progress .dashboard-client-tag { background: #e8eaf6; color: #3949ab; }
+    .dashboard-card.card-paused .dashboard-client-tag { background: #f5f5f5; color: #757575; }
+
+    .kanban-group { margin-bottom: 32px; }
+    .kanban-group-header {
+      display: flex; align-items: center; gap: 10px;
+      padding: 10px 16px; margin-bottom: 10px;
+      background: #f7f8fa; border-radius: 10px;
+      border-left: 4px solid #ccc;
+    }
+    .kanban-group-dot {
+      width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0;
+    }
+    .kanban-group-title {
+      font-size: 0.95em; font-weight: 700; color: var(--text);
+    }
+    .kanban-group-count {
+      font-size: 0.75em; color: #bbb; font-weight: 400; margin-left: 2px;
+    }
+
+    .kanban-table {
+      width: 100%; border-collapse: separate; border-spacing: 0;
+      background: var(--card-bg); border-radius: 12px;
+      overflow: hidden; box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+      border: 1px solid var(--border);
+    }
+    .kanban-table thead th {
+      background: #fafbfc; padding: 10px 18px; font-size: 0.8em;
+      font-weight: 600; color: #333; text-align: center;
+      border-bottom: 1px solid var(--border); white-space: nowrap;
+      text-transform: uppercase; letter-spacing: 0.5px;
+    }
+    .kanban-table tbody td {
+      padding: 16px 18px; font-size: 0.88em; color: var(--text);
+      border-bottom: 1px solid #f3f3f3; vertical-align: top; line-height: 1.7;
+      text-align: center;
+    }
+    .kanban-table tbody tr:last-child td { border-bottom: none; }
+    .kanban-table tbody tr:hover { background: #fcfdfe; }
+
+    .kanban-client-name {
+      font-weight: 700; color: var(--primary-dark); white-space: nowrap;
+      font-size: 0.95em;
+    }
+    .kanban-client-track {
+      display: inline-block; font-size: 0.72em; background: #ede7f6;
+      color: #5e35b1; padding: 1px 8px; border-radius: 10px;
+      margin-top: 4px; border: 1px solid #ce93d8;
+    }
+    .kanban-provider {
+      display: inline-flex; align-items: center; gap: 4px;
+      padding: 3px 12px; border-radius: 14px; font-size: 0.84em;
+      font-weight: 500; margin: 2px 4px 2px 0; white-space: nowrap;
+    }
+    .kanban-provider.in-lib {
+      background: #e3f2fd; color: #1565c0; cursor: pointer;
+      transition: background 0.2s, box-shadow 0.2s; text-decoration: none;
+    }
+    .kanban-provider.in-lib:hover {
+      background: #bbdefb; box-shadow: 0 1px 4px rgba(21,101,192,0.2);
+    }
+    .kanban-provider.out-lib {
+      background: #f5f5f5; color: #999; cursor: default;
+    }
+    .kanban-provider-multi {
+      display: flex; flex-wrap: wrap; gap: 4px; align-items: center; justify-content: center;
+    }
+
+    .kanban-status {
+      display: inline-flex; align-items: center; gap: 4px;
+      padding: 3px 12px; border-radius: 14px; font-size: 0.78em;
+      font-weight: 600; white-space: nowrap;
+    }
+    .kanban-status.s-live { background: #e8f5e9; color: #2e7d32; }
+    .kanban-status.s-progress { background: #e8eaf6; color: #3949ab; }
+    .kanban-status.s-paused { background: #f5f5f5; color: #9e9e9e; }
+
+    .kanban-table td.kanban-notes {
+      font-size: 0.78em; color: #666; line-height: 1.75;
+      text-align: left;
+    }
+    .kanban-table td.kanban-notes strong { color: var(--text); font-weight: 600; }
+
+
+    @media (max-width: 768px) {
+      .view-switcher { width: 100%; }
+      .view-switch-btn { flex: 1; text-align: center; padding: 8px 12px; font-size: 0.85em; }
+      .kanban-table thead th,
+      .kanban-table tbody td { padding: 10px 12px; font-size: 0.82em; }
+      .kanban-table td.kanban-notes { font-size: 0.78em; }
+      .kanban-header { }
+    }
+
+  </style>
+<script src="https://beacon.cdn.qq.com/sdk/4.5.9/beacon_web.min.js"></script>
+<script>
+(function(){
+  try{
+    var beacon=new BeaconAction({
+      appkey:'0WEB06U85YBSLJNL',
+      versionCode:'1.0.0',
+      channelID:'share',
+      delay:1000,
+      sessionDuration:30*60*1000,
+      isOversea:false,
+      needReportRqdEvent:false
+    });
+    beacon.onDirectUserAction('preview_page_view',{
+      'url':location.href,
+      'referrer':document.referrer,
+      'title':document.title,
+      'sandbox_id':'4cda7ba9705343a5bac4d76f6cccc6d9'
+    });
+  }catch(e){}
+})();
+</script></head>
+<body>
+<div class="page-hero help-guide-wrapper">
+  <h1 class="page-hero-title">教育行业直播代播资源库</h1>
+  <p class="page-hero-subtitle">整合优质直播服务商资源，助力品牌品效销一体化增长</p>
+  <button class="help-guide-btn" id="helpGuideBtn">❓ 使用指南</button>
+</div>
+<div class="help-guide-popup" id="helpGuidePopup">
+  <div class="help-guide-title">📖 筛选功能使用指南</div>
+  <div class="help-guide-step"><strong>1️⃣</strong> 点击搜索栏右侧「筛选」按钮，展开高级筛选面板</div>
+  <div class="help-guide-step"><strong>2️⃣</strong> 按需选择：资源类型 → 能力&amp;经验标签 → 细分赛道 → 预算范围</div>
+  <div class="help-guide-step"><strong>3️⃣</strong> 输入权重百分比，调整各维度在排序中的占比</div>
+  <div class="help-guide-step" style="padding-left:28px;">· <strong>预算匹配</strong>权重：默认 50%，越重则预算越接近的商家排越前</div>
+  <div class="help-guide-step" style="padding-left:28px;">· <strong>能力&amp;经验</strong>权重：默认 30%，越重则匹配你选的能力标签越优先</div>
+  <div class="help-guide-step" style="padding-left:28px;">· <strong>细分赛道</strong>权重：自动计算（100% - 预算 - 能力），越重则赛道经验越重要</div>
+  <div class="help-guide-step"><strong>4️⃣</strong> 点击「智能推荐排序」，系统按权重计算匹配度并排序</div>
+  <div class="help-guide-step"><strong>5️⃣</strong> 也可在能力&amp;经验和细分赛道区域输入自定义关键词</div>
+  <div class="help-guide-step"><strong>6️⃣</strong> 点击结果上的匹配度标签，可查看各维度得分明细</div>
+  <div class="help-guide-note">💡 提示：筛选后筛选面板会自动收起，上方会显示当前筛选条件，可点击「重新筛选」调整条件，或点击「✕ 清除」恢复全部。</div>
+</div>
+<!-- ===== View Switcher ===== -->
+<div class="view-switcher" id="viewSwitcher">
+  <button class="view-switch-btn active" data-view="resource" id="viewResourceBtn">服务商资源库</button>
+  <button class="view-switch-btn" data-view="kanban" id="viewKanbanBtn">客户合作进度</button>
+</div>
+<div class="search-container">
+<div class="search-box">
+<svg class="search-icon" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><circle cx="11" cy="11" r="8"></circle><line x1="21" x2="16.65" y1="21" y2="16.65"></line></svg>
+<input autocomplete="off" class="search-input" id="searchInput" placeholder="搜索公司名称、行业、能力、案例、客户…" type="text"/>
+<button class="adv-toggle-btn" id="advToggle" title="高级检索"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 21v-7m0-4V3m8 18v-9m0-4V3m8 18v-5m0-4V3M1 14h6M9 8h6M17 16h6"/></svg>筛选</button>
+<button class="search-clear" id="searchClear" title="清除搜索">✕</button>
+</div>
+<div class="search-stats" id="searchStats"></div>
+
+<!-- Filter Status Bar (shown after advanced search) -->
+<div class="filter-status-bar" id="filterStatusBar">
+  <span class="filter-status-icon">🔍</span>
+  <span id="filterStatusTags"></span>
+  <button class="filter-status-reopen" id="filterReopenBtn">重新筛选</button>
+  <button class="filter-status-close" id="filterClearBtn">✕ 清除</button>
+</div>
+
+<!-- Advanced Search Panel -->
+<div class="adv-panel" id="advPanel">
+  <div class="adv-panel-content">
+  <!-- Resource Type -->
+  <div class="adv-section">
+    <div class="adv-label">资源类型</div>
+    <div class="type-radios" id="typeRadios">
+      <span class="type-radio active" data-type="all">全部</span>
+      <span class="type-radio" data-type="代理商">🏢 代理商</span>
+      <span class="type-radio" data-type="三方代播公司">🎬 三方代播</span>
+      <span class="type-radio" data-type="直播SaaS服务商">🛠️ SaaS</span>
+    </div>
+  </div>
+
+  <!-- Capability & Experience Tags (merged) -->
+  <div class="adv-section">
+    <div class="adv-label">能力&经验 <span style="font-weight:400;color:var(--text-light);font-size:0.85em;">（多选）</span></div>
+    <div class="cap-group-label">基础能力</div>
+    <div class="cap-chips" id="capChips1">
+      <span class="cap-chip" data-cap="直播代播">直播代播</span>
+      <span class="cap-chip" data-cap="直播运营">直播运营</span>
+      <span class="cap-chip" data-cap="直播代投">直播代投</span>
+      <span class="cap-chip" data-cap="腾讯广告投放">腾讯广告投放</span>
+      <span class="cap-chip" data-cap="视频号投放">视频号投放</span>
+      <span class="cap-chip" data-cap="ROI优化">ROI优化</span>
+      <span class="cap-chip" data-cap="人货场搭建">人货场搭建</span>
+      <span class="cap-chip" data-cap="主播培训">主播培训</span>
+      <span class="cap-chip" data-cap="店铺运营">店铺运营</span>
+      <span class="cap-chip" data-cap="流量投放">流量投放</span>
+    </div>
+    <div class="cap-group-label">内容创作</div>
+    <div class="cap-chips" id="capChips2">
+      <span class="cap-chip" data-cap="短视频制作">短视频制作</span>
+      <span class="cap-chip" data-cap="素材拍摄">素材拍摄</span>
+      <span class="cap-chip" data-cap="AI素材生成">AI素材生成</span>
+      <span class="cap-chip" data-cap="脚本策划">脚本策划</span>
+      <span class="cap-chip" data-cap="内容创意">内容创意</span>
+      <span class="cap-chip" data-cap="AIGC内容">AIGC内容</span>
+    </div>
+    <div class="cap-group-label">运营转化</div>
+    <div class="cap-chips" id="capChips3">
+      <span class="cap-chip" data-cap="私域运营">私域运营</span>
+      <span class="cap-chip" data-cap="粉丝运营">粉丝运营</span>
+      <span class="cap-chip" data-cap="客户服务">客户服务</span>
+      <span class="cap-chip" data-cap="线索管理">线索管理</span>
+      <span class="cap-chip" data-cap="矩阵运营">矩阵运营</span>
+      <span class="cap-chip" data-cap="新媒体获客">新媒体获客</span>
+    </div>
+    <div class="cap-group-label">案例经验</div>
+    <div class="cap-chips" id="capChips4">
+      <span class="cap-chip" data-cap="0-1起号">0-1起号</span>
+      <span class="cap-chip" data-cap="代播代投">代播代投</span>
+      <span class="cap-chip" data-cap="线索获取">线索获取</span>
+      <span class="cap-chip" data-cap="精准获客">精准获客</span>
+      <span class="cap-chip" data-cap="大客单成交">大客单成交</span>
+      <span class="cap-chip" data-cap="二销转化">二销转化</span>
+      <span class="cap-chip" data-cap="低价课放量">低价课放量</span>
+      <span class="cap-chip" data-cap="IP操盘">IP操盘</span>
+      <span class="cap-chip" data-cap="私域转化">私域转化</span>
+      <span class="cap-chip" data-cap="全域投放">全域投放</span>
+      <span class="cap-chip" data-cap="创意投放">创意投放</span>
+      <span class="cap-chip" data-cap="全案策划">全案策划</span>
+      <span class="cap-chip" data-cap="品牌营销">品牌营销</span>
+      <span class="cap-chip" data-cap="数据分析">数据分析</span>
+    </div>
+    <div class="cap-group-label">工具/SaaS</div>
+    <div class="cap-chips" id="capChips5">
+      <span class="cap-chip" data-cap="数字人直播">数字人直播</span>
+      <span class="cap-chip" data-cap="智能客服">智能客服</span>
+      <span class="cap-chip" data-cap="合规风控">合规风控</span>
+      <span class="cap-chip" data-cap="话术优化">话术优化</span>
+      <span class="cap-chip" data-cap="AI复盘">AI复盘</span>
+      <span class="cap-chip" data-cap="竞品对标">竞品对标</span>
+    </div>
+    <div class="cap-input-row">
+      <input class="cap-input" id="capCustomInput" placeholder="自定义关键词，回车添加（如：上市公司、千人团队）" />
+      <button class="cap-add-btn" id="capAddBtn">+ 添加</button>
+    </div>
+  </div>
+
+  <!-- Sub-tracks (only for 代理商 + 三方代播) -->
+  <div class="adv-section" id="subtrackSection">
+    <div class="adv-label">细分赛道 <span style="font-weight:400;color:var(--text-light);font-size:0.85em;">（多选，仅代理商/三方代播）</span></div>
+    <div class="cap-chips" id="subtrackChips">
+      <span class="cap-chip" data-track="K12学科">K12学科</span>
+      <span class="cap-chip" data-track="学科教辅">学科教辅</span>
+      <span class="cap-chip" data-track="素质教育">素质教育</span>
+      <span class="cap-chip" data-track="职业教育">职业教育</span>
+      <span class="cap-chip" data-track="考研">考研</span>
+      <span class="cap-chip" data-track="公考">公考</span>
+      <span class="cap-chip" data-track="语言培训">语言培训</span>
+      <span class="cap-chip" data-track="阅读写作">阅读写作</span>
+      <span class="cap-chip" data-track="知识付费">知识付费</span>
+      <span class="cap-chip" data-track="心理疏导">心理疏导</span>
+      <span class="cap-chip" data-track="亲子教育">亲子教育</span>
+      <span class="cap-chip" data-track="技能培训">技能培训</span>
+      <span class="cap-chip" data-track="艺考">艺考</span>
+      <span class="cap-chip" data-track="保险/金融">保险/金融</span>
+    </div>
+    <div class="cap-input-row">
+      <input class="cap-input" id="trackCustomInput" placeholder="自定义赛道关键词，回车添加（如：出国留学、少儿英语）" />
+      <button class="cap-add-btn" id="trackAddBtn">+ 添加</button>
+    </div>
+  </div>
+
+  <!-- Budget Range -->
+  <div class="adv-section">
+    <div class="adv-label">预算范围 <span id="budgetUnit" style="font-weight:400;color:var(--text-light);font-size:0.85em;">（月度总预算）</span></div>
+    <div class="budget-radios" id="budgetRadios">
+      <!-- Filled by JS based on selected type -->
+    </div>
+  </div>
+
+  <!-- Weight Settings -->
+  <div class="adv-section weight-section">
+    <div class="adv-label" style="margin-bottom:10px;">权重设置 <button class="reset-weights-btn" id="resetWeightsBtn">恢复默认</button></div>
+    <div class="weight-row-inline">
+      <span class="weight-name">预算匹配</span>
+      <input class="weight-input" id="weightBudget" type="number" min="0" max="100" value="50" />
+      <span class="weight-unit">%</span>
+      <span class="weight-sep">|</span>
+      <span class="weight-name">能力&经验</span>
+      <input class="weight-input" id="weightCap" type="number" min="0" max="100" value="30" />
+      <span class="weight-unit">%</span>
+      <span class="weight-sep">|</span>
+      <span class="weight-name">细分赛道</span>
+      <input class="weight-input readonly" id="weightTrack" type="number" min="0" max="100" value="20" readonly />
+      <span class="weight-unit">%</span>
+    </div>
+    <div class="weight-hint" id="weightHint">权重之和不能超过100%</div>
+  </div>
+  </div><!-- end adv-panel-content -->
+
+  <!-- Actions (fixed footer) -->
+  <div class="adv-panel-footer">
+    <div class="adv-actions">
+      <button class="adv-search-btn" id="advSearchBtn">🔍 智能推荐排序</button>
+      <button class="adv-reset-btn" id="advResetBtn">重置筛选</button>
+      <span class="adv-result-hint" id="advResultHint"></span>
+    </div>
+  </div>
+</div>
+</div>
+<div class="category-nav">
+<button class="category-tab active" data-cat="all">全部<span class="tab-count">17</span></button>
+<button class="category-tab" data-cat="代理商">🏢 代理商<span class="tab-count">3</span></button>
+<button class="category-tab" data-cat="三方代播公司">🎬 三方代播公司<span class="tab-count">8</span></button>
+<button class="category-tab" data-cat="直播SaaS服务商">🛠️ 直播SaaS服务商<span class="tab-count">6</span></button>
+</div>
+<!-- ===== Kanban Board: Client-Agent Collaboration Progress ===== -->
+<div class="kanban-container" id="kanbanContainer">
+<div class="kanban-header">
+  <div class="kanban-title">客户直播代播合作进度</div>
+  <span class="kanban-update-time">更新于 2026-06-10</span>
+</div>
+
+<!-- Dashboard / 一览表 — 卡片式 -->
+<div class="kanban-dashboard">
+  <div class="dashboard-card card-live" onclick="toggleDashboardCard(this)">
+    <div class="dashboard-card-header">
+      <span class="dashboard-card-dot" style="background:#43a047;"></span>
+      <span class="dashboard-card-label">合作中</span>
+      <span class="dashboard-card-number-inline">3</span>
+      <span class="dashboard-card-toggle">▼</span>
+    </div>
+    <div class="dashboard-card-clients">
+      <span class="dashboard-client-tag">兴趣岛（手机摄影）</span>
+      <span class="dashboard-client-tag">兴趣岛（太极）</span>
+      <span class="dashboard-client-tag">墨尔冥想</span>
+    </div>
+  </div>
+  <div class="dashboard-card card-progress" onclick="toggleDashboardCard(this)">
+    <div class="dashboard-card-header">
+      <span class="dashboard-card-dot" style="background:#3949ab;"></span>
+      <span class="dashboard-card-label">推进中</span>
+      <span class="dashboard-card-number-inline">5</span>
+      <span class="dashboard-card-toggle">▼</span>
+    </div>
+    <div class="dashboard-card-clients">
+      <span class="dashboard-client-tag">红松</span>
+      <span class="dashboard-client-tag">开开华彩</span>
+      <span class="dashboard-client-tag">喜播</span>
+      <span class="dashboard-client-tag">正元</span>
+      <span class="dashboard-client-tag">北英教育</span>
+    </div>
+  </div>
+  <div class="dashboard-card card-paused" onclick="toggleDashboardCard(this)">
+    <div class="dashboard-card-header">
+      <span class="dashboard-card-dot" style="background:#9e9e9e;"></span>
+      <span class="dashboard-card-label">暂缓</span>
+      <span class="dashboard-card-number-inline">6</span>
+      <span class="dashboard-card-toggle">▼</span>
+    </div>
+    <div class="dashboard-card-clients">
+      <span class="dashboard-client-tag">一藤老师</span>
+      <span class="dashboard-client-tag">简知</span>
+      <span class="dashboard-client-tag">兴趣岛（唱歌）</span>
+      <span class="dashboard-client-tag">蜗牛教育</span>
+      <span class="dashboard-client-tag">冯唐</span>
+      <span class="dashboard-client-tag">高顿</span>
+    </div>
+  </div>
+</div>
+
+<!-- Filter bar -->
+<div class="kanban-filter-bar" style="margin-bottom:20px;">
+  <span class="kanban-filter-chip active" data-filter="all">全部<span class="chip-count">14</span></span>
+  <span class="kanban-filter-chip" data-filter="s-live"><span class="chip-dot" style="color:#43a047;">●</span> 合作中<span class="chip-count">3</span></span>
+  <span class="kanban-filter-chip" data-filter="s-progress"><span class="chip-dot" style="color:#3949ab;">●</span> 推进中<span class="chip-count">5</span></span>
+  <span class="kanban-filter-chip" data-filter="s-paused"><span class="chip-dot" style="color:#9e9e9e;">●</span> 暂缓<span class="chip-count">6</span></span>
+</div>
+
+<!-- Group 1: 合作中（已开播） -->
+<div class="kanban-group" data-group-status="s-live">
+  <div class="kanban-group-header" style="border-left-color:#43a047;">
+    <span class="kanban-group-dot" style="background:#43a047;"></span>
+    <span class="kanban-group-title">合作中（已开播）</span>
+    <span class="kanban-group-count">3条记录</span>
+  </div>
+  <table class="kanban-table">
+    <thead>
+      <tr><th style="width:16%">客户</th><th style="width:20%">推荐服务商</th><th style="width:9%">状态</th><th>备注</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          <div class="kanban-client-name">兴趣岛</div>
+          <span class="kanban-client-track">手机摄影</span>
+        </td>
+        <td>
+          <div class="kanban-provider-multi">
+            <a class="kanban-provider in-lib" data-target="飞天经纬">飞天经纬</a>
+            <a class="kanban-provider in-lib" data-target="麦克风">飞雨文化</a>
+          </div>
+        </td>
+        <td><span class="kanban-status s-live">已开播</span></td>
+        <td class="kanban-notes">
+          6.8正式开播，手机摄影品类。<strong>直播模式</strong>：10分钟一个闭环（废片展示/挖需→理论+实操教学→逼单），3个小闭环组成0.5h大闭环。飞天同时承担太极"代投+客户自播"项目。<strong>背景</strong>：飞天和飞雨通过招标胜出，围绕手机摄影开展直播代播；另有7家参与提案（东莱、世纪飞扬、吾友视界、晴空、金鹃传媒、嘉桥数科、上海茉莉）待后续品类分配。
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <div class="kanban-client-name">兴趣岛</div>
+          <span class="kanban-client-track">太极</span>
+        </td>
+        <td>
+          <div class="kanban-provider-multi">
+            <a class="kanban-provider in-lib" data-target="飞天经纬">飞天经纬</a>
+            <a class="kanban-provider in-lib" data-target="涤涤卫">涤涤卫</a>
+          </div>
+        </td>
+        <td><span class="kanban-status s-live">已开播</span></td>
+        <td class="kanban-notes">
+          太极项目采用<strong>"飞天代投+客户自播"</strong>模式，飞天负责投放端，兴趣岛自播团队负责直播间执行。涤涤卫直播卫士保障合规。
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <div class="kanban-client-name">墨尔冥想</div>
+          <span class="kanban-client-track">冥想/身心成长</span>
+        </td>
+        <td>
+          <div class="kanban-provider-multi">
+            <a class="kanban-provider in-lib" data-target="晴空">晴空</a>
+          </div>
+        </td>
+        <td><span class="kanban-status s-live">已开播</span></td>
+        <td class="kanban-notes">
+          晴空提供代播，400元/h，每场3h，每周3场。
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Group 2: 推进中（方案沟通/建联） -->
+<div class="kanban-group" data-group-status="s-progress">
+  <div class="kanban-group-header" style="border-left-color:#3949ab;">
+    <span class="kanban-group-dot" style="background:#3949ab;"></span>
+    <span class="kanban-group-title">推进中（方案沟通 / 建联）</span>
+    <span class="kanban-group-count">5条记录</span>
+  </div>
+  <table class="kanban-table">
+    <thead>
+      <tr><th style="width:16%">客户</th><th style="width:20%">推荐服务商</th><th style="width:9%">状态</th><th>备注</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          <div class="kanban-client-name">红松</div>
+          <span class="kanban-client-track">银发兴趣</span>
+        </td>
+        <td>
+          <div class="kanban-provider-multi">
+            <a class="kanban-provider in-lib" data-target="广联先锋">广联先锋</a>
+          </div>
+        </td>
+        <td><span class="kanban-status s-progress">方案沟通</span></td>
+        <td class="kanban-notes">
+          5月发起代播需求：<strong>乐器类头部主播→熟龄英语</strong>方向，方案输出阶段，预计200元/h+线索抽佣。客户直播负责人欧阳5月中下旬刚入职，自播团队同步搭建中。<strong>客户规模</strong>：银发平台，注册用户超1000万，付费用户超100万，讲师4000+。核心业务含红松小课（50+中老年兴趣课）、红松社区、红松如意行、红松消费品。<strong>投放</strong>：日均35w（钢琴X企微日均14w），暂未投放直播。
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <div class="kanban-client-name">开开华彩</div>
+          <span class="kanban-client-track">中老年兴趣</span>
+        </td>
+        <td>
+          <div class="kanban-provider-multi">
+            <a class="kanban-provider in-lib" data-target="云景集团">云景集团</a>
+          </div>
+        </td>
+        <td><span class="kanban-status s-progress">方案沟通</span></td>
+        <td class="kanban-notes">
+          <strong>口琴品类提案</strong>，6.8-6.12当周沟通方案和直播。客户直播推进1年半，抖音/视频号双开（自然流+微付费模式）。<strong>投放</strong>：QTD 356w，日均4.5w。考虑代播服务+视频号加热。公司2020年成立，为中老年学员提供声乐、钢琴、朗诵、国画、书法、舞蹈等课程。
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <div class="kanban-client-name">喜播</div>
+          <span class="kanban-client-track">声音/AI课</span>
+        </td>
+        <td>
+          <div class="kanban-provider-multi">
+            <a class="kanban-provider in-lib" data-target="云景集团">云景集团</a>
+          </div>
+        </td>
+        <td><span class="kanban-status s-progress">方案沟通</span></td>
+        <td class="kanban-notes">
+          喜马拉雅官方旗下，国内头部声音/内容创作者职业教育与变现平台。<strong>核心业务</strong>：有声演播/声音主播、短视频与内容创作、AI内容创作。<strong>投放</strong>：围绕有声书，当前日均3-4w。
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <div class="kanban-client-name">正元</div>
+          <span class="kanban-client-track">非遗文化</span>
+        </td>
+        <td>
+          <div class="kanban-provider-multi">
+            <a class="kanban-provider in-lib" data-target="广联先锋">广联先锋</a>
+          </div>
+        </td>
+        <td><span class="kanban-status s-progress">建联中</span></td>
+        <td class="kanban-notes">
+          中老年非遗文化（篆刻/书法/绘画/瓷画）。<strong>直播现状</strong>：3个直播间已跑通（腾讯2个+抖音1个自然流），日均消耗2.5w准备放量至6-7w/d。下单成本260，已有专业直播赋能公司提供服务。5.28石家庄拜访，<strong>沟通方向</strong>：拓展直播数量+优化视频号素材CTR。累计注册用户10w人，篆刻课时长40min。
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <div class="kanban-client-name">北英教育</div>
+          <span class="kanban-client-track">事业编</span>
+        </td>
+        <td>
+          <div class="kanban-provider-multi">
+            <a class="kanban-provider in-lib" data-target="涤涤卫">涤涤卫</a>
+          </div>
+        </td>
+        <td><span class="kanban-status s-progress">建联中</span></td>
+        <td class="kanban-notes">
+          事业编课程，主播已招聘开播，<strong>遇到封号问题</strong>，正在对接涤涤卫处理直播审核合规。
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Group 4: 暂缓/未启动 -->
+<div class="kanban-group" data-group-status="s-paused">
+  <div class="kanban-group-header" style="border-left-color:#bdbdbd;">
+    <span class="kanban-group-dot" style="background:#bdbdbd;"></span>
+    <span class="kanban-group-title">暂缓</span>
+    <span class="kanban-group-count">6条记录</span>
+  </div>
+  <table class="kanban-table">
+    <thead>
+      <tr><th style="width:16%">客户</th><th style="width:20%">推荐服务商</th><th style="width:9%">状态</th><th>备注</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          <div class="kanban-client-name">一藤老师</div>
+          <span class="kanban-client-track">健康营养师</span>
+        </td>
+        <td>
+          <div class="kanban-provider-multi">
+            <a class="kanban-provider in-lib" data-target="云景集团">云景集团</a>
+          </div>
+        </td>
+        <td><span class="kanban-status s-paused">暂缓</span></td>
+        <td class="kanban-notes">
+          健康营养师考证赛道，<strong>4.13-5.15云景代播</strong>，累计消耗1.1w。现已暂停代播，客户转为招募已拿证学员做直播矩阵号自播，<strong>核心缺失素材拍摄能力</strong>。项目制+IP合作模式。
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <div class="kanban-client-name">简知</div>
+          <span class="kanban-client-track">知识付费</span>
+        </td>
+        <td>
+          <div class="kanban-provider-multi">
+            <a class="kanban-provider in-lib" data-target="爱复盘">爱复盘</a>
+          </div>
+        </td>
+        <td><span class="kanban-status s-paused">暂缓</span></td>
+        <td class="kanban-notes">
+          爱复盘提供直播全流程AI解决方案。当前自播打0-1阶段，<strong>代播留作后续拓展</strong>储备。
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <div class="kanban-client-name">兴趣岛</div>
+          <span class="kanban-client-track">唱歌</span>
+        </td>
+        <td>
+          <div class="kanban-provider-multi">
+            <span class="kanban-provider out-lib">未引入</span>
+          </div>
+        </td>
+        <td><span class="kanban-status s-paused">暂缓</span></td>
+        <td class="kanban-notes">
+          唱歌品类代播需求，<strong>项目暂缓</strong>，优先推进手机摄影。
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <div class="kanban-client-name">蜗牛教育</div>
+        </td>
+        <td>
+          <div class="kanban-provider-multi">
+            <span class="kanban-provider out-lib">未引入</span>
+          </div>
+        </td>
+        <td><span class="kanban-status s-paused">暂缓</span></td>
+        <td class="kanban-notes">
+          直播尚在考虑阶段，<strong>未引入服务商</strong>。
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <div class="kanban-client-name">冯唐</div>
+          <span class="kanban-client-track">知识付费</span>
+        </td>
+        <td>
+          <div class="kanban-provider-multi">
+            <a class="kanban-provider in-lib" data-target="金鹃传媒">金鹃传媒</a>
+          </div>
+        </td>
+        <td><span class="kanban-status s-paused">暂缓</span></td>
+        <td class="kanban-notes">
+          "黄帝内经"299课程直播，要求<strong>ROI 1.2</strong>，抖音/视频号双端开播。<strong>进展</strong>：0-1起量阶段受阻，<strong>自播代投，暂时不考虑代播了</strong>。
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <div class="kanban-client-name">高顿</div>
+          <span class="kanban-client-track">考证培训</span>
+        </td>
+        <td>
+          <div class="kanban-provider-multi">
+            <span class="kanban-provider out-lib">外部合作方（非库内）</span>
+          </div>
+        </td>
+        <td><span class="kanban-status s-paused">暂缓</span></td>
+        <td class="kanban-notes">
+          考证类教育直播，<strong>100元/h采买</strong>模式，一半代播一半自播并行。<strong>项目暂缓</strong>。
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Legend -->
+<div style="background:#fafbfc;border:1px solid var(--border);border-radius:10px;padding:14px 20px;margin-top:8px;font-size:0.82em;color:#999;line-height:2;">
+  <span class="kanban-provider in-lib" style="font-size:0.92em;padding:1px 8px;">蓝色可点击</span> = 资源库内有详情，点击跳转 &nbsp;|&nbsp;
+  <span class="kanban-provider out-lib" style="font-size:0.92em;padding:1px 8px;">灰色</span> = 不在资源库内
+</div>
+
+</div>
+<!-- ===== End Kanban Board ===== -->
+
+<div class="category-group" data-group="代理商">
+<div class="category-header cat-agent">代理商<span class="cat-desc">直接与腾讯签署渠道代理协议，通过返货政策及业绩激励获取收益。</span></div>
+<!-- ==================== 3. 云景集团 ==================== -->
+<div class="accordion-item" data-category="代理商" data-capabilities="流量投放,直播代投,直播运营,素材拍摄,AI素材生成,店铺运营,粉丝运营,客户服务,内容创意,全案策划" data-advantages="200人团队,8年经验,10万+客户,海量演员,AI素材,区域深耕,政企媒体资源,全链路服务,0-1起号,精准获客" data-subtracks="K12择校,艺考培训,家庭教育,心理疏导" data-budget="3">
+<div class="accordion-header" onclick="toggleAccordion(this)">
+<svg class="accordion-arrow" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
+<span class="company-name-inline">云景集团</span>
+<span class="company-brief">200人团队 · 8年经验 · 10万+客户 · 六大媒体全覆盖</span>
+</div>
+<div class="accordion-body"><div class="accordion-content">
+<div class="detail-grid">
+<div class="detail-section">
+<div class="section-title">能力类别</div>
+<div class="section-body">
+<ul>
+<li>流量投放（腾讯/百度/快手/抖音等六大主流媒体）</li>
+<li>直播代投与直播运营</li>
+<li>素材拍摄与AI素材生成</li>
+<li>店铺运营与粉丝运营</li>
+<li>客户服务与资源整合</li>
+<li>内容创意与全案策划</li>
+</ul>
+</div>
+</div>
+<div class="detail-section">
+<div class="section-title">核心优势</div>
+<div class="section-body">
+<ul>
+<li>成立于<strong>2015年</strong>，<strong>200人团队</strong>，<strong>8年行业经验</strong></li>
+<li>在安徽、陕西、北京、新疆、甘肃、藏青宁等地均设有分公司</li>
+<li>服务近<strong>100,000+客户</strong></li>
+<li><strong>8000㎡办公面积</strong>，50+直播运营团队</li>
+<li>六大主流媒体平台深度覆盖，深刻理解各平台流量特性与投放逻辑</li>
+<li>全链路服务能力闭环，确保客户需求一站式高效解决</li>
+<li><strong>海量演员资源储备</strong>，适用不同年龄层次及风格搭配</li>
+<li>专业拍摄团队 + AI素材工具支持智能生成跑量素材</li>
+<li>区域化深耕布局，属地化精准服务</li>
+<li>政企媒体资源：电视台融媒体中心核心合作单位</li>
+<li>荣誉：腾讯广告优秀区域服务商/战略合作奖/年度区域深耕奖、百度营销品类增量NO.1等</li>
+</ul>
+</div>
+</div>
+<div class="detail-section">
+<div class="section-title">主播资源</div>
+<div class="section-body">
+<p>主播类型覆盖广泛：</p>
+<div class="client-list">
+<span class="client-tag edu-client">养生类</span>
+<span class="client-tag">带货类</span>
+<span class="client-tag">声乐类</span>
+<span class="client-tag">美学类</span>
+</div>
+<p style="margin-top:8px;">海量演员资源储备，可按需筛选不同年龄层次及风格搭配的优秀演员。</p>
+</div>
+</div><div class="detail-section"><div class="section-title">擅长的教育子赛道</div><div class="section-body"><div class="case-metrics" style="margin-bottom:8px;"><span class="metric">K12择校</span><span class="metric">艺考培训</span><span class="metric">家庭教育</span><span class="metric">心理疏导</span></div><p style="margin:0;font-size:0.88em;color:#555;line-height:1.6;">云景集团教育案例覆盖K12民办学校招生（科信中学）、艺考培训精准获客（大一美术）、青少年心理疏导（学而雅），擅长地域性强的教育品类投放，核心能力是“建立信任”型的家长决策链路运营。</p>
+</div>
+</div>
+<div class="detail-section full-width">
+<div class="section-title">详细案例</div>
+<div class="section-body">
+<div class="case-item edu-case">
+<div class="case-title">🎓 乌鲁木齐市科信中学 — 教育行业直播</div>
+<div class="case-detail"><strong>教育行业策略</strong>：素材选取学校学生拍摄跳舞、作画等校园活动视频进行混剪，达到风趣幽默吸引点击的效果，展现学校活力与多元化教育理念。投放范围广，投放时间长，持续引流。<strong>运营亮点</strong>：投放版位微信朋友圈+视频号双平台联动，日消耗1k-2k。朋友圈广告精准锁定学校周边5-10公里范围内有初高中孩子的家庭用户，视频号信息流拓展到同城关注教育的家长群体。落地页设计为"校园VR云参观+在线预约到校"，缩短从了解到实地考察的转化链路。<strong>教育洞察</strong>：K12民办学校的直播/投放核心是"建立信任"，家长择校决策极其谨慎，需要通过真实校园场景+师生风采+家长口碑三层内容叠加，逐步消除信息差和信任壁垒。</div>
+<div class="case-metrics">
+<span class="metric">关注人数8000</span>
+<span class="metric">点赞24000</span>
+<span class="metric">互动3700</span>
+</div>
+</div>
+<div class="case-item edu-case">
+<div class="case-title">🎓 【教育】大一美术 — 教育行业精准获客</div>
+<div class="case-detail"><strong>教育行业策略</strong>：面向新疆美术生，以"大一美术"品牌为核心，主打"专业+文化课+吃住学封闭式"教学优势，直击艺考生家长"专业和文化课两头抓"的核心痛点。素材用大卫石膏像风格大图+教学短视频，突出"名校标准教学"与封闭管理亮点，强化"师资权威感+管理安全感"双诉求。<strong>运营亮点</strong>：投放精准定向本地初高中美术生及家长群体，落地页简化表单（仅3-4个必填项降低流失），主推免费试学、限时报名优惠等引流钩子。每日复盘CTR、表单成本，2-3天轮换素材保持新鲜度；线索快速响应机制——3小时内电话回访跟进，确保转化闭环。<strong>教育洞察</strong>：艺考培训属于地域性极强的教育细分赛道，家长最关心的是"联考通过率"和"校考拿证率"，直播间/广告需以真实升学数据和学员作品为信任基石，"结果导向"是核心转化逻辑。</div>
+<div class="case-metrics">
+<span class="metric">表单成本150-200</span>
+<span class="metric">电话直拨25-35</span>
+<span class="metric">日消耗1k-1.5k</span>
+</div>
+</div>
+<div class="case-item edu-case">
+<div class="case-title">🎓 西安学而雅 — 心理疏导+家庭教育</div>
+<div class="case-detail"><strong>教育行业策略</strong>：利用腾讯生态数据能力，精准锁定12-18岁青少年的家长群体（尤其是面对孩子叛逆期、厌学、网瘾等问题的焦虑型家长）。突出"心理疏导+家庭教育指导"双轨模式，以"孩子不听话怎么办""沉迷手机怎么管"等高共鸣问题作为广告文案切入点，直击家长痛点。<strong>运营亮点</strong>：素材均为真人实拍，保证创意重合度低且首发素材多，保证账户拿量能力。落地页仅有2屏左右内容，表单填写项看似繁杂实则多为选择项（如"孩子年龄段""主要问题""联系方式"），方便填写同时保证线索质量度，便于后续销售精准跟进。<strong>教育洞察</strong>：家庭教育/心理疏导类教育产品属于"情感驱动型"消费，家长往往处于焦虑和迫切状态，直播间/广告需要先"共情"再"给方案"，切忌上来就推销课程，"先倾听→再理解→后建议"的话术结构转化率最高。</div>
+<div class="case-metrics">
+<span class="metric">表单成本160-200</span>
+<span class="metric">日消耗2k-3k</span>
+<span class="metric">真人实拍素材</span>
+</div>
+</div>
+</div>
+</div>
+<div class="detail-section full-width">
+<div class="section-title">收费标准</div>
+<div class="pricing-box"><div class="pricing-item">月度服务费：<strong>5-15万/月</strong></div>
+<div class="pricing-item">小时费+投放佣金模式：<strong>小时费 + 分佣5%</strong></div>
+<div class="pricing-item">小时费：<strong>350-500元/小时</strong></div>
+</div>
+</div>
+</div>
+</div></div>
+</div>
+<!-- ==================== 5. 广联先锋 ==================== -->
+<div class="accordion-item" data-category="代理商" data-capabilities="直播代播,直播代投,全案策划,短视频制作,人货场搭建,主播培训" data-advantages="上市公司,600+员工,160000+客户,全专业团队,多平台,创意团队,20+影棚,1000+演员,运营SOP,代播代投,大客单成交,二销转化" data-subtracks="K12教辅,公考培训,职业技能培训,会计考证,名人IP教育" data-budget="3">
+<div class="accordion-header" onclick="toggleAccordion(this)">
+<svg class="accordion-arrow" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
+<span class="company-name-inline">广联先锋</span>
+<span class="company-brief">上市公司背景 · 600+员工 · 20+影棚 · 1000+演员</span>
+</div>
+<div class="accordion-body"><div class="accordion-content">
+<div class="detail-grid">
+<div class="detail-section">
+<div class="section-title">能力类别</div>
+<div class="section-body">
+<ul>
+<li>教育品类直播代播与代投</li>
+<li>直播全案策划与执行</li>
+<li>短视频创意制作（周制作1000+）</li>
+<li>千川/巨量广告投放优化</li>
+<li>直播间人货场搭建</li>
+<li>主播话术设计与培训</li>
+</ul>
+</div>
+</div>
+<div class="detail-section">
+<div class="section-title">核心优势</div>
+<div class="section-body">
+<ul>
+<li><strong>上市公司背景</strong>，成立于2005年，注册资本17745.448万</li>
+<li><strong>600+员工</strong>专业营销服务团队，160,000+家企业客户积累</li>
+<li>配备主播、运营、投流、编导<strong>全专业团队</strong></li>
+<li>自有达人+主播矩阵，<strong>多平台承接代播业务</strong></li>
+<li>创意团队<strong>20人+</strong>，周制作<strong>1000+</strong></li>
+<li>数字化影棚<strong>20+间</strong>，实景场地<strong>30+个</strong></li>
+<li>签约及外聘演员<strong>1000名+</strong>，高效演员库管理体系</li>
+<li>运营SOP体系：1.0敢接活→2.0套模板→3.0会聊天→4.0字转图→N.0直接用</li>
+</ul>
+</div>
+</div>
+<div class="detail-section">
+<div class="section-title">主播资源</div>
+<div class="section-body">
+<p>专业主播团队，覆盖教育品类：</p>
+<div class="client-list">
+<span class="client-tag edu-client">K12教辅</span>
+<span class="client-tag edu-client">学科教育</span>
+<span class="client-tag edu-client">职业技能</span>
+</div>
+<p style="margin-top:8px;">直播团队配置完善：直播运营（策略/统筹/数据）、场控/中控（流程/氛围/应急）、主播（讲解/互动/节奏）。硬件配置专业：单反+采集卡、无线领夹麦、三灯布光、千兆有线+5G热点。</p>
+</div>
+</div><div class="detail-section"><div class="section-title">擅长的教育子赛道</div><div class="section-body"><div class="case-metrics" style="margin-bottom:8px;"><span class="metric">K12教辅</span><span class="metric">公考培训</span><span class="metric">职业技能培训</span><span class="metric">会计考证</span><span class="metric">名人IP教育</span></div><p style="margin:0;font-size:0.88em;color:#555;line-height:1.6;">广联先锋是教育品类覆盖最全的代理商，6个标杆教育案例横跨K12教辅（希望学）、职业技能（软考）、会计考证（初级会计/东奥/正保）、公考（中公）、名人IP教育直播（张泉灵），擅长“低价钩子→高价课转化”的递增客单模型。</p>
+</div>
+</div>
+<div class="detail-section full-width">
+<div class="section-title">详细案例</div>
+<div class="section-body">
+<div class="case-item edu-case">
+<div class="case-title">🎓 【教育】希望学秘籍 — 学科教辅大客单成交</div>
+<div class="case-detail"><strong>教育行业策略</strong>：品牌直推教辅+课程类，属于标品。人货场上进行教辅赠课、巩固衔接为主，获客成本<strong>200左右</strong>。<strong>运营亮点</strong>：精准锁定K12家长群体，通过"教辅材料免费领"的引流策略吸引精准用户进入直播间，再通过主播对教辅内容的深度讲解（如"这本教辅的3大核心考点""如何用教辅帮孩子提分"），自然过渡到正价课推荐。保证获客人群画像精准，降低前端获客成本。通过直播投流实现名片获取与直播转化。<strong>教育洞察</strong>：教辅类产品属于"刚需高频低客单"入口产品，核心策略是"以教辅为钩子引流，以课程为利润核心"，教辅客单29-99元，正价课客单500-3000元，二销转化率可达15%-25%。</div>
+<div class="case-metrics">
+<span class="metric">获客成本约200</span>
+<span class="metric">大客单成交</span>
+</div>
+</div>
+<div class="case-item edu-case">
+<div class="case-title">🎓 【教育】学科教辅二销转化 — 客单递增模式</div>
+<div class="case-detail"><strong>教育行业策略</strong>：品牌直推90天服务课程类，属于标品。人货场上进行教辅赠课、巩固衔接为主，ROI在<strong>1-1.3之间</strong>。<strong>运营亮点</strong>：采用"29-99-299"三档客单递增模型——29元体验课引流→99元短期课体验→299元中期课转化，层层递进提升客单价。后端服务流程转正价课在直播间开播前梳理好完整话术和引导路径，素材更新及时保持量级递增。<strong>教育洞察</strong>：教育类二销转化的核心在于"服务体验驱动续费"，直播间的职责是"卖首次体验"，后端1对1班主任的服务质量决定正价课转化率。需要在直播间就做好"服务承诺"（如"专属班主任跟踪辅导""不满意全额退款"），降低用户决策门槛。</div>
+<div class="case-metrics">
+<span class="metric">ROI 1-1.3</span>
+<span class="metric">29-299客单递增</span>
+</div>
+</div>
+<div class="case-item edu-case">
+<div class="case-title">🎓 【教育】张泉灵 — 阅读写作直播</div>
+<div class="case-detail"><strong>教育行业策略</strong>：借助张泉灵（前央视知名主持人）的IP影响力，打造"名人+教育"的直播模式。前期冷启动阶段，实时调整基建，为起量作准备——以"名人阅读方法分享"为切入点吸引流量，再自然过渡到课程推荐。<strong>运营亮点</strong>：通过精准投放和优质内容实现阅读写作课程的高效转化。成交人数稳步增长，获客成本逐步优化。直播间核心话术围绕"阅读能力=学习能力""写作是孩子未来的核心竞争力"等教育理念展开，直击家长对孩子语文素养的焦虑。<strong>教育洞察</strong>：名人IP教育直播的核心优势是"信任前置"——用户因为信任名人而信任产品，决策链路大幅缩短。但需注意名人不能只是"站台"，必须展现真实的教育理念和方法论，否则用户感知为"割韭菜"会严重损害品牌。</div>
+<div class="case-metrics">
+<span class="metric">冷启动实时调整</span>
+<span class="metric">阅读写作赛道</span>
+</div>
+</div>
+<div class="case-item edu-case">
+<div class="case-title">🎓 【教育】软考299 — 职业技能直播</div>
+<div class="case-detail"><strong>教育行业策略</strong>：投放、运营、主播、项目经理"四位一体"协作模式，确保每个环节紧密衔接——投放端精准锁定IT从业者，运营端根据软考科目（系统集成/信息系统等）定制直播排期，主播端以"IT老兵"人设增强专业感，项目经理统筹全链路数据复盘与优化。<strong>运营亮点</strong>：前端、后端"一损俱损"，电商逻辑的后端一定是"服务→好评→升级"三步走。299元低价课引流+后端高客单转化（如考前冲刺班、面授班等），前端负责"让人来"，后端负责"让人留下来"。持续增长。<strong>教育洞察</strong>：职业资格类教育（软考、PMP、建造师等）用户目标明确——"一次通过考试"，直播间话术需围绕"通过率""真题命中率""不过退款"等核心承诺展开，专业度和结果保障是转化的绝对核心。</div>
+<div class="case-metrics">
+<span class="metric">四位一体协作</span>
+<span class="metric">前后端联动</span>
+</div>
+</div>
+<div class="case-item edu-case">
+<div class="case-title">🎓 【教育】初级会计 — 实体产品+课程转化</div>
+<div class="case-detail"><strong>教育行业策略</strong>：实体产品（教材/题库）加上课程打包销售，圈定小人群（初级会计备考群体）配合整体转化，根据产品属性适时变更直播形式——教材讲解型、刷题互动型、冲刺押题型等多种直播形式轮替。<strong>运营亮点</strong>：不同客单决定受众质量，通过分层投放策略（低价课人群→正价课人群→高端班人群），实现用户质量的阶梯式提升。GMV从<strong>421</strong>增长至<strong>1577</strong>，ROI从<strong>0.63</strong>提升至<strong>1.99</strong>，增幅超3倍。<strong>教育洞察</strong>：会计类课程的"实体产品+课程"组合拳非常有效——实体教材让用户"看得见摸得着"降低决策门槛，课程内容是核心利润来源，两者捆绑销售既提升了客单价，又增强了用户的"物超所值"感知。</div>
+<div class="case-metrics">
+<span class="metric">实体+课程组合</span>
+<span class="metric">小人群精准转化</span>
+<span class="metric">ROI 0.63→1.99</span>
+</div>
+</div>
+<div class="case-item edu-case">
+<div class="case-title">🎓 【教育】中公 — 面试引流课</div>
+<div class="case-detail"><strong>教育行业策略</strong>：品牌公考（公务员考试），属于标品。人货场上：课程赠教辅，成本在<strong>50-55之间</strong>。<strong>运营亮点</strong>：直播间采用"面试真题解析+免费面试技巧课"的引流策略，精准锁定备考公务员的大学毕业生及在职人群。做通用卡片提高用户黏性和品牌记忆度，主体消耗要够，没有通用卡片、高级预约形式会影响后转。配合公考时间节点（国考/省考报名期、笔试冲刺期、面试准备期）调整直播节奏和话术重点。<strong>教育洞察</strong>：公考培训的决策周期与考试周期高度绑定，"报名期引流→冲刺期转化→面试期追销"的节奏至关重要。面试引流课的转化核心是"通过率数据展示+名师光环+不过退款承诺"三重保障。</div>
+<div class="case-metrics">
+<span class="metric">成本50-55</span>
+<span class="metric">公考标品</span>
+</div>
+</div>
+<div class="case-item edu-case">
+<div class="case-title">🎓 【教育】高顿 — 大职研直播</div>
+<div class="case-detail"><strong>教育行业策略</strong>：大职研（在职研究生/CPA等高阶职业教育），主播必须符合"资深讲师"形象——着装正式、语速快、逻辑清晰、专业术语运用自如，话术频率较高，不断加重重点，配合KT板引导下单。<strong>运营亮点</strong>：直播节奏较快（5-8分钟一个产品讲解循环），后端跟不上会造成线索流失，需前后端紧密配合——前端直播间产出线索→后端销售2小时内回访→24小时内完成首通转化。成交人数从<strong>35</strong>增长至<strong>498+</strong>，增幅超14倍。<strong>教育洞察</strong>：高客单价职业教育（CPA/考研/法考等）的直播间核心是"权威感+紧迫感"，权威感来自讲师专业度和数据展示（如"去年通过率87%"），紧迫感来自限时优惠和名额限制（如"仅剩最后3个优惠名额"）。</div>
+<div class="case-metrics">
+<span class="metric">讲师型主播</span>
+<span class="metric">KT板引导</span>
+</div>
+</div>
+<div class="case-item edu-case">
+<div class="case-title">🎓 【教育】猿辅导作文 — 创意投放案例</div>
+<div class="case-detail">投放媒体：视频号+朋友圈。日均消耗<strong>3w+</strong>，峰值<strong>10w+</strong>，考核成本650，产品299小学作文。前期高出价800-860堆素材测试拿量，主投版位视频号，覆盖人群以女性24-55为主。后期跑出跑量素材后账户逐步稳定，出价逐渐下调到550-650，不断迭代跑量素材测试增量。跑量素材类型：口播+前贴。定向：排偏远+女+25-50。</div>
+<div class="case-metrics">
+<span class="metric">日耗3w+，峰值10w+</span>
+<span class="metric">成本650→550</span>
+<span class="metric">测试周期1周</span>
+</div>
+</div>
+<div class="case-item edu-case">
+<div class="case-title">🎓 【教育】猿辅导奥数 — 创意投放案例</div>
+<div class="case-detail">投放媒体：视频号+朋友圈。日均消耗<strong>3w+</strong>，峰值<strong>10w+</strong>，考核成本600，产品299小学奥数。前期测试跑出素材出价800-850，宽定向加速拿量，主测版位朋友圈和视频号，分账户分版位，广告一键起量加快度过冷启动。后期出价下调至600以内，迭代跑量素材及更新同类型新素材口播测试，账户从2个增加至4个投放稳定量级增量。</div>
+<div class="case-metrics">
+<span class="metric">日耗3w+，峰值10w+</span>
+<span class="metric">账户2个→4个</span>
+<span class="metric">出价800→600</span>
+</div>
+</div>
+<div class="case-item edu-case">
+<div class="case-title">🎓 【教育】一鸣数学 — 名师带量投放</div>
+<div class="case-detail">投放媒体：视频号+公众号+朋友圈。日均消耗<strong>3w+</strong>，峰值<strong>5w+</strong>，考核成本500，产品99元数学。结合名师带量，素材产出一部分是名师拍摄口播，一部分演员视频拼接名师。前期高出价撬动账户流量后立马降价到考核范围内搭配一键起量测试，高素材积累搭配8条以上广告基建，快速积累跑量素材。</div>
+<div class="case-metrics">
+<span class="metric">日耗3w+，峰值5w+</span>
+<span class="metric">名师口播+拼接</span>
+</div>
+</div>
+<div class="case-item edu-case">
+<div class="case-title">🎓 【教育】摩比数学 — 视频号精细化投放</div>
+<div class="case-detail">投放媒体：视频号。日均消耗<strong>1w+</strong>，峰值<strong>3w+</strong>，考核成本600，产品摩比数学套盒。前期高出价700堆素材测试拿量，覆盖人群女性24-40，每日基建广告3条以上，广告一键起量预算1000-2000。后期跑出跑量素材后账户逐步稳定，抓头部户和广告，尾部关停，出价下调到520-550，不断迭代跑量素材增加增量。</div>
+<div class="case-metrics">
+<span class="metric">日耗1w+，峰值3w+</span>
+<span class="metric">出价700→520-550</span>
+<span class="metric">测试周期3周</span>
+</div>
+</div>
+</div>
+</div>
+<div class="detail-section full-width">
+<div class="section-title">收费标准</div>
+<div class="pricing-box"><div class="pricing-item">按直播时间收费：<strong>400-450元/小时</strong></div>
+<div class="pricing-item" style="margin-top:6px;color:#888;font-size:0.82em;">注：作为上市公司旗下专业营销服务机构，可根据客户需求定制全案服务报价</div>
+</div>
+</div>
+</div>
+</div></div>
+</div>
+<!-- ==================== 3.5 飞天经纬 ==================== -->
+<div class="accordion-item" data-category="代理商" data-capabilities="腾讯广告投放,直播代播,全案策划,ROI优化" data-advantages="年营收25亿+,日耗800W,综合ROI3-10+,出海布局,线索获取,大客单成交" data-subtracks="在线教育硬件,教育线索获取,少儿编程" data-budget="5">
+<div class="accordion-header" onclick="toggleAccordion(this)">
+<svg class="accordion-arrow" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
+<span class="company-name-inline">飞天经纬</span>
+<span class="company-brief">年营收25亿+ · 日耗800W · 综合ROI 3-10+ · 出海布局</span>
+</div>
+<div class="accordion-body"><div class="accordion-content">
+<div class="detail-grid">
+<div class="detail-section">
+<div class="section-title">能力类别</div>
+<div class="section-body">
+<ul>
+<li>品牌直播代运营（DP服务）</li>
+<li>千川/巨量广告投放</li>
+<li>抖音代运营与蓝V认证</li>
+<li>短视频创意策划与制作</li>
+<li>直播矩阵搭建</li>
+<li>TikTok海外营销</li>
+</ul>
+</div>
+</div>
+<div class="detail-section">
+<div class="section-title">核心优势</div>
+<div class="section-body">
+<ul>
+<li>成立于<strong>2005年</strong>，2025年全年业绩超<strong>25亿元</strong>，日耗突破<strong>800W/日</strong></li>
+<li><strong>30+精装影棚</strong>，丰富的场景支持</li>
+<li>直播运营能力：一周6场，单日16:00-24:00，单次8h，100平场景</li>
+<li>配置专业：摄像机/推流设备/灯光/录音设备，项目经理/运营专员/场控/主播/助播/模特等</li>
+<li><strong>7*24*365</strong>服务响应，日常沟通5分钟内回复，投放策略调整1小时内反馈，素材制作2小时内反馈</li>
+<li>完善的备选与止损方案机制：预想好会发生的问题，做好阶段性目标；数据复盘自查投放问题；人员备选/账户备用/素材备选</li>
+</ul>
+</div>
+</div>
+<div class="detail-section">
+<div class="section-title">主播资源</div>
+<div class="section-body">
+<p>专业直播团队配置：</p>
+<ul>
+<li>项目经理、运营专员、场控、主播、助播、模特等</li>
+<li>一周6场常态化直播运营能力</li>
+<li>单日16:00-24:00时段覆盖</li>
+<li>单次直播时长8小时</li>
+</ul>
+</div>
+</div><div class="detail-section"><div class="section-title">擅长的教育子赛道</div><div class="section-body"><div class="case-metrics" style="margin-bottom:8px;"><span class="metric">在线教育硬件</span><span class="metric">教育线索获取</span><span class="metric">少儿编程</span></div><p style="margin:0;font-size:0.88em;color:#555;line-height:1.6;">飞天经纬年营收25亿+，教育案例覆盖网易有道（词典笔/AI学习机/少儿编程，月GMV 800万+）和高途教育（线索获取，月投流450万+），擅长"硬件+课程"组合拳模式与高线索量获取。</p>
+</div>
+</div>
+<div class="detail-section full-width">
+<div class="section-title">详细案例</div>
+<div class="section-body">
+<div class="case-item edu-case">
+<div class="case-title">🎓 网易有道 — 教育代投合作</div>
+<div class="case-detail"><strong>成果</strong>：场均GMV 30万+，单月GMV 800万+，单日最高GMV 80万+，投流ROI &gt;1.3，综合ROI &gt;1.5，账号等级LV5，带货口碑4.7。<strong>教育行业策略</strong>：直播策略——围绕有道教育王牌爆品集中精细化投放，合理分配直播产品讲解时长，搭配限时赠品、专属权益加码等营销活动，持续拉高直播间成交转化效率；短视频策略——千川短视频全部采用爆款核心素材引流拓量，以主力热销单品搭配周边配件、学习套餐组合捆绑销售，稳步提升客单价，放大整体GMV营收规模。</div>
+<div class="case-metrics">
+<span class="metric">单日最高GMV 80万+</span>
+<span class="metric">单月GMV 800万+</span>
+<span class="metric">场均GMV 30万+</span>
+<span class="metric">综合ROI&gt;1.5</span>
+<span class="metric">投流ROI&gt;1.3</span>
+</div>
+</div>
+<div class="case-item edu-case">
+<div class="case-title">🎓 高途教育 — 教育线索获取</div>
+<div class="case-detail"><strong>成果</strong>：场均线索数500，单月投流消耗450万+，单日最高消耗50万+，线索成本350元，线索成本（优化后）&lt;330元，账号等级LV5，带货口碑4.7。<strong>教育行业策略</strong>：直播策略——围绕店铺王牌爆款单品集中发力投放，科学把控直播讲解时长，叠加限时好礼、专属加码福利等活动，高效拉升用户下单转化率；短视频策略——千川短视频全部采用爆款专属素材进行全域引流曝光，以核心爆品为纽带搭配多款关联产品做组合套餐运营，有效提升客单价，拉动整体成交总额稳步增长。</div>
+<div class="case-metrics">
+<span class="metric">场均线索数500</span>
+<span class="metric">线索成本&lt;330元</span>
+<span class="metric">单月投流消耗450万+</span>
+<span class="metric">单日最高消耗50万+</span>
+</div>
+</div>
+</div>
+</div>
+<div class="detail-section full-width">
+<div class="section-title">收费标准</div>
+<div class="pricing-box"><div class="pricing-item"><strong>直播代播：500元/h</strong></div>
+<div class="pricing-item">具体收费标准根据品牌规模、投放量级、服务内容等因素定制报价</div>
+<div class="pricing-item" style="margin-top:6px;color:#888;font-size:0.82em;">注：日耗突破800W/日的投放体量，具备极强的议价能力和资源获取能力</div>
+</div>
+</div>
+</div>
+</div></div>
+</div>
+</div>
+<div class="category-group" data-group="三方代播公司">
+<div class="category-header cat-daibo">三方代播公司<span class="cat-desc">为客户提供直播带货及广告投放的运营服务，主要盈利来源为服务费（Retainer）或GMV流水分成。</span></div>
+<!-- ==================== 1. 云盟山海 ==================== -->
+<div class="accordion-item" data-category="三方代播公司" data-capabilities="直播代播,腾讯广告投放,视频号投放,直播运营,短视频制作" data-advantages="5年经验,教育行业深耕,500㎡拍摄基地,教育品类深耕,代播代投,0-1起号,全域投放" data-subtracks="知识付费,考研教育,幼儿教育,兴趣课,会计考证,英语教育" data-budget="2">
+<div class="accordion-header" onclick="toggleAccordion(this)">
+<svg class="accordion-arrow" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
+<span class="company-name-inline">云盟山海</span>
+<span class="company-brief">5年经验 · 教育行业深耕 · 500㎡拍摄基地</span>
+</div>
+<div class="accordion-body"><div class="accordion-content">
+<div class="detail-grid"><!-- 能力类别 -->
+<div class="detail-section">
+<div class="section-title">能力类别</div>
+<div class="section-body">
+<ul>
+<li>直播代运营（0-1快速起号）</li>
+<li>直播投放运营</li>
+<li>短视频摄制与创意产出</li>
+<li>直播间搭建与场景设计（仿高光、办公室、别墅、汽车、室外、医院等50+场景）</li>
+<li>品牌直播全案策划</li>
+<li>策略-创意-运营-转化全链路专业闭环</li>
+</ul>
+</div>
+</div>
+<!-- 核心优势 -->
+<div class="detail-section">
+<div class="section-title">核心优势</div>
+<div class="section-body">
+<ul>
+<li><strong>5年直播经验</strong>，2021年开启直播之旅</li>
+<li>接触过<strong>上百个客户</strong>，覆盖多个垂直领域</li>
+<li><strong>500㎡+拍摄基地</strong>，50+场景，覆盖高中低档生活学习场景</li>
+<li><strong>20+创意团队</strong>，导演、编导、摄像、剪辑、助理齐全</li>
+<li>一流设备：索尼A7M3、ARRI ALEXA mini、罗德麦克风等</li>
+<li>多直播间一体化部署，各直播间硬件配置统一，网络环境稳定</li>
+<li>全方位洞察驱动营销决策，数据驱动全景用户经营</li>
+<li>规模化创意素材生产，全流程专业团队支持</li>
+</ul>
+</div>
+</div>
+<!-- 主播资源 -->
+<div class="detail-section">
+<div class="section-title">主播资源</div>
+<div class="section-body">
+<p>可供筛选主播 <strong>20-30人</strong>，可根据客户需求定向招聘、培训。</p>
+<p>团队配置按直播时长灵活配置，基础配置为：1名项目经理 + 1名直播运营 + 1名场控 + 1名投手 + 2-3名主播，均为从业经验2年以上的专业人员。</p>
+<p>项目负责人负责统筹整个项目、资源协调；直播运营操盘多品类直播间（教育/保险/家装等），单场GMV百万级别；投放运营百万级消耗体量投放经验；场控上千场控场经验。</p>
+</div>
+</div><div class="detail-section"><div class="section-title">擅长的教育子赛道</div><div class="section-body"><div class="case-metrics" style="margin-bottom:8px;"><span class="metric">知识付费</span><span class="metric">考研教育</span><span class="metric">幼儿教育</span><span class="metric">兴趣课</span><span class="metric">会计考证</span><span class="metric">英语教育</span></div><p style="margin:0;font-size:0.88em;color:#555;line-height:1.6;">云盟山海深耕教育行业，教育行业品牌客户樊登读书、学而思、高途、网易有道、新东方、牛津树、东奥、正保等合作已久，8个教育案例覆盖知识付费（樊登读书427万+）、考研（高途考研/启航考研）、幼儿教育（叫叫阅读/牛津树）、兴趣课（兴趣岛）、会计考证（正保财会学习机）、英语教育（剑桥英语），擅长多平台投放与50+直播场景设计。</p></div></div>
+<!-- ===== 详细案例 ===== -->
+<div class="detail-section full-width">
+<div class="section-title">详细案例</div>
+<div class="section-body">
+<div class="case-item edu-case">
+<div class="case-title">📚 樊登读书 — 视频号直播12天427万+</div>
+<div class="case-detail"><strong>成果</strong>：为期12天直播活动，累计13场带货直播，预估总销售额超过<strong>427万</strong>，11月12日单场预估销售额突破<strong>183万</strong>，全胜收官。<strong>教育行业策略</strong>：选品+达人双发力——选品方面，以优惠让利和激励性福袋奖励提升用户消费意愿；达人方面，采用"主播+一场控"双保险配置，保证主播随时与粉丝互动、现场提问能及时解答；还邀请《最强大脑》魏教授等大咖嘉宾亲临现场，助力品牌在用户心中积累正向情绪资本，实现品牌力提升。</div>
+<div class="case-metrics">
+<span class="metric">总销售额427万+</span>
+<span class="metric">单场峰值183万</span>
+<span class="metric">13场直播</span>
+<span class="metric">选品+达人双发力</span>
+</div>
+</div>
+<div class="case-item edu-case">
+<div class="case-title">📚 高途考研 — 抖音0基础账户起号</div>
+<div class="case-detail"><strong>成果</strong>：累计带货直播<strong>50+</strong>场，单次突破单量<strong>100+</strong>，精准曝光<strong>585万+</strong>，订单量提升<strong>110%+</strong>，直播间观看人次提升，直接下单订单数提升，转化成本下降。<strong>教育行业策略</strong>：稳定日播，实现从0到1。0基础账户带货产出，以介绍资料作为直播画面输出，为直播间引入精准曝光；做好每一个细节，实时跟进该产品的直播形式和流量新情况，实现高效产出，每一期给到客户理想的获客量。</div>
+<div class="case-metrics">
+<span class="metric">曝光585万+</span>
+<span class="metric">订单量提升110%+</span>
+<span class="metric">单场突破100+单</span>
+<span class="metric">稳定日播从0到1</span>
+</div>
+</div>
+<div class="case-item edu-case">
+<div class="case-title">📚 叫叫阅读 — 88元月包引流</div>
+<div class="case-detail"><strong>成果</strong>：从单场低于10单到上百单，实现直播转化<strong>0-1突破</strong>。<strong>教育行业策略</strong>：素材+直投结合（<strong>90%素材+10%直投</strong>起量）；分阶段精细运营——前期精准莱卡+达人定向快速建模，后期搭建新客计划起量扩规模；风格快速迭代，根据产品节点更新直播风格和素材，赋能转化效果持续提升。</div>
+<div class="case-metrics">
+<span class="metric">首单新客提升117%</span>
+<span class="metric">ROI提升14.3%</span>
+<span class="metric">转化成本降8.57%</span>
+<span class="metric">90%素材+10%直投</span>
+</div>
+</div>
+<div class="case-item edu-case">
+<div class="case-title">📚 牛津树故事机 — 抖音0基础起号</div>
+<div class="case-detail"><strong>成果</strong>：0基础账户起号，实现流量转化<strong>0-1突破</strong>。<strong>教育行业策略</strong>：精细把控付费流量与自然流量占比，探寻成本平衡，实现量级与成本双赢。</div>
+<div class="case-metrics">
+<span class="metric">投产比1.5+</span>
+<span class="metric">客单价159-700元</span>
+<span class="metric">0基础起号</span>
+<span class="metric">付费/自然流量精细把控</span>
+</div>
+</div>
+<div class="case-item edu-case">
+<div class="case-title">📚 兴趣岛 — 单小时1100单突破</div>
+<div class="case-detail"><strong>成果</strong>：单小时单量突破<strong>1100单</strong>。<strong>教育行业策略</strong>：筛选优质主播，搭建主播评级与赛马机制，让优秀主播稳定直播时长；50%画面+50%视频引流，精准付费引流。</div>
+<div class="case-metrics">
+<span class="metric">单小时1100单</span>
+<span class="metric">兑换成本40</span>
+<span class="metric">投产比0.26→0.44</span>
+<span class="metric">日播4h</span>
+</div>
+</div>
+<div class="case-item edu-case">
+<div class="case-title">📚 正保财会学习机 — ROI 6+ 全天16h+</div>
+<div class="case-detail"><strong>成果</strong>：0基础账户起号，实现ROI <strong>6+</strong>，全天拉时长<strong>16h+</strong>。<strong>教育行业策略</strong>：画面与投放——通过画面搭配爆款素材投放，实现高投产；主播形象——主播形象专业、服道化给用户信任感，提高转化率，实现实效高效转化；内容与话术——每一个阶段产出主题背景、话术迭代实现高效转化，利用爆款素材复制稳定转化。</div>
+<div class="case-metrics">
+<span class="metric">ROI 6+</span>
+<span class="metric">日播16h+</span>
+<span class="metric">月销售额提升上百万</span>
+<span class="metric">爆款素材复制转化</span>
+</div>
+</div>
+<div class="case-item edu-case">
+<div class="case-title">📚 启航考研 — ROI突破9 单量GMV提升50%</div>
+<div class="case-detail"><strong>成果</strong>：成功辅助客户在直播板块提升<strong>50%</strong>单量和GMV，实现整体目标完成，ROI突破<strong>9</strong>。<strong>教育行业策略</strong>：流量组合——采用70%直投+30%素材搭配策略，给到客户素材产出指导方向和优化建议，完善直播间引流；直播优化——给予专业的直播方向优化建议，涵盖话术、背景、直播节奏等方面；冲量阶段——在冲量阶段选择全域冲量，实现单量和GMV突破。</div>
+<div class="case-metrics">
+<span class="metric">ROI突破9</span>
+<span class="metric">单量GMV提升50%</span>
+<span class="metric">70%直投+30%素材</span>
+<span class="metric">全域冲量</span>
+</div>
+</div>
+<div class="case-item edu-case">
+<div class="case-title">📚 剑桥英语 — 高客单价从0-1稳定出单</div>
+<div class="case-detail"><strong>成果</strong>：高客单价产品，从0-1稳定出单。<strong>教育行业策略</strong>：直投+素材出单——结合直投与素材投放实现稳定出单；0-1冷启动——0基础账户开播，经历建模到稳定出单全过程，期间根据节点产出素材和直播物料；主播人设——利用有经验的教育主播快速上手，打造宝妈人设增强亲和力与信任感。</div>
+<div class="case-metrics">
+<span class="metric">直播时长4h→8h+</span>
+<span class="metric">投产比1.2→2</span>
+<span class="metric">0基础冷启动</span>
+<span class="metric">宝妈人设主播</span>
+</div>
+</div>
+</div>
+</div>
+<!-- 适合客户 --><!-- 收费标准 -->
+<div class="detail-section full-width">
+<div class="section-title">收费标准</div>
+<div class="pricing-box"><div class="pricing-item">主播时薪：<strong>300-350元/小时</strong></div>
+<div class="pricing-item">直播费用：<strong>400元/小时</strong>（稳定时长价格可谈）</div>
+<div class="pricing-item">投流服务费：<strong>6%+1</strong></div>
+<div class="pricing-item" style="margin-top:6px;color:#888;font-size:0.82em;">注：具体价格根据项目体量、直播时长、服务内容等因素可协商调整</div>
+</div>
+</div>
+</div>
+</div></div>
+</div>
+<!-- ==================== 2. 上海晴空 ==================== -->
+<div class="accordion-item" data-category="三方代播公司" data-capabilities="直播代播,腾讯广告投放,直播运营,ROI优化" data-advantages="专攻教育10年,多平台放量,低价引流专家,教育行业深度理解,低价课放量,代播代投,精准获客" data-subtracks="K12,兴趣课,成人兴趣教育,声音变现,低价课放量" data-budget="3">
+<div class="accordion-header" onclick="toggleAccordion(this)">
+<svg class="accordion-arrow" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
+<span class="company-name-inline">晴空</span>
+<span class="company-brief">专攻教育10年 · 多平台放量 · 低价引流专家</span>
+</div>
+<div class="accordion-body"><div class="accordion-content">
+<div class="detail-grid">
+<div class="detail-section">
+<div class="section-title">能力类别</div>
+<div class="section-body">
+<ul>
+<li>教育行业直播代播</li>
+<li>直播代投（千川/广点通/MP）</li>
+<li>教育类短视频素材创作</li>
+<li>直播间0-1起号与运营</li>
+<li>后端低价转高价转化策略</li>
+</ul>
+</div>
+</div>
+<div class="detail-section">
+<div class="section-title">核心优势</div>
+<div class="section-body">
+<ul>
+<li><strong>教育行业代播代投十年</strong>，深耕教育赛道</li>
+<li>专攻兴趣课、K12、职能课等<strong>全品类教育直播</strong></li>
+<li>多平台投放能力：头条、快手、腾讯（广点通/MP）</li>
+<li>擅长<strong>低价引流、素材起量</strong>策略</li>
+<li>深挖用户痛点，声优及口播演员资源丰富</li>
+<li>素材围绕配音、播音、副业相关生活鸡汤等进行产出</li>
+</ul>
+</div>
+</div>
+<div class="detail-section">
+<div class="section-title">主播资源</div>
+<div class="section-body">
+<p>覆盖多品类教育主播：</p>
+<div class="client-list">
+<span class="client-tag edu-client">K12</span>
+<span class="client-tag edu-client">兴趣</span>
+<span class="client-tag edu-client">养生</span>
+<span class="client-tag edu-client">瑜伽</span>
+<span class="client-tag edu-client">太极</span>
+<span class="client-tag edu-client">编程</span>
+<span class="client-tag edu-client">围棋</span>
+</div>
+</div>
+</div><div class="detail-section"><div class="section-title">擅长的教育子赛道</div><div class="section-body"><div class="case-metrics" style="margin-bottom:8px;"><span class="metric">K12</span><span class="metric">兴趣课</span><span class="metric">成人兴趣教育</span><span class="metric">声音变现</span><span class="metric">低价课放量</span></div><p style="margin:0;font-size:0.88em;color:#555;line-height:1.6;">晴空专攻教育行业代播10年，核心能力是低价课放量与多平台引流。案例覆盖成人兴趣教育（讲真精品课）、声音变现课程（张弛语言课）、AI教学IP（李一舟），精通头条/快手/腾讯多平台0-9.9元低价课批量获客模型。</p></div></div>
+<!-- 详细案例 -->
+<div class="detail-section full-width">
+<div class="section-title">详细案例</div>
+<div class="section-body">
+<div class="case-item edu-case">
+<div class="case-title">🎓 讲真精品课 — 代播代投（第一次合作）</div>
+<div class="case-detail"><strong>成果</strong>：开播时间2022.3.20，开播7日表单突破<strong>500+</strong>，开播第14日同时在线人数突破<strong>200</strong>，4月20日当晚表单冲破<strong>1200</strong>，有效开播30天。<strong>教育行业策略</strong>：讲真精品课（成人兴趣教育平台），主打短视频/声音变现等课程。</div>
+<div class="case-metrics">
+<span class="metric">7日表单500+</span>
+<span class="metric">峰值表单1200+</span>
+<span class="metric">同时在线200+</span>
+<span class="metric">有效开播30天</span>
+</div>
+</div>
+<div class="case-item edu-case">
+<div class="case-title">🎓 讲真精品课 — 代播代投（第二次合作）</div>
+<div class="case-detail"><strong>成果</strong>：开播时间2022.9.19，开播7日表单突破100+，开播第4日同时在线人数50+，1月10日表单冲破<strong>300+</strong>，每天6小时稳定表单<strong>150+</strong>。<strong>教育行业策略</strong>：基于首次合作数据积累，优化运营策略。</div>
+<div class="case-metrics">
+<span class="metric">稳定表单150+/天</span>
+<span class="metric">峰值表单300+</span>
+<span class="metric">第二次合作优化</span>
+</div>
+</div>
+<div class="case-item edu-case">
+<div class="case-title">🎓 张弛语言课 — 声音变现课程直播代投</div>
+<div class="case-detail"><strong>成果</strong>：抖音直播代投，投放期间消耗呈稳步上升趋势，月度消耗峰值超<strong>80万</strong>。<strong>教育行业策略</strong>：声音变现课程，后端低价转高价转化模型。</div>
+<div class="case-metrics">
+<span class="metric">月度消耗峰值超80万</span>
+<span class="metric">低价转高价模式</span>
+<span class="metric">抖音直播代投</span>
+</div>
+</div>
+<div class="case-item edu-case">
+<div class="case-title">🎓 李一舟 — 抖音IP教学直播代投</div>
+<div class="case-detail"><strong>成果</strong>：单日最高消耗<strong>5.3w</strong>，累计消耗<strong>80w</strong>。<strong>教育行业策略</strong>：付费年课教学，抖音直播代投。营销方式：直播间连麦学员，解答问题，介绍课程。运营策略：以付费流量撬动自然流量，提升平台量级；极速&amp;专业计划搭配，细致维度用户测试；粘性粉丝高强度覆盖，相似达人粉丝广告推送。</div>
+<div class="case-metrics">
+<span class="metric">单日消耗5.3w</span>
+<span class="metric">累计消耗80w</span>
+<span class="metric">付费撬动自然流量</span>
+</div>
+</div>
+<div class="case-item edu-case">
+<div class="case-title">🎓 十方教育 — 多平台低价课放量</div>
+<div class="case-detail"><strong>成果</strong>：多平台低价课放量，头条渠道3元课日均消耗<strong>20w+</strong>，成本170内；0元课日均消耗<strong>15w+</strong>，成本<strong>40</strong>。快手渠道1元课日均消耗<strong>10w+</strong>，成本140以内；0.9元课日均消耗<strong>10w+</strong>，成本110。腾讯渠道日消耗<strong>10-20w</strong>，群内付费成本300-400。<strong>教育行业策略</strong>：课程测试期内不断尝试声优及口播演员，素材围绕配音、播音、副业相关生活鸡汤进行产出，深挖用户痛点，效果逐渐显现，量级成本很快达到客户预期。0元课程测试期内利用行业经验以前贴片形式为主。腾讯渠道广点通大投放、MP同步投放加粉，脚本上进行了vlog、情景剧、风景混剪、真人口播、知识点分享等全方位尝试，账户模型逐渐稳定，成本量级不断优化。</div>
+<div class="case-metrics">
+<span class="metric">头条日耗20w+</span>
+<span class="metric">快手日耗10w+</span>
+<span class="metric">腾讯日耗10-20w</span>
+<span class="metric">0元课成本仅40</span>
+</div>
+</div>
+<div class="case-item edu-case">
+<div class="case-title">🎓 核桃编程 — 9元礼盒课程头条渠道</div>
+<div class="case-detail"><strong>成果</strong>：日均消耗<strong>8w</strong>，成本550以内。<strong>教育行业策略</strong>：9元礼盒，以礼盒为主入手，插入课程内容以及宝妈痛点，切换不同场景制作差异化素材，快速度过测试期。</div>
+<div class="case-metrics">
+<span class="metric">日耗8w</span>
+<span class="metric">成本550以内</span>
+<span class="metric">差异化素材快速度过测试期</span>
+</div>
+</div>
+<div class="case-item edu-case">
+<div class="case-title">🎓 小叶子智能陪练 — 腾讯渠道</div>
+<div class="case-detail"><strong>成果</strong>：持续稳定投放，量级不断增长，成本持续优化，日消耗可达<strong>30w+</strong>。<strong>教育行业策略</strong>：结合郎朗视频、钢琴演示视频及产品功能介绍产出优质内容，对视频音效、特效及花字等细节进行大量测试，专门聘请会弹钢琴的演员协助拍摄，罗卡定向细分测试。</div>
+<div class="case-metrics">
+<span class="metric">日耗30w+</span>
+<span class="metric">郎朗视频+专业拍摄</span>
+<span class="metric">罗卡定向细分测试</span>
+</div>
+</div>
+<div class="case-item edu-case">
+<div class="case-title">🎓 少年得到 — 9.9元课程腾讯渠道快速起量</div>
+<div class="case-detail"><strong>成果</strong>：日消耗可达<strong>20w+</strong>，单日转化可达<strong>800+</strong>。<strong>教育行业策略</strong>：大投放做9.9元课程投放，一周内平稳度过测试期进入增量期，成本稳定。素材以剪辑优化为主，通过增加特效、制作吸睛片头等视频优化手段不断迭代视频。</div>
+<div class="case-metrics">
+<span class="metric">日耗20w+</span>
+<span class="metric">单日转化800+</span>
+<span class="metric">一周过测试期</span>
+</div>
+</div>
+</div>
+</div>
+<div class="detail-section full-width">
+<div class="section-title">收费标准</div>
+<div class="pricing-box"><div class="pricing-item">直播费用：<strong>400元/小时</strong>（稳定时长价格可谈）</div>
+<div class="pricing-item">投流服务费：<strong>6%+1</strong></div>
+</div>
+</div>
+</div>
+</div></div>
+</div>
+<!-- ==================== 4. 嘉桥数科 ==================== -->
+<div class="accordion-item" data-category="三方代播公司" data-capabilities="直播代播,直播代投,主播培训,私域运营" data-advantages="头部MCN背景,月销千万孵化,培训+代运营双驱动,IP操盘,私域转化" data-subtracks="知识付费,财经教育,保险教育" data-budget="3">
+<div class="accordion-header" onclick="toggleAccordion(this)">
+<svg class="accordion-arrow" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
+<span class="company-name-inline">嘉桥数科</span>
+<span class="company-brief">头部MCN背景 · 月销千万孵化 · 培训+代运营双驱动</span>
+</div>
+<div class="accordion-body"><div class="accordion-content">
+<div class="detail-grid">
+<div class="detail-section">
+<div class="section-title">能力类别</div>
+<div class="section-body">
+<ul>
+<li>新媒体全案代运营</li>
+<li>直播电商运营与陪跑</li>
+<li>短视频运营与IP孵化</li>
+<li>企业/政府新媒体培训</li>
+<li>视频号全生态运营</li>
+</ul>
+</div>
+</div>
+<div class="detail-section">
+<div class="section-title">核心优势</div>
+<div class="section-body">
+<ul>
+<li>核心团队均来自<strong>头部MCN机构</strong>（无忧传媒、遥望科技），3年以上教育赛道直播代运营服务经验</li>
+<li>创始人<strong>大师傅（陈嘉诚）</strong>：抖音电商官方认证讲师、阿里/腾讯官方平台认证讲师、前蘑菇街椰子学院院长</li>
+<li>操盘孵化过<strong>月销千万</strong>直播带货账号，服务企业端客户3个月营收超<strong>15亿</strong></li>
+<li>直播运营导师徐晓强：18年电商操盘经验、抖音电商金营奖年度优秀讲师、孵化IP项目营收过亿</li>
+<li>短视频操盘手伟总编：前北京2家顶级MCN短视频总监、孵化50个主播8个年入千万</li>
+<li>多个平台官方认证讲师资源（阿里本地生活大学、抖音电商、阿里数字乡村电商学院）</li>
+<li>可灵活承接<strong>月付、中小预算</strong>客户</li>
+</ul>
+</div>
+</div>
+<div class="detail-section">
+<div class="section-title">主播资源</div>
+<div class="section-body">
+<p>多类型主播储备：</p>
+<div class="client-list">
+<span class="client-tag">带货类</span>
+<span class="client-tag">戏曲类</span>
+<span class="client-tag">达人类</span>
+<span class="client-tag">美学类</span>
+</div>
+<p style="margin-top:8px;">团队讲师包括短视频运营、拍剪、直播运营、主播等专业人员；团队操盘手覆盖教育赛道、IP赛道、直播操盘手等。主播老师曾雪花：3年培训+陪跑，全品类单场破百W直播账号100+。</p>
+</div>
+</div><div class="detail-section"><div class="section-title">擅长的教育子赛道</div><div class="section-body"><div class="case-metrics" style="margin-bottom:8px;"><span class="metric">知识付费</span><span class="metric">财经教育</span><span class="metric">保险教育</span></div><p style="margin:0;font-size:0.88em;color:#555;line-height:1.6;">嘉桥数科擅长知识付费+财经教育赛道，案例包括水滴保MCN（“保臧讲坛”年营收1200万+）和顾姐保险规划（小红书+视频号财经类），核心能力是IP账号孵化与知识付费直播变现。</p>
+</div>
+</div>
+<div class="detail-section full-width">
+<div class="section-title">详细案例</div>
+<div class="section-body">
+<div class="case-item edu-case">
+<div class="case-title">🎓 【教育】水滴保MCN — 知识付费直播</div>
+<div class="case-detail">孵化个人IP账号"保臧讲坛"，水滴保官方直播间头部主播。单人直播间年营收<strong>1200w+</strong>，直播投放ROI占比<strong>1:2</strong>。</div>
+<div class="case-metrics">
+<span class="metric">年营收1200w+</span>
+<span class="metric">ROI 1:2</span>
+</div>
+</div>
+<div class="case-item edu-case">
+<div class="case-title">🎓 【教育】顾姐保险规划 — 小红书&amp;视频号财经类</div>
+<div class="case-detail"><strong>教育行业策略</strong>：打造"保险知识科普达人"IP人设，通过小红书图文种草+视频号直播双场域运营，实现知识付费类保险教育的高效转化。单月单直播间<strong>500+线索</strong>，单月单直播间后端转化<strong>100w+</strong>。<strong>运营亮点</strong>：小红书以"保险避坑指南""家庭保障配置方案"等干货内容精准触达25-45岁中产家庭人群，直播间采用"案例讲解→方案定制→限时咨询"三段式转化，配合企微私域沉淀实现长线复购。<strong>教育洞察</strong>：保险知识付费本质是"信任型教育产品"，用户需要先认可专业度再产生购买意愿，IP人设的"专业+温度"平衡是转化关键。</div>
+<div class="case-metrics">
+<span class="metric">月线索500+</span>
+<span class="metric">后端转化100w+</span>
+</div>
+</div>
+</div>
+</div>
+<div class="detail-section full-width">
+<div class="section-title">收费标准</div>
+<div class="pricing-box"><div class="pricing-item">小时费+投放佣金模式：<strong>小时费 + 分佣5%</strong></div>
+<div class="pricing-item">小时费范围：<strong>350-500元/小时</strong></div>
+<div class="pricing-item" style="margin-top:6px;color:#888;font-size:0.82em;">注：可灵活承接月付、中小预算客户，适配多类型教育项目需求</div>
+</div>
+</div>
+</div>
+</div></div>
+</div>
+<!-- ==================== 15. 白云之外/Joey乔伊 ==================== -->
+<div class="accordion-item" data-category="三方代播公司" data-capabilities="IP操盘,全案策划,品牌营销,直播运营" data-advantages="前字节明星超头运营,IP操盘+陪跑,矩阵运营,创意投放" data-subtracks="知识付费,成人教育,IP教育直播" data-budget="4">
+<div class="accordion-header" onclick="toggleAccordion(this)">
+<svg class="accordion-arrow" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
+<span class="company-name-inline">白云之外</span>
+<span class="company-brief">前字节明星超头运营 · IP操盘+陪跑 · 线下2天2夜课2.98万/人</span>
+</div>
+<div class="accordion-body"><div class="accordion-content">
+<div class="detail-grid"><!-- 能力类别 -->
+<div class="detail-section">
+<div class="section-title">能力类别</div>
+<div class="section-body">
+<ul>
+<li><strong>IP操盘陪跑</strong>：IP个性化商业定位、人设定位、产品定位</li>
+<li><strong>线下陪跑服务</strong>：帮助创始人跑通IP全链路（定位→拍摄→内容→变现）</li>
+<li><strong>线上陪跑服务</strong>：帮助创始人跑通IP短视频获客变现</li>
+<li><strong>短视频内容制作</strong>：每月20条爆款选题+粗剪精剪+1条置顶长视频</li>
+<li><strong>直播合作</strong>：IP直播定位+直播运营</li>
+<li><strong>企业内训</strong>：IP短视频&amp;直播线下课程（2天2夜，乔伊本人授课）</li>
+<li><strong>IP助理培训</strong>：培养客户团队独立运营能力</li>
+</ul>
+</div>
+</div>
+<!-- 核心优势 -->
+<div class="detail-section">
+<div class="section-title">核心优势</div>
+<div class="section-body">
+<ul>
+<li><strong>前字节跳动明星名人超头运营</strong>，操盘东方甄选、张兰等头部IP</li>
+<li>进过外企500强，待过字节大厂，融过资创过业，<strong>懂内容+懂商业</strong></li>
+<li>已成功操盘多个短视频IP案例：蓝江律师、孙圈圈、Hoya豪雅豪宅、徐涵明星造型、贾超心理、倪洋讲留学</li>
+<li>多个短视频<strong>爆款案例</strong>：单条最高点赞1.8万、转发3.9万、评论7351</li>
+<li>直播合作案例：蓝江律师、一条暴叔讲留学</li>
+<li>企业内训客户：字节跳动、上汽集团、光明食品集团、Glanbia格兰比亚、九多肉多</li>
+<li>乔伊本人深度参与：每月亲自拍摄+产出选题+授课，非外包流水线</li>
+</ul>
+</div>
+</div>
+<!-- 主播资源 -->
+<div class="detail-section">
+<div class="section-title">主播资源</div>
+<div class="section-body">
+<p>白云之外为<strong>IP操盘工作室</strong>，核心为主理人Joey乔伊本人亲自操盘，非规模化代播服务商。</p>
+<p>直播能力体现在<strong>IP直播定位与运营指导</strong>，帮助创始人/个人IP打造自己的直播能力，而非提供代播主播。通过线下陪跑和线上陪跑，让IP本人掌握短视频+直播获客变现的全链路能力。已合作直播案例包括蓝江律师、一条暴叔讲留学等。</p>
+</div>
+</div><div class="detail-section"><div class="section-title">擅长的教育子赛道</div><div class="section-body"><div class="case-metrics" style="margin-bottom:8px;"><span class="metric">知识付费</span><span class="metric">成人教育</span><span class="metric">IP教育直播</span></div><p style="margin:0;font-size:0.88em;color:#555;line-height:1.6;">白云之外由前字节跳动明星超头运营创立，擅长IP操盘+陪跑。教育案例涉及知识付费机构AI批量内容生产+矩阵分发，曾操盘蓝江律师、倪洋讲留学等教育IP直播，核心能力是“IP定位→内容生产→直播获客”全链路。</p></div></div>
+<!-- 适合客户 --><!-- 收费标准 -->
+<div class="detail-section full-width">
+<div class="section-title">收费标准</div>
+<div class="section-body">
+<div class="pricing-box"><div class="pricing-item">• <strong>线下陪跑服务</strong>：<strong>¥6.98万/月</strong>，季度签约<strong>¥15万</strong>。帮助创始人梳理IP全链路、乔伊本人每月为IP拍摄，交付IP个性化拍摄剪辑SOP+1条置顶长视频+30条访谈口播短视频；季度档增加IP助理培训与直播定位服务</div>
+<div class="pricing-item">• <strong>线上陪跑</strong>：<strong>2.98万/月</strong>，2个月一签。含IP个性化商业/人设/产品定位、乔伊本人每月产出20条爆款内容选题、每月20条短视频粗剪&amp;精剪服务</div>
+<div class="pricing-item">• <strong>线下课</strong>：<strong>2.98万/人</strong>（双人同行有优惠），2天2夜，乔伊本人授课，一站式搞定IP短视频&amp;直播</div>
+</div>
+</div>
+</div>
+<!-- 文档查看 -->
+</div>
+</div></div>
+</div>
+<!-- ==================== 16. 龙宜文化 ==================== -->
+<div class="accordion-item" data-category="三方代播公司" data-capabilities="品牌营销,直播代播,全案策划,短视频制作" data-advantages="一站式品牌营销,500+品牌,10大业务板块,官号代运营,品牌获客,创意投放" data-subtracks="品牌营销,官号代运营,知识付费" data-budget="4">
+<div class="accordion-header" onclick="toggleAccordion(this)">
+<svg class="accordion-arrow" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
+<span class="company-name-inline">龙宜文化</span>
+<span class="company-brief">一站式品牌营销 · 服务500+品牌 · 10大业务板块</span>
+</div>
+<div class="accordion-body"><div class="accordion-content">
+<div class="detail-grid">
+<div class="detail-section">
+<div class="section-title">能力类别</div>
+<div class="section-body">
+<ul>
+<li><strong>内容投放代运营：</strong>抖音蓝V内容&amp;投放代运营、视频号内容&amp;投放代运营、小红书内容&amp;投放代运营、抖音本地生活代运营</li>
+<li><strong>视频&amp;平面创意：</strong>病毒视频、MG/三维动画、广告片TVC、企业宣传片、天猫逛逛视频、平面海报拍摄</li>
+<li><strong>直播服务：</strong>抖音直播服务（品牌直播、达人直播、明星快闪直播）</li>
+</ul>
+</div>
+</div>
+<div class="detail-section">
+<div class="section-title">核心优势</div>
+<div class="section-body">
+<ul>
+<li>公司成立于2020年，基于不同受众洞察，整合多种创意方式，致力于为品牌提供一站式营销服务</li>
+<li>拥有10大强势业务板块，擅长视觉内容输出、营销变现转化、达人发布运营及广告投放推广</li>
+<li>擅长大中型品牌企业<strong>官号代运营、官号代播与获客</strong></li>
+<li>可承接本地演员招募、线下拍摄剪辑的全案工作</li>
+<li>能产出高端个性化IP自媒体内容，指导客户后链搜索承接SOP，推动私信有效获客</li>
+<li>累计服务超<strong>500+</strong>品牌，其中食品快消50+、本地生活50+、汽车金融100+、工业医疗50+、综合50+</li>
+<li>以客户经营业绩和用户价值为出发点，提供从内容到传播到营销的全链条整合服务方案</li>
+<li>拥有丰富的一线品牌操盘经验，在食品快消、汽车、本地生活等领域有深度案例积累</li>
+</ul>
+</div>
+</div>
+<div class="detail-section">
+<div class="section-title">主播资源</div>
+<div class="section-body">
+<ul>
+<li>明星快闪直播（如赛百味明星2h单场直播，场观200万+，同时在线峰值3万+）</li>
+<li>达人直播资源（覆盖食品、本地生活、餐饮等多领域达人）</li>
+<li>自有直播团队（多机位直播、品牌推介会直播、互动直播）</li>
+</ul>
+</div>
+</div><div class="detail-section"><div class="section-title">擅长的教育子赛道</div><div class="section-body"><div class="case-metrics" style="margin-bottom:8px;"><span class="metric">品牌营销</span><span class="metric">官号代运营</span><span class="metric">知识付费</span></div><p style="margin:0;font-size:0.88em;color:#555;line-height:1.6;">龙宜文化是一站式品牌营销公司，服务500+品牌，拥有10大业务板块，核心能力是大中型品牌企业官号代运营、官号代播与获客。标杆案例包括汉堡王（抖音蓝V 3年涨粉80W+、投产比1:23.76）和优衣库（涨粉361.8W+），长周期品牌运营经验可迁移至教育品牌官号代运营场景。</p>
+</div>
+</div>
+<div class="detail-section full-width">
+<div class="section-title">详细案例</div>
+<div class="case-item edu-case">
+<div class="case-title">🍔 汉堡王 — 抖音蓝V代运营（3年长效增长）</div>
+<div class="case-detail"><strong>客户背景</strong>：汉堡王（国际快餐品牌），龙宜文化为其提供抖音蓝V内容投放代运营服务，持续运营3年。<strong>运营亮点</strong>：抖音蓝V账号3年涨粉<strong>80W+</strong>，10%爆款率，13条百万级曝光视频；商品投产比<strong>1:23.76</strong>，超同类型食品投产比<strong>296%</strong>；视频号从930粉丝起步，3年增长至<strong>6.4W</strong>粉丝。<strong>教育行业关联</strong>：龙宜文化在大中型品牌官号代运营与获客方面经验丰富，汉堡王案例验证了其长周期品牌运营能力和高投产比达成能力，该能力可直接迁移至教育品牌的官号代运营场景。</div>
+<div class="case-metrics">
+<span class="metric">3年涨粉80W+</span>
+<span class="metric">投产比1:23.76</span>
+<span class="metric">超同类投产比296%</span>
+<span class="metric">视频号3年→6.4W</span>
+</div>
+</div>
+<div class="case-item edu-case">
+<div class="case-title">👕 优衣库 — 品牌蓝V代运营</div>
+<div class="case-detail"><strong>客户背景</strong>：优衣库（国际服装零售品牌），龙宜文化为其提供抖音蓝V代运营服务。<strong>运营亮点</strong>：抖音蓝V涨粉<strong>361.8W+</strong>，互动量<strong>59.8W+</strong>。<strong>教育行业关联</strong>：验证了龙宜文化在大型品牌账号快速增长和用户互动运营方面的实力，适用于教育品牌快速起号和粉丝沉淀。</div>
+<div class="case-metrics">
+<span class="metric">涨粉361.8W+</span>
+<span class="metric">互动量59.8W+</span>
+</div>
+</div>
+</div>
+<div class="detail-section full-width">
+<div class="section-title">收费标准</div>
+<div class="pricing-box"><div class="pricing-item"><strong>官号重播代运营</strong>：3万元/微信账号/月，适配从未做过IP号的企业，蓝v账号准荐+10条视频拍摄发布（非演员）+日常维护</div>
+<div class="pricing-item"><strong>官号直播代运营</strong>：7万/单账号/月，1主播4h/天播25天+助理4h/天播30天</div>
+</div>
+</div>
+</div>
+</div></div>
+</div>
+<!-- ==================== 17. 北京宝汇 ==================== -->
+<div class="accordion-item" data-category="三方代播公司" data-capabilities="新媒体获客,短视频制作,直播代播,私域运营" data-advantages="中小企业新媒体获客,五种引流形式,1对1落地辅导,线索获取,0-1起号" data-subtracks="职业技能培训,短视频获客" data-budget="2">
+<div class="accordion-header" onclick="toggleAccordion(this)">
+<svg class="accordion-arrow" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
+<span class="company-name-inline">宝汇</span>
+<span class="company-brief">中小企业新媒体获客 · 五种引流形式 · 1对1落地辅导</span>
+</div>
+<div class="accordion-body"><div class="accordion-content">
+<div class="detail-grid">
+<div class="detail-section">
+<div class="section-title">能力类别</div>
+<div class="section-body">
+<ul>
+<li><strong>抖音精细化运营：</strong>账号搭建与装修、视频内容定位与策划、专职剪辑师剪辑视频、每日发布</li>
+<li><strong>SEO关键词优化：</strong>抖音站内搜索优化，5万词布局，前10名排名</li>
+<li><strong>巨量精准投流：</strong>精准范围投放（地区/街道）、粉丝截流、兴趣标签投放</li>
+<li><strong>员工矩阵运营：</strong>绑定10-50个账号，统一管理、统一监管回复</li>
+<li><strong>全媒体平台分发：</strong>抖音/视频号/快手/小红书/西瓜/头条/好看等多平台同步</li>
+<li><strong>百度&amp;小红书运营：</strong>小红书和百家号同步运营、文章写作发布</li>
+<li><strong>视频拍摄剪辑：</strong>专业相机+灯光+提词器+麦克风拍摄，专业剪辑</li>
+</ul>
+</div>
+</div>
+<div class="detail-section">
+<div class="section-title">核心优势</div>
+<div class="section-body">
+<ul>
+<li>公司原名北京宝汇网络，2016年至今，<strong>8年以上</strong>操盘经验</li>
+<li>中央新影挂牌服务商 + 巨量官方授权</li>
+<li>AAA级信用单位</li>
+<li><strong>五种引流形式</strong>：账号运营+搜流+投流+员工矩阵+全媒体平台，确保效果最大化</li>
+<li>"教你做、帮你做、带你做"原则，深入企业1对1落地辅导，以结果为导向</li>
+<li>五大系统：全网营销定位系统→媒介系统→流量系统→咨询系统→成交系统</li>
+<li>企业使命：让中小企业没有难做的新媒体营销</li>
+</ul>
+</div>
+</div>
+<div class="detail-section">
+<div class="section-title">主播资源</div>
+<div class="section-body">
+<p>未在资料中明确提及主播资源，主要侧重于企业短视频代运营和精准获客，非直播代播为主的公司。</p>
+</div>
+</div><div class="detail-section"><div class="section-title">擅长的教育子赛道</div><div class="section-body"><div class="case-metrics" style="margin-bottom:8px;"><span class="metric">职业技能培训</span><span class="metric">短视频获客</span></div><p style="margin:0;font-size:0.88em;color:#555;line-height:1.6;">宝汇专注中小企业新媒体获客8年以上，教育案例为新东方烹饪职业技能培训学校（292条作品/4679私信+7975电话），核心能力是抖音短视频+SEO关键词优化+多平台分发的获客模型。</p>
+</div>
+</div>
+<div class="detail-section full-width">
+<div class="section-title">详细案例</div>
+<div class="section-body">
+<div class="case-item edu-case">
+<div class="case-title">🍳 【教育】北京市朝阳区新东方烹饪职业技能培训学校</div>
+<div class="case-detail">主营：烹饪学校、厨师培训、小吃培训、学西点。发布<strong>292条</strong>作品，获得<strong>77.7万</strong>播放量，获得<strong>4679个</strong>私信咨询+<strong>7975个</strong>打电话留电话。</div>
+<div class="case-metrics">
+<span class="metric">292条作品</span>
+<span class="metric">4679私信+7975电话</span>
+</div>
+</div>
+</div>
+</div>
+<div class="detail-section full-width">
+<div class="section-title">收费标准</div>
+<div class="pricing-box"><div class="pricing-item"><strong>豪华版 — 29,800元/年</strong>：200条精剪+1000条图文，100万曝光，3次拍摄</div>
+<div class="pricing-item"><strong>至尊版 — 69,800元/年</strong>：500条精剪+3000条图文，300万曝光，15个矩阵账号，10次拍摄，含上门内训</div>
+<div class="pricing-item" style="margin-top:6px;color:#888;font-size:0.82em;">注：宝汇可线下拍摄+内容策划陪跑，具体报价根据项目需求定制</div>
+</div>
+</div>
+</div>
+</div></div>
+</div>
+<!-- ==================== 18. 金鹃传媒 ==================== -->
+<div class="accordion-item" data-category="三方代播公司" data-capabilities="品牌营销,直播代播,全案策划" data-advantages="安徽广电旗下,30年+广告营销,国家高新技术企业,品牌营销,全案策划" data-subtracks="知识付费,读书IP,文化名人直播" data-budget="5">
+<div class="accordion-header" onclick="toggleAccordion(this)">
+<svg class="accordion-arrow" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
+<span class="company-name-inline">金鹃传媒</span>
+<span class="company-brief">安徽广电旗下 · 30年+广告营销 · 国家高新技术企业</span>
+</div>
+<div class="accordion-body"><div class="accordion-content">
+<div class="detail-grid">
+<div class="detail-section">
+<div class="section-title">能力类别</div>
+<div class="section-body">
+<ul>
+<li><strong>直播代播：</strong>抖音代播（品牌官方直播、达人直播、溯源直播）</li>
+<li><strong>抖音代运营：</strong>账号搭建与运营、达人招募与管理、短视频内容营销</li>
+<li><strong>溯源直播：</strong>产地溯源专场（五常大米、中宁枸杞、九华山黄精等）</li>
+<li><strong>数字营销：</strong>互联网信息流广告、短视频内容营销、内容创意输出、平台电商运营</li>
+<li><strong>品牌营销咨询：</strong>品牌咨询、媒介传播、创意设计、会展执行</li>
+<li><strong>影视内容生产：</strong>品牌全案视频创意制作、媒体宣传视频制作</li>
+<li><strong>媒体广告运营：</strong>安徽广播电视台全部地面频道及合肥地铁全线广告资源独家运营</li>
+</ul>
+</div>
+</div>
+<div class="detail-section">
+<div class="section-title">核心优势</div>
+<div class="section-body">
+<ul>
+<li><strong>国企背景</strong>：直属安徽广电传媒产业集团，安徽广播电视台共同持股，天然信任背书</li>
+<li>成立于<strong>1993年</strong>，30年+广告营销经验，业内享有"广告黄埔军校"之称</li>
+<li><strong>中国一级广告企业</strong>资质，中央电视台广告代理资质</li>
+<li><strong>国家高新技术企业</strong>（2013年至今连续认定），安徽省大数据企业</li>
+<li>安徽省广告协会<strong>会长单位</strong>，中国广告协会理事单位</li>
+<li>累计获得国际/国家级大奖<strong>233个</strong>、省级大奖<strong>221个</strong></li>
+<li>5家控股子公司、2家参股子公司，300+员工，覆盖全媒体营销全链路</li>
+<li>与安徽广电融媒体云播基地战略合作，拥有专业演播厅、实景片场、直播中心</li>
+<li>独家运营安徽广播电视台5大地面频道及合肥地铁全线广告资源</li>
+</ul>
+</div>
+</div>
+<div class="detail-section">
+<div class="section-title">主播资源</div>
+<div class="section-body">
+<ul>
+<li>自有带货主播团队（国企招聘，形象气质佳，专业培训）</li>
+<li>文化名人/知名IP直播合作（帆书/樊登、冯唐等）</li>
+<li>溯源专场主播（产地实景直播，五常大米、枸杞、黄精等）</li>
+<li>品牌专场主播（新百伦等运动品牌专场）</li>
+<li>达人招募与管理能力</li>
+</ul>
+</div>
+</div><div class="detail-section"><div class="section-title">擅长的教育子赛道</div><div class="section-body"><div class="case-metrics" style="margin-bottom:8px;"><span class="metric">知识付费</span><span class="metric">读书IP</span><span class="metric">文化名人直播</span></div><p style="margin:0;font-size:0.88em;color:#555;line-height:1.6;">金鹃传媒作为安徽广电旗下国企，擅长知识付费+文化名人IP直播。教育案例包括帆书/樊登（“金句输出→场景共鸣→限时促单”三段式）和冯唐（“文人书房”场景），核心优势是国企背景保障内容合规，30年+广告营销经验。</p>
+</div>
+</div>
+<div class="detail-section full-width">
+<div class="section-title">详细案例</div>
+<div class="section-body">
+<div class="case-item edu-case">
+<div class="case-title">📚 【教育】帆书（樊登讲书）— 抖音代播</div>
+<div class="case-detail"><strong>客户背景</strong>：帆书（原樊登读书），中国头部知识付费品牌，注册用户超4000万。<strong>业务成效</strong>：拉新产品15天测试期即达成投放目标，且投产数据呈稳步上升态势，当前日均销售单量稳定在<strong>1500-2000单</strong>，实现高效获客与转化。<strong>视觉升级</strong>：针对原有绿幕直播间进行视觉优化迭代，打造专属实景直播间，强化品牌调性与质感，提升用户观看体验与信任度。<strong>行业认可</strong>：帆书项目凭借出色的数字营销表现，荣获<strong>2025年度ADMEN国际大赏数字营销类实战金案</strong>。</div>
+<div class="case-metrics">
+<span class="metric">日均1500-2000单</span>
+<span class="metric">绿幕→实景升级</span>
+<span class="metric">2025 ADMEN金案</span>
+</div>
+</div>
+<div class="case-item edu-case">
+<div class="case-title">📖 【教育】冯唐 — 抖音代播</div>
+<div class="case-detail"><strong>业务布局与战略核心</strong>：深耕教育知识付费赛道，2025年与冯唐IP达成深度直播合作，联合孵化麦肯锡商业管理课程体系。通过直播前端精准触达目标客群，构建"公域引流+私域转化"的完整业务闭环，助力客户实现商业价值深度变现。<strong>运营策略与技术赋能</strong>：以冯唐IP资产为核心进行内容放量，综合运用AIGC技术提升内容创作效能，同时搭建实景直播间强化品牌质感，并精准筛选匹配产品调性的主播团队，形成"内容+场景+人设"的全链路运营体系。<strong>测试成效与增长趋势</strong>：项目处于测试攻坚阶段，经一周试运行，投放日消耗由<strong>1000元</strong>稳步提升至<strong>3000元</strong>，用户关注度与转化数据持续向好，展现出强劲的业务增长潜力。</div>
+<div class="case-metrics">
+<span class="metric">麦肯锡课程体系</span>
+<span class="metric">公域引流+私域转化</span>
+<span class="metric">AIGC提升创作效能</span>
+<span class="metric">日消耗1000→3000元</span>
+</div>
+</div>
+</div>
+</div>
+<div class="detail-section full-width">
+<div class="section-title">收费标准</div>
+<div class="pricing-box"><div class="pricing-item">• <strong>30万基础成本</strong> + 按需求上浮一定比例，具体方案请联系商务沟通确认。</div>
+</div>
+</div>
+</div>
+</div></div>
+</div>
+<!-- ==================== 8. 麦克风（飞雨文化） ==================== -->
+<div class="accordion-item" data-category="三方代播公司" data-capabilities="直播代播,抖音投放,视频号投放,短视频带货,直播运营" data-advantages="顶级教育大厂基因,低价课精细化运营,短直协同矩阵,规模化增长,跨赛道复用" data-subtracks="K12,食疗/大健康,图书,低价课引流" data-budget="3">
+<div class="accordion-header" onclick="toggleAccordion(this)">
+<svg class="accordion-arrow" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
+<span class="company-name-inline">麦克风（飞雨文化）</span>
+<span class="company-brief">顶级教育大厂基因 · 低价课精细化运营 · 短直协同矩阵</span>
+</div>
+<div class="accordion-body"><div class="accordion-content">
+<div class="detail-grid">
+<div class="detail-section">
+<div class="section-title">能力类别</div>
+<div class="section-body">
+<ul>
+<li><strong>直播代播：</strong>抖音/视频号直播代播，低价引流品到高客单价全链路运营</li>
+<li><strong>抖音投放：</strong>信息流广告投放，日耗可达80万+，ROI驱动可持续增长</li>
+<li><strong>视频号投放：</strong>中老年精准流量运营，后端转化保障性强</li>
+<li><strong>短视频带货：</strong>短视频内容种草与转化，短直协同构建流量矩阵</li>
+<li><strong>定制化引流：</strong>为品牌主业务定制化输送精准Leads，动态调整成本与量级</li>
+</ul>
+</div>
+</div>
+<div class="detail-section">
+<div class="section-title">核心优势</div>
+<div class="section-body">
+<ul>
+<li><strong>顶级教育大厂基因</strong>：核心成员来自猿辅导、学而思等互联网教育巨头，亲历行业从爆发到精耕全周期</li>
+<li><strong>懂产品·懂流量·懂转化·懂数据</strong>：深刻理解教育用户需求与产品设计逻辑，精通主流平台投放与直播运营</li>
+<li><strong>可复制的增长公式</strong>：产品设计（低价引流品+高转正价品+精准产品线拓展）+ 流量运营（抖音规模+视频号精准+短直协同矩阵）</li>
+<li><strong>跨赛道复用能力</strong>：从K12到大健康等新消费领域，已验证模型可快速复制启动</li>
+<li><strong>规模化增长</strong>：最高日耗百万级，构建从低价引流到高客单价的完整商业闭环</li>
+</ul>
+</div>
+</div>
+<div class="detail-section">
+<div class="section-title">主播资源</div>
+<div class="section-body">
+<p>核心团队来自猿辅导、学而思等顶级教育大厂，具备教育直播专业操盘能力。团队覆盖投放运营、直播运营、内容创意等全链路专业岗位。</p>
+</div>
+</div>
+<div class="detail-section">
+<div class="section-title">擅长的教育子赛道</div>
+<div class="section-body">
+<div class="case-metrics" style="margin-bottom:8px;"><span class="metric">K12</span><span class="metric">食疗/大健康</span><span class="metric">图书</span><span class="metric">低价课引流</span></div>
+<p style="margin:0;font-size:0.88em;color:#555;line-height:1.6;">麦克风（飞雨文化）核心团队源自猿辅导、学而思，深谙教育行业流量规则。教育案例覆盖K12图书直营（猿辅导/学而思）、大健康食疗引流（长轻食疗），擅长低价课精细化流量运营，抖音/视频号双平台策略，短直协同构建流量矩阵。</p>
+</div>
+</div>
+<div class="detail-section full-width">
+<div class="section-title">详细案例</div>
+<div class="section-body">
+<div class="case-item edu-case">
+<div class="case-title">📚 【教育】猿辅导 — 抖音图书直营+定制化引流</div>
+<div class="case-detail"><strong>爆品图书直营</strong>：低客单爆品（50-90元，如《暑假一本通》），日单量<strong>2万+</strong>，日耗<strong>80万+</strong>，ROI 1.X；中高客单突破（300-400+元，如《趣系列》《奥数》），图书闭环阶段ROI高达<strong>2.X</strong>。<strong>定制化引流</strong>：49元盒子产品为学科正价课部门输送精准Leads，综合成本150-300元，单日引流500-3000单，日耗40万+。</div>
+<div class="case-metrics">
+<span class="metric">日单量2万+</span>
+<span class="metric">日耗80万+</span>
+<span class="metric">ROI 2.X</span>
+<span class="metric">单日引流500-3000单</span>
+</div>
+</div>
+<div class="case-item edu-case">
+<div class="case-title">📚 【教育】学而思 — 短直协同+高客单图书</div>
+<div class="case-detail"><strong>高客单图书</strong>：170-1999元产品（如《初中/高中秘籍》），直播间整体ROI接近<strong>3.X</strong>，日耗<strong>20万+</strong>。<strong>短视频带货</strong>：产品从22元到千元全覆盖，7天总支付ROI <strong>2.X</strong>，日耗<strong>50万+</strong>，高效种草与转化，形成流量互补。</div>
+<div class="case-metrics">
+<span class="metric">ROI接近3.X</span>
+<span class="metric">短视频7天ROI 2.X</span>
+<span class="metric">日耗50万+</span>
+<span class="metric">全客单价覆盖</span>
+</div>
+</div>
+<div class="case-item edu-case">
+<div class="case-title">🌿 【大健康】长轻食疗 — 从0-1验证引流模型</div>
+<div class="case-detail"><strong>抖音模型</strong>：1元7天饮食调理课，直播间小黄车+小风车H5，获客成本60-150元，小时出单100+。<strong>视频号模型</strong>：1/5/7元课，流量精准（中老年），获客成本~200+元，小时出单50+。<strong>中价探索</strong>：迭代为99元10天服务营，后端转化率提升至<strong>3倍</strong>，跑通盈利模型。</div>
+<div class="case-metrics">
+<span class="metric">获客成本60-150元</span>
+<span class="metric">小时出单100+</span>
+<span class="metric">转化率提升3倍</span>
+<span class="metric">跑通盈利模型</span>
+</div>
+</div>
+</div>
+</div>
+<div class="detail-section full-width">
+<div class="section-title">收费标准</div>
+<div class="pricing-box"><div class="pricing-item"><strong>直播代播：400元/h</strong></div>
+<div class="pricing-item"><strong>直播代投：4%</strong></div>
+</div>
+</div>
+</div>
+</div></div>
+</div>
+</div>
+</div>
+<div class="category-group" data-group="直播SaaS服务商">
+<div class="category-header cat-saas">直播SaaS服务商<span class="cat-desc">专注为行业提供技术工具解决方案（如音频处理、AI消音等），采用订阅制收费，不介入具体投放与直播执行。</span></div>
+<!-- ==================== 9. 涤涤卫 ==================== -->
+<div class="accordion-item" data-category="直播SaaS服务商" data-capabilities="合规风控,话术优化" data-advantages="降低90%违规风险,智能消音+违规词检测,合规风控" data-subtracks="" data-budget="1">
+<div class="accordion-header" onclick="toggleAccordion(this)">
+<svg class="accordion-arrow" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
+<span class="company-name-inline">涤涤卫</span>
+<span class="company-brief">直播合规风控与音频优化SaaS · 智能消音+违规词检测 · 降低90%违规风险</span>
+</div>
+<div class="accordion-body"><div class="accordion-content">
+<div class="detail-grid"><!-- 能力类别 -->
+<div class="detail-section">
+<div class="section-title">能力类别</div>
+<div class="section-body">
+<ul>
+<li><strong>涤涤卫直播卫士</strong>：直播全流程安全防护（直播前话术预审/生成 → 直播中实时消音 → 直播后违规复盘）</li>
+<li><strong>涤涤卫话术优化大师</strong>：企业级深度话术优化与风险管理平台（多直播间管理 + 竞品监测分析 + 话术策略优化）</li>
+<li>违禁词实时检测与消音</li>
+<li>直播话术合规预审与智能生成</li>
+<li>竞品直播间开播检测与话术分析</li>
+<li>直播违规数据报告自动生成</li>
+</ul>
+</div>
+</div>
+<!-- 核心优势 -->
+<div class="detail-section">
+<div class="section-title">核心优势</div>
+<div class="section-body">
+<ul>
+<li><strong>10万+规则词库</strong>，全量梳理主流直播平台规则，持续迭代更新</li>
+<li>实时消音低延时（最低延时 <strong>0.8秒</strong>），有效阻断风险内容传播</li>
+<li>有效降低直播间 <strong>90%话术违规风险</strong></li>
+<li>不仅匹配敏感词库，更能<strong>结合上下文智能识别违规意图</strong>（如过度承诺、虚假宣传等语义层面违规）</li>
+<li>直播前+直播中+直播后<strong>全流程防护闭环</strong>，已升级至3.0版本</li>
+<li>话术优化大师支持<strong>多直播间集中管理</strong>，直观看清不同直播间数据表现</li>
+<li>竞品直播间<strong>合规扫描+话术策略借鉴</strong>，将竞争压力转化为提升驱动力</li>
+<li>违规报告包含：违规词总量、类别占比、命中时间文本、替换建议等</li>
+</ul>
+</div>
+</div>
+<!-- 主播资源 -->
+<div class="detail-section">
+<div class="section-title">主播资源</div>
+<div class="section-body">
+<p>涤涤卫为<strong>SaaS工具型产品</strong>，非代播服务商，无自有主播团队。</p>
+<p>核心价值在于为品牌自有直播团队、MCN机构、代运营公司提供<strong>直播合规风控工具</strong>，帮助任何主播降低违规风险。尤其适合<strong>新手主播</strong>快速进阶、<strong>易违规类目</strong>直播间合规保障、<strong>品牌直播矩阵</strong>集中风控管理。</p>
+</div>
+</div>
+<!-- ===== 详细案例 ===== -->
+<div class="detail-section full-width">
+<div class="section-title">详细案例</div>
+<div class="case-item edu-case">
+<div class="case-title">🛡️ 品牌直播矩阵合规风控 — 多直播间集中管理</div>
+<div class="case-detail"><strong>场景</strong>：面向中大型品牌直播矩阵，使用话术优化大师集中管理多个直播间。<strong>解决方案</strong>：系统自动汇总各直播间违规类型分布、风险等级排名等聚合报告，从集团视角呈现整体合规态势。为每个违规点生成包含违规原话、上下文片段及具体改进建议的详细报告，使培训与整改精准高效。<strong>效果</strong>：降低90%违规风险，实现多直播间集中管理，违规报告自动生成。</div>
+<div class="case-metrics">
+<span class="metric">降低90%违规风险</span>
+<span class="metric">多直播间集中管理</span>
+<span class="metric">违规报告自动生成</span>
+</div>
+</div>
+<div class="case-item edu-case">
+<div class="case-title">🔍 竞品直播间监测 — 合规扫描+话术策略借鉴</div>
+<div class="case-detail"><strong>场景</strong>：对竞品直播间进行同标准合规扫描，清晰看到竞品在哪些产品描述上"踩线"，评估其潜在监管风险。<strong>效果</strong>：同时分析竞品高频宣传话术与卖点，在规避违规风险的同时合法优化自身话术策略，将外部竞争压力转化为内部提升驱动力。</div>
+<div class="case-metrics">
+<span class="metric">竞品合规扫描</span>
+<span class="metric">话术策略借鉴</span>
+<span class="metric">风险预警库</span>
+</div>
+</div>
+<div class="case-item">
+<div class="case-title">⚡ 直播实时消音 — 0.8秒极速响应</div>
+<div class="case-detail"><strong>场景</strong>：主播在直播间不慎说出违规话术（如"穿3年10年都没问题"等模糊过度承诺），涤涤卫直播卫士实时监测并消音，避免因说错话导致违规。<strong>解决方案</strong>：系统不仅能匹配敏感词，更能结合上下文智能识别整段话术的违规表意，从根源拦截"擦边球"。<strong>效果</strong>：0.8秒极速消音，语义级违规识别，过度承诺拦截。</div>
+<div class="case-metrics">
+<span class="metric">0.8秒极速消音</span>
+<span class="metric">语义级违规识别</span>
+<span class="metric">过度承诺拦截</span>
+</div>
+</div>
+<div class="case-item">
+<div class="case-title">📋 新手主播话术预审 — 快速生成合规话术</div>
+<div class="case-detail"><strong>场景</strong>：直播前使用预审功能对脚本进行文本审核，发现并剔除违禁词；同时可快速生成产品讲解文案，积累卖货话术经验，让新手主播快速进阶，辅助资深主播提高效率。<strong>效果</strong>：直播结束后自动获得违规数据报告，形成合规管理闭环。话术预审+智能生成，新手快速进阶。</div>
+<div class="case-metrics">
+<span class="metric">话术预审+智能生成</span>
+<span class="metric">新手快速进阶</span>
+<span class="metric">合规管理闭环</span>
+</div>
+</div>
+</div>
+<!-- 适合客户 --><!-- 收费标准 -->
+<div class="detail-section full-width">
+<div class="section-title">收费标准</div>
+<div class="section-body">
+<div class="pricing-box"><div class="pricing-item">• 软件费用：约2,000元（基础版，按直播间数量和功能模块定制）</div>
+<div class="pricing-item">• 涤涤卫直播卫士：按直播间/账号数收费，适合单直播间或少量直播间场景</div>
+<div class="pricing-item">• 涤涤卫话术优化大师：企业级定价，适合品牌直播矩阵集中管理场景</div>
+</div>
+</div>
+</div>
+<!-- 文档查看 -->
+</div>
+</div></div>
+</div>
+<!-- ==================== 10. 百准 ==================== -->
+<div class="accordion-item" data-category="直播SaaS服务商" data-capabilities="数据分析,ROI优化,腾讯广告投放,视频号投放" data-advantages="视频号官方数据服务商,矩阵运营+ROI追踪,数据分析" data-subtracks="" data-budget="3">
+<div class="accordion-header" onclick="toggleAccordion(this)">
+<svg class="accordion-arrow" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
+<span class="company-name-inline">百准</span>
+<span class="company-brief">视频号数据分析与投流工作台 · 矩阵运营+ROI追踪 · 视频号官方数据服务商</span>
+</div>
+<div class="accordion-body"><div class="accordion-content">
+<div class="detail-grid"><!-- 能力类别 -->
+<div class="detail-section">
+<div class="section-title">能力类别</div>
+<div class="section-body">
+<ul>
+<li><strong>视频号矩阵运营工作台</strong>（核心产品）</li>
+<li>数据魔方：日历报表、核心指标、排行榜</li>
+<li>矩阵列表：账号/组织视角查询核心指标</li>
+<li>视频列表 &amp; 直播列表：自定义字段展示</li>
+<li>数据汇算：账号/组织/区域三视角汇总</li>
+<li>任务系统：按区域/城市发布活动和指标任务</li>
+<li>积分体系：完成行动获积分，积分可作广告金自助加热</li>
+<li>ADQ投放：门店账号直通ADQ资源，自助加热+自动加热</li>
+<li>线索聚合：ADQ投放线索+消息线索双线汇算归因</li>
+<li>双端一体：品牌营销端 + 终端门店mini工作台</li>
+</ul>
+</div>
+</div>
+<!-- 核心优势 -->
+<div class="detail-section">
+<div class="section-title">核心优势</div>
+<div class="section-body">
+<ul>
+<li><strong>5年专注视频号生态</strong>，产品成熟度高</li>
+<li>腾讯供应商 + 微信视频号服务商 + 腾讯广告开发者，<strong>官方生态深度合作</strong></li>
+<li>获得<strong>两轮融资</strong>，持续服务腾讯、阿里、蚂蚁、小米、京东等大客户</li>
+<li><strong>100+500强企业</strong>选择，100+汽车/科技行业客户</li>
+<li>全部客户采用<strong>独立部署模式</strong>，品牌间数据硬件级隔离，安全可靠</li>
+<li>视频号一次授权<strong>三年自动更新数据</strong>，D+1自动更新，避免人工统计</li>
+<li><strong>50+项可视化功能</strong>，多视角筛选，一站式解决视频号矩阵看数难</li>
+<li>积分体系实现行动激励，形成终端持续产出高质量内容的<strong>正循环</strong></li>
+<li>ADQ+消息双线线索聚合汇算，从曝光到线索完整归因</li>
+</ul>
+</div>
+</div>
+<!-- 主播资源 -->
+<div class="detail-section">
+<div class="section-title">主播资源</div>
+<div class="section-body">
+<p>百准为<strong>SaaS工具型平台</strong>，非代播服务商，无自有主播团队。</p>
+<p>核心价值在于为品牌提供<strong>视频号矩阵管理工具</strong>，帮助品牌高效管理终端经销商/经纪人/设计师的视频号账号，实现数据分析、内容管理、任务调动、自助加热等闭环运营。平台支持管理 <strong>1000-3000个视频号账号</strong>（按版本），适合大中型品牌矩阵化运营。</p>
+</div>
+</div>
+<!-- ===== 详细案例 ===== -->
+<div class="detail-section full-width">
+<div class="section-title">详细案例</div>
+<div class="case-item edu-case">
+<div class="case-title">📱 品牌视频号矩阵管理 — 终端经销商集中运营</div>
+<div class="case-detail"><strong>场景</strong>：某全国性品牌拥有数百个区域代理/经销商，每个都有视频号账号但缺乏统一管理。<strong>解决方案</strong>：使用百准视频号矩阵运营工作台，品牌总部可按区域发布营销任务活动，调动各经销商积极性。数据魔方自动汇总矩阵全景数据，终端通过mini工作台快速打卡发视频并获得积分，积分可作广告金自助加热优质内容。ADQ+消息双线线索聚合汇算，从曝光到线索完整归因。<strong>效果</strong>：数百账号统一管理，三年数据自动回溯；积分→广告金正循环激励终端持续产出；矩阵全景数据汇总，多视角筛选看数。</div>
+<div class="case-metrics">
+<span class="metric">数百账号统一管理</span>
+<span class="metric">积分→广告金自助加热</span>
+<span class="metric">矩阵全景数据汇总</span>
+<span class="metric">三年数据自动回溯</span>
+</div>
+</div>
+<div class="case-item">
+<div class="case-title">🚗 汽车/科技行业 — ADQ投放+消息双线线索聚合归因</div>
+<div class="case-detail"><strong>场景</strong>：汽车品牌拥有大量区域经销商视频号账号，广告投放线索和自然流量消息线索分散，无法统一归因分析。<strong>解决方案</strong>：使用百准旗舰版矩阵运营工作台，ADQ投放线索与消息来源线索双线聚合汇算，自动整理归属账号。支持账户维度、组织维度、区域维度数据汇总归因，从曝光到线索完整追踪每个号的流量转线索价值。终端经销商通过mini工作台10秒打卡识别消息来客。<strong>效果</strong>：100+汽车/科技行业客户采用独立部署模式，品牌间数据硬件级隔离；双线线索聚合打通广告与自然流归因链路。</div>
+<div class="case-metrics">
+<span class="metric">100+汽车/科技客户</span>
+<span class="metric">ADQ+消息双线聚合</span>
+<span class="metric">独立部署数据隔离</span>
+<span class="metric">曝光→线索完整归因</span>
+</div>
+</div>
+</div>
+<!-- 适合客户 --><!-- 收费标准 -->
+<div class="detail-section full-width">
+<div class="section-title">收费标准</div>
+<div class="section-body">
+<div class="pricing-box"><div class="pricing-item">• <strong>专业版：30,000元/年</strong> — 最多1,000个视频号；数据回溯：60天；50+可视化功能；两级管理权限、一级组织架构；板块：数据魔方/账号主页/视频列表/直播列表/数据汇器/用户管理/组织管理/广告数据</div>
+<div class="pricing-item">• <strong>国服版：60,000元/年</strong> — 最多3,000个视频号；数据回溯：360天；50+可视化功能；三级管理权限、五级组织架构；在专业版全部板块基础上，额外开放：双端一体的任务模块、积分模块、自助加热模块、以及数据API（每日把看板汇总数据推送至客户服务器）</div>
+<div class="pricing-item">• 提供技术服务费6%专用发票</div>
+<div class="pricing-item">• 支持定制化需求，多项能力持续迭代</div>
+</div>
+</div>
+</div>
+<!-- 文档查看 -->
+</div>
+</div></div>
+</div>
+<!-- ==================== 11. 易聊科技/私信通 ==================== -->
+<div class="accordion-item" data-category="直播SaaS服务商" data-capabilities="智能客服,私域运营,线索管理,AI自动回复" data-advantages="NLP智能客服,AI自动回复+线索清洗,抖音私信通核心服务商,线索获取" data-subtracks="" data-budget="3">
+<div class="accordion-header" onclick="toggleAccordion(this)">
+<svg class="accordion-arrow" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
+<span class="company-name-inline">私信通</span>
+<span class="company-brief">NLP智能客服与私域获客SaaS · AI自动回复+线索清洗 · 抖音私信通核心服务商</span>
+</div>
+<div class="accordion-body"><div class="accordion-content">
+<div class="detail-grid"><!-- 能力类别 -->
+<div class="detail-section">
+<div class="section-title">能力类别</div>
+<div class="section-body">
+<ul>
+<li><strong>AI私信获客</strong>：7×24小时智能私信回复，5-8秒响应，确保3分钟回复率</li>
+<li><strong>多平台私信统一管理</strong>：绑定企业号/员工号/KOS，一个平台管理分配所有线索</li>
+<li><strong>直播间AI互动</strong>：AI甄别高意向弹幕用户，智能回复引导私信留资转化</li>
+<li><strong>实景直播AI自动应答</strong>：无需真人出镜，15-30秒声音样本即可生成真人声音，24小时AI直播</li>
+<li><strong>AI实时语音互动</strong>：语音点名欢迎、打赏感谢、关注感谢、循环引导话术</li>
+<li><strong>全渠道线索汇聚</strong>：30+主流媒体全渠道客户触点统一服务入口</li>
+<li><strong>线索秒级分发</strong>：根据来源、地域等信息秒级分发给销售</li>
+<li><strong>AI模型训练</strong>：通用大模型+行业大模型+品牌定制+单店定制，四级模型架构</li>
+</ul>
+</div>
+</div>
+<!-- 核心优势 -->
+<div class="detail-section">
+<div class="section-title">核心优势</div>
+<div class="section-body">
+<ul>
+<li>国内<strong>首家基于NLP开发获客型AI客服系统</strong>的公司，拥有多项技术专利及软件著作权</li>
+<li>荣获<strong>国家级高新技术企业认证</strong>、中关村高新技术企业认证，获政府专项资金奖励</li>
+<li><strong>20,000+客户</strong>，上市企业100+，覆盖27个行业280+城市</li>
+<li><strong>四级AI模型架构</strong>：通用大模型→行业大模型→品牌定制→单店定制，拟人化程度高</li>
+<li>AI拟人回复平均 <strong>5-8秒响应</strong>，确保3分钟回复率，深夜也在线</li>
+<li>人工+AI无缝切换：人工超过120秒未回复，自动切换AI托管模式</li>
+<li>AI主动触达：针对进私未开口用户，通过活动政策等方案引导开口</li>
+<li>公司总部北京，国内3家分公司+海外硅谷分公司，覆盖全球业务</li>
+</ul>
+</div>
+</div>
+<!-- 主播资源 -->
+<div class="detail-section">
+<div class="section-title">主播资源</div>
+<div class="section-body">
+<p>易聊科技为<strong>SaaS工具型产品</strong>，非代播服务商，无自有主播团队。</p>
+<p>核心价值在于提供<strong>AI直播+AI私信获客工具</strong>：仅需15-30秒声音样本即可生成真人声音的AI主播，实现 <strong>7×24小时无人直播</strong>，AI自动生成开场话术、根据实时数据智能调整策略、与访客自由互动，当意向客户增多时自动切换强化引导留资话术。适合品牌自主直播场景的获客提效。</p>
+</div>
+</div>
+<!-- ===== 详细案例 ===== -->
+<div class="detail-section full-width">
+<div class="section-title">详细案例</div>
+<div class="case-item">
+<div class="case-title">🚗 汽车经销商 — AI直播线索提升</div>
+<div class="case-detail"><strong>场景</strong>：某汽车经销商接入私信通AI直播前，日均线索量有限。接入后实现人工+AI全天24小时直播，AI根据实时弹幕数据智能调整直播策略，当意向客户增多时自动切换强化引导留资话术。<strong>效果</strong>：接入后线索提升<strong>25%</strong>（客户A），另一客户线索提升<strong>17.86%</strong>，留咨转化率显著提高。</div>
+<div class="case-metrics">
+<span class="metric">线索提升25%</span>
+<span class="metric">线索提升17.86%</span>
+<span class="metric">留咨转化率提升</span>
+</div>
+</div>
+<div class="case-item">
+<div class="case-title">🚗 汽车经销商 — 人工 vs 人工+AI直播对比</div>
+<div class="case-detail"><strong>场景</strong>：对比纯人工直播与人工+AI直播全天24小时的获客效率。<strong>纯人工</strong>：一个月广告消耗3,425元，获得11个直播间表单线索+1个直播引导私信线索留资。<strong>人工+AI</strong>：一个月广告消耗9,794元（其中AI直播投流2,000元），获得59个表单+10个私信留资。<strong>结论</strong>：AI直播全天候覆盖使线索量大幅提升，单条线索成本显著降低。</div>
+<div class="case-metrics">
+<span class="metric">线索12条→69条</span>
+<span class="metric">AI投流2000元</span>
+<span class="metric">单条线索成本降低</span>
+</div>
+</div>
+<div class="case-item">
+<div class="case-title">🚗 汽车经销商 — AI替代离职主播</div>
+<div class="case-detail"><strong>场景</strong>：6月底主播离职，7月全部使用AI直播替代。<strong>效果</strong>：仅用1周时间，AI全天直播每天平均5-6场，每场不低于1小时，2,000元投流获25条留资，成功<strong>卖出2台车</strong>，最快实现昨晚留资、今天成交。</div>
+<div class="case-metrics">
+<span class="metric">5-6场/天</span>
+<span class="metric">25条留资/周</span>
+<span class="metric">卖出2台车</span>
+<span class="metric">隔日成交</span>
+</div>
+</div>
+</div>
+<!-- 适合客户 --><!-- 收费标准 -->
+<div class="detail-section full-width">
+<div class="section-title">收费标准</div>
+<div class="section-body">
+<div class="pricing-box"><div class="pricing-item">• 访客先试用，根据项目情况具体沟通费用</div>
+<div class="pricing-item">• 大致参考区间：按访客开口计费：<strong>1-2元/开口对话</strong></div>
+<div class="pricing-item">• 按年付费：<strong>10万/年</strong></div>
+<div class="pricing-item">• 核心产品私信通按账号数+功能模块收费，AI直播、AI私信获客、线索管理等模块可按需组合</div>
+<div class="pricing-item">• 提供售前实施、AI训练、售后保障、客户成功全流程服务</div>
+</div>
+</div>
+</div>
+<!-- 文档查看 -->
+</div>
+</div></div>
+</div>
+<!-- ==================== 12. 杭州云智创心/超级编导 ==================== -->
+<div class="accordion-item" data-category="直播SaaS服务商" data-capabilities="AIGC内容,脚本策划,短视频制作,素材管理" data-advantages="巨量引擎五星服务商,智能脚本+素材管理,AI素材生成" data-subtracks="" data-budget="2">
+<div class="accordion-header" onclick="toggleAccordion(this)">
+<svg class="accordion-arrow" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
+<span class="company-name-inline">超级编导</span>
+<span class="company-brief">AIGC商业内容生产平台 · 智能脚本生成+素材管理 · 巨量引擎五星服务商</span>
+</div>
+<div class="accordion-body"><div class="accordion-content">
+<div class="detail-grid">
+<!-- 能力类别 -->
+<div class="detail-section">
+<div class="section-title">能力类别</div>
+<div class="section-body">
+<ul>
+<li><strong>文案智能创作</strong>：关键词创作 + 智能文案 + AI助手，随心切换</li>
+<li><strong>风险词检测</strong>：基于深度学习的风险词监测系统，直播/短视频文案合规预审</li>
+<li><strong>可视化批量剪辑</strong>：原创首发，逼近"剪映"编辑器体验，一站式精细化处理</li>
+<li><strong>视频智能去重</strong>：自研智能去重算法，精准计算重复率，提高视频过审率</li>
+<li><strong>真人形象&amp;声音克隆</strong>：数字人功能，克隆达人/老板/员工形象声音，量产真人出镜口播</li>
+<li><strong>100+台词朗读音色</strong>：内置丰富素材库与配音资源</li>
+<li><strong>多平台矩阵分发</strong>：自动定时定点发布至多账号，不限绑定账号数量</li>
+<li><strong>门店POI挂载</strong>：扫码分发+小程序挂载，适配本地生活场景</li>
+<li><strong>广告素材推送</strong>：一键推送视频至多个广告账户素材库</li>
+<li><strong>数据回流分析</strong>：作品数据实时回流，帮助客户即时做出内容策略调整</li>
+<li><strong>流量学院</strong>：线上+线下双线培训，运营专家1V1量身定制服务方案</li>
+</ul>
+</div>
+</div>
+<!-- 核心优势 -->
+<div class="detail-section">
+<div class="section-title">核心优势</div>
+<div class="section-body">
+<ul>
+<li><strong>2024 AIGC百强企业</strong>，超级编导登上「2024 CHINA AIGC 100」榜</li>
+<li>巨量引擎群峰服务市场<strong>2025 Q1五星服务商</strong>，群峰C位推荐</li>
+<li>巨量引擎工作台C位推荐 + 巨量千川首页C位推荐</li>
+<li><strong>14项专利证书和软件著作权</strong>，自研视频混剪算法、可视化批量剪辑、AIGC批量一键成片</li>
+<li>数倍于友商的技术开发团队，<strong>30+人员</strong>负责维护及上新功能</li>
+<li>累计服务全球客户超 <strong>7,500家</strong>，服务各领域头部客户近百个</li>
+<li>具有大批量视频需求客户经验：车仆、金丰传媒年总量各近 <strong>10万条</strong></li>
+<li>多轨道精细化混剪，手机可无损上传，多种视频剪辑技术支持</li>
+<li>"平台 + 运营 + 服务"一站式解决方案，运营专家1V1定制方案</li>
+</ul>
+</div>
+</div>
+<!-- 主播资源 -->
+<div class="detail-section">
+<div class="section-title">主播资源</div>
+<div class="section-body">
+<p>杭州云智创心为<strong>SaaS工具型产品</strong>，非代播服务商，无自有主播团队。</p>
+<p>核心价值在于提供<strong>AI批量内容生产+矩阵分发工具</strong>：通过数字人克隆技术（真人形象&amp;声音克隆），无需真人出镜即可量产口播视频，每日可生产 <strong>1000+条</strong> 真人出镜口播视频；通过可视化批量剪辑+智能去重算法，人均日产从10条提升至 <strong>100条</strong>，效率提升 <strong>10倍</strong>。</p>
+</div>
+</div>
+<!-- ===== 详细案例 ===== -->
+<div class="detail-section full-width">
+<div class="section-title">详细案例</div>
+<div class="case-item">
+<div class="case-title">👕 服装品牌 — 多场景混剪+爆款裂变+矩阵分发</div>
+<div class="case-detail"><strong>场景</strong>：服装品牌（防晒服单品）需大量短视频推广，产品单一需多场景混剪，同时需拆解同行爆款批量复刻。<strong>解决方案</strong>：通过超级编导数字人功能克隆达人、人脸融合，结合实拍画面，批量混剪每日量产200+短视频；选择流量效果好的视频通过爆款裂变功能批量替换素材快速裂变；矩阵自动分发到各平台账号。<strong>效果</strong>：团队人力成本降低<strong>70%</strong>；短视频日更<strong>100条+</strong>；多条百万短视频，总曝光<strong>1000万+</strong>；单条素材最高消耗<strong>270万+</strong>；月发布量<strong>4000条+</strong>，日留咨最高<strong>300+</strong>；带货GMV提升<strong>300%</strong>。</div>
+<div class="case-metrics">
+<span class="metric">人力成本降70%</span>
+<span class="metric">日更100条+</span>
+<span class="metric">单条消耗270万+</span>
+<span class="metric">GMV提升300%</span>
+</div>
+</div>
+<div class="case-item">
+<div class="case-title">🐾 宠物品牌 — 短视频矩阵招商+同城获客</div>
+<div class="case-detail"><strong>场景</strong>：宠物品牌立足杭州，需通过短视频为品牌总部招商进行全域流量传播。<strong>解决方案</strong>：搭建全网<strong>200+</strong>品牌账号矩阵，营销总部批量生产短视频，通过矩阵分发功能下发到门店并挂载POI地址，带动线下业务增长。依靠品牌超级矩阵做到抖音同城宠物人气TOP1。<strong>效果</strong>：抖音同城宠物人气<strong>TOP1</strong>；20+账号累计创作超<strong>4亿</strong>播放量；累计带货金额突破<strong>100万</strong>。</div>
+<div class="case-metrics">
+<span class="metric">同城宠物TOP1</span>
+<span class="metric">4亿播放量</span>
+<span class="metric">带货突破100万</span>
+<span class="metric">200+账号矩阵</span>
+</div>
+</div>
+<div class="case-item">
+<div class="case-title">🌏 TikTok跨境 — 批量原创视频+海外矩阵分发</div>
+<div class="case-detail"><strong>场景</strong>：跨境电商（美区带货），需大量原创带货视频分发至TikTok等海外平台，面临矩阵裂变素材优化效率低、多语言与跨文化适配、创意素材匮乏等问题。<strong>解决方案</strong>：在国内拍摄带货样品多角度多场景素材，导入超级编导批量混剪，单日量产超<strong>1000条</strong>原创视频作品；通过矩阵自动分发到<strong>200+</strong>TikTok账号；选择流量效果好的视频通过爆款裂变功能批量替换素材快速裂变。<strong>效果</strong>：团队人力成本降低<strong>80%</strong>；单日量产1000条+原创视频；拥有超200+账号矩阵；带货GMV提升<strong>200%-300%</strong>。</div>
+<div class="case-metrics">
+<span class="metric">人力成本降80%</span>
+<span class="metric">日产1000条+</span>
+<span class="metric">GMV提升200%-300%</span>
+<span class="metric">200+账号矩阵</span>
+</div>
+</div>
+</div>
+<!-- 适合客户 --><!-- 收费标准 -->
+<div class="detail-section full-width">
+<div class="section-title">收费标准</div>
+<div class="section-body">
+<div class="pricing-box"><div class="pricing-item\">• <strong>专业版</strong>（适合5人以下团队）：算力28000点，均价0.5元/点，可操作账户数6个，云存储空间2000G</div>
+<div class="pricing-item\">• <strong>企业版</strong>（适合5-10人团队）：算力28000点，均价0.4元/点，可操作账户数12个，云存储空间3000G</div>
+<div class="pricing-item\">• <strong>旗舰版</strong>（适合10人以上团队）：算力175000点，均价0.3元/点，可操作账户数20个，云存储空间4000G</div>
+<div class="pricing-item\">• 配套流量学院线上+线下培训，助力客户快速上手</div>
+</div>
+</div>
+</div>
+<!-- 文档查看 -->
+</div>
+</div></div>
+</div>
+<!-- ==================== 13. 杭州像衍科技/神绘数字人 ==================== -->
+<div class="accordion-item" data-category="直播SaaS服务商" data-capabilities="数字人直播,AI素材生成,无人直播" data-advantages="7×24h无人直播,120小时连续零失误,AI数字人,数字人直播" data-subtracks="" data-budget="1">
+<div class="accordion-header" onclick="toggleAccordion(this)">
+<svg class="accordion-arrow" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
+<span class="company-name-inline">神绘数字人</span>
+<span class="company-brief">AI数字人直播SaaS · 7×24h无人直播+实时互动 · 120小时连续零失误</span>
+</div>
+<div class="accordion-body"><div class="accordion-content">
+<div class="detail-grid"><!-- 能力类别 -->
+<div class="detail-section">
+<div class="section-title">能力类别</div>
+<div class="section-body">
+<ul>
+<li><strong>神绘数字人内容生成平台</strong>：形象克隆、音色克隆、AI文稿生成、AI文生图、AI PPT、视频合成、视频翻译</li>
+<li><strong>神绘数字人实时交互平台</strong>：一键开播、智能话术库、商品管理、AI氛围互动、多平台推流</li>
+<li><strong>衍生智算系统</strong>：云边协同计算底座，支持万级节点并发调度，为全平台提供算力支撑</li>
+<li>个性化主播：不同性别、口音、年龄和情绪的音色选择</li>
+<li>AI动态话术生成与复写，让直播更自然</li>
+<li>实时识别用户提问并AI自动回复，用户进场/点赞/送礼智能回应</li>
+<li>脚本草稿管理与内容复用，像编辑PPT一样操作</li>
+</ul>
+</div>
+</div>
+<!-- 核心优势 -->
+<div class="detail-section">
+<div class="section-title">核心优势</div>
+<div class="section-body">
+<ul>
+<li><strong>国家高新技术企业</strong>，2021年成立，天使轮融资</li>
+<li>自主研发<strong>云边协同计算底座</strong>，首创跨架构(CPU/GPU/NPU)算力池化技术，算力利用率提升3倍+</li>
+<li>超写实建模：基于神经辐射场，3D建模周期从<strong>数周压缩至数小时</strong>，成本降低<strong>80%+</strong></li>
+<li>唇形同步误差 <strong>&lt;5ms</strong>，边缘端推理引擎模型压缩率超<strong>80%</strong></li>
+<li>杭州文广集团"小雨"项目：4K画质下端到端延迟仅<strong>50ms</strong>，创下<strong>120小时连续直播零失误</strong>行业纪录</li>
+<li>单一服务器可同时处理<strong>数百个数字人实时渲染</strong>任务</li>
+<li>手机拍摄1-2分钟视频，4小时即可生成超写实数字人</li>
+<li>全栈式端到端方案："智算底座+工具链+数字人应用"完整闭环</li>
+</ul>
+</div>
+</div>
+<!-- 主播资源 -->
+<div class="detail-section">
+<div class="section-title">主播资源</div>
+<div class="section-body">
+<p>杭州像衍科技为<strong>数字人SaaS工具型产品</strong>，非代播服务商，无自有真人主播团队。</p>
+<p>核心价值在于提供<strong>AI数字人替代真人主播</strong>的能力：通过形象克隆+音色克隆技术，无需真人出镜即可创建个性化数字主播，实现 <strong>7×24小时不间断直播</strong>。一个数字人主播可代替一个团队，支持电商带货、品牌宣讲、政务讲解、教育培训等多场景。用户可选择不同性别、口音、年龄和情绪的音色，打造贴合品牌调性的数字主播形象。</p>
+</div>
+</div>
+<!-- ===== 详细案例 ===== -->
+<div class="detail-section full-width">
+<div class="section-title">详细案例</div>
+<div class="section-body">
+<div class="case-item edu-case">
+<div class="case-title">🎓 2D数字人克隆与视频合成平台 — 口播短视频高效量产</div>
+<div class="case-detail"><strong>场景</strong>：面向B端/C端用户，提供全面的数字人视频场景剪辑功能，满足复杂视频创作场景需求。<strong>产品亮点</strong>：①数字人个性化——支持形象自定义、音色自定义，不同形象不同音色均可灵活搭配；②素材丰富——支持丰富的背景、音乐、气泡文字、字幕、形状元素、图片、视频、音频素材；③剪辑便捷——支持移动、拖拉、缩放、图层、复制、同步、时间轴等多重剪辑功能；④场景多样——支持多稿多页、单稿多页、多页多图层，满足多场景视频创作需求。<strong>效果</strong>：结合LLM+数字人能力，从创意到成片只需几分钟，效率提升80%，成本降低60%。</div>
+<div class="case-metrics">
+<span class="metric">效率提升80%</span>
+<span class="metric">成本降低60%</span>
+<span class="metric">形象+音色自定义</span>
+<span class="metric">多场景视频创作</span>
+</div>
+</div>
+<div class="case-item edu-case">
+<div class="case-title">📱 2D数字人实时交互平台 — 智能问答+实时互动</div>
+<div class="case-detail"><strong>场景</strong>：2D数字人实时交互平台，支持人脸自动检测唤醒、语音实时识别、大模型智能问答、数字人实时交互。<strong>核心能力</strong>：①知识库——大模型RAG识别、外接客户本地大模型通用接口、智能体定制封装、知识库文档导入；②展示形式——形象定制、声音定制、多模态应答。<strong>优势</strong>：情绪稳定、永不疲劳、运营成本低、专业性强。</div>
+<div class="case-metrics">
+<span class="metric">人脸自动检测唤醒</span>
+<span class="metric">大模型智能问答</span>
+<span class="metric">多模态应答</span>
+<span class="metric">运营成本低</span>
+</div>
+</div>
+<div class="case-item">
+<div class="case-title">🛒 数字人直播平台 — 24小时智能带货</div>
+<div class="case-detail"><strong>场景</strong>：AI赋能电商直播，告别高成本、低效率，开启24小时智能带货新时代。<strong>核心能力</strong>：①AI直播话术动态改写，让直播内容更具吸引力；②主播副播配合切换，打造真实直播间气氛组；③实时弹幕互动，智能回应观众提问；④矩阵跨平台直播，轻松扩展流量；⑤近百种预置数字人形象、话术，满足个性化直播需求。</div>
+<div class="case-metrics">
+<span class="metric">24h智能带货</span>
+<span class="metric">AI话术动态改写</span>
+<span class="metric">实时弹幕互动</span>
+<span class="metric">矩阵跨平台直播</span>
+</div>
+</div>
+</div>
+</div>
+<!-- 适合客户 --><!-- 收费标准 -->
+<div class="detail-section full-width">
+<div class="section-title">收费标准</div>
+<div class="section-body">
+<div class="pricing-box"><div class="pricing-item\">• <strong>套餐包1：数字人克隆形象+声音克隆+内容生成视频时长打包</strong></div>
+<div class="pricing-item\">　- 数字人1个+声音1个+时长50分钟=优惠后共计：<strong>2500元</strong></div>
+<div class="pricing-item\">　- 数字人2个+声音2个+时长100分钟=<strong>4000元</strong></div>
+<div class="pricing-item\">　- 数字人5个+声音5个+时长500分钟=<strong>12000元</strong></div>
+<div class="pricing-item\">　- 数字人10个+声音10个+时长500分钟=<strong>24000元</strong></div>
+<div class="pricing-item\">• <strong>套餐包2：内容生成视频</strong></div>
+<div class="pricing-item\">　- 时长500分钟：<strong>2888元</strong>；时长1000分钟：<strong>5188元</strong></div>
+<div class="pricing-item\">• 另外：单独充值数字人形象克隆<strong>1999元/个</strong>，内容生成视频<strong>6元/分钟</strong></div>
+</div>
+</div>
+</div>
+<!-- 文档查看 -->
+</div>
+</div></div>
+</div>
+<div class="accordion-item" data-category="直播SaaS服务商" data-capabilities="AI复盘,数据分析,竞品对标,ROI优化" data-advantages="抖音AI应用大赛第一名,全链路AI直播复盘,AI复盘,数据分析" data-subtracks="" data-budget="1">
+<div class="accordion-header" onclick="toggleAccordion(this)">
+<svg class="accordion-arrow" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
+<span class="company-name-inline">爱复盘</span>
+<span class="company-brief">全链路AI直播复盘工具 · 数据诊断+竞品对标+策略推荐 · 抖音AI应用大赛第一名</span>
+</div>
+<div class="accordion-body">
+<div class="accordion-content">
+<div class="detail-grid">
+<div class="detail-section">
+<div class="section-title">能力类别</div>
+<div class="section-body">
+<ul>
+<li>AI复盘 — 大幅缩减复盘时长，提升团队运营效率</li>
+<li>AI对比复盘 — 一键拆解同行，全维度对标直播间</li>
+<li>AI话术助手 — 一键提取优化同行话术，输出标准化即用话术</li>
+<li>AI运营助手 — 精准定位直播问题，优化流程和节奏</li>
+<li>AI违规助手 — 精准查违规，圈定可能产生违规的地方</li>
+<li>高清自动录屏 — 告别手机录制直播间，工作提效8倍</li>
+<li>短视频选题 — 追踪达人与爆款，高效筛选低粉爆款</li>
+<li>云空间 — 企业级云存储，沉淀直播复盘内容为可复用资产</li>
+</ul>
+</div>
+</div>
+<div class="detail-section">
+<div class="section-title">核心优势</div>
+<div class="section-body">
+<ul>
+<li><strong>官方认证</strong>：抖音官方AI应用大赛直播提效工具第一名，全国前三名；省级互联网营销大赛官方合作伙伴</li>
+<li><strong>用户规模</strong>：2万+品牌主、商家、IP都在使用的AI复盘学习工具</li>
+<li><strong>AI 10分钟产出复盘报告</strong>：线索行业客户直播复盘人工需3-4h且难以识别有效线索，爱复盘AI仅需10分钟产出复盘报告，分秒级弹幕分析识别高意向线索，话术分析识别留客效果好的话术</li>
+<li><strong>智能识别直播高光片段</strong>：主播开播效果不好、培养难，爱复盘支持与同品类/本品以往直播间的不同时段对比，且智能识别直播高光片段供学习借鉴</li>
+<li><strong>全量敏感词识别+上下文语境提取</strong>：部分行业客户话术违规风险高，爱复盘全量识别敏感词，并提取完整上下文语境供参照，精准防控违规风险</li>
+<li><strong>内置12类高频复盘提示词模板</strong>：中长/小白客户后台难上手，爱复盘内置12类高频复盘提示词模板，一键分析，大幅降低使用门槛</li>
+<li><strong>提效显著</strong>：高清自动录屏工作提效8倍，AI复盘大幅缩减复盘时长</li>
+<li><strong>精准对标</strong>：AI对比复盘一键拆解同行直播间，精准定位差异，输出可落地优化方案</li>
+<li><strong>话术标准化</strong>：AI话术助手解决新主播话术培养难、塑品无标准痛点，输出标准化即用话术</li>
+<li><strong>违规防控</strong>：AI违规助手+风控专家1V1服务，精准查违规，挽回潜在损失</li>
+<li><strong>资产沉淀</strong>：云空间沉淀直播复盘内容为可复用直播资产，云端随时调取，异地协同无需传文件</li>
+<li><strong>数据驱动</strong>：通过AI拆解优秀直播间话术、场景、评论等内容，供新主播学习优秀直播打法</li>
+</ul>
+</div>
+</div>
+<div class="detail-section">
+<div class="section-title">主播资源</div>
+<div class="section-body">
+<p>爱复盘是AI工具型SaaS产品，不提供主播资源，但提供<strong>主播能力复制与培训体系</strong>：</p>
+<ul>
+<li>通过AI复盘多维度拆解自身及行业头部直播间的话术、场景、评论等内容</li>
+<li>通过AI对比复盘找出新主播与优质主播的差距，针对性补强薄弱环节</li>
+<li>整套SOP大幅缩短主播培训周期（案例验证缩短70%）</li>
+<li>生成品牌专属脚本，搭建直播SOP和话术库</li>
+</ul>
+</div>
+</div>
+</div>
+<!-- ===== 详细案例 ===== -->
+<div class="detail-section full-width">
+<div class="section-title">详细案例</div>
+<div class="section-body">
+<div class="case-item">
+<div class="case-title">📱 【3C数码】某3C头部直播间 — 使用爱复盘后直播业绩暴涨240%</div>
+<div class="case-detail"><strong>客户背景</strong>：深耕3C外设数十年的跨国上市头部品牌，核心布局计算机外设全品类，旗下覆盖消费、专业、游戏多赛道子品牌，业务遍及全球140余国，早已完成直播电商多矩阵布局。<strong>痛点问题</strong>：依赖人工盯播、手动录屏，流程繁琐、耗时漫长；每天逐帧复盘多直播间，耗时冗长、效率低下；业绩增长乏力，优化无方向，运营无核心逻辑；新主播话术培养周期长，塑品话术无标准化体系；短视频引流选题无方向，竞品与热点获取滞后。<strong>解决方案</strong>：①高清自动录屏——告别手机录制直播间，工作提效8倍；②AI复盘——解决复盘耗时低效问题，大幅缩减时长，提升团队运营效率；③AI对比复盘——一键拆解同行、全维度对标直播间，精准定位差异，解决业绩增长难、提升无方向的痛点，输出可落地的优化方案；④AI话术助手——一键提取优化同行话术，输出标准化即用话术，解决主播话术培养难、塑品无标准痛点，省时提效；⑤短视频选题——追踪达人与爆款，解决选题难、热点滞后问题，高效筛选低粉爆款。<strong>效果</strong>：直播业绩暴涨<strong>240%</strong>；场均观看从<strong>1.5w→3.2w</strong>；场均销售额从<strong>5-7.5w→10-25w</strong>；工作提效<strong>8倍</strong>。</div>
+<div class="case-metrics">
+<span class="metric">业绩暴涨240%</span>
+<span class="metric">场均观看1.5w→3.2w</span>
+<span class="metric">场均销售额5-7.5w→10-25w</span>
+<span class="metric">工作提效8倍</span>
+</div>
+</div>
+<div class="case-item">
+<div class="case-title">🛍️ 【品牌电商】视说物语 — 使用爱复盘后直播业务提效78%</div>
+<div class="case-detail"><strong>客户背景</strong>：成都视说物语是数据驱动的全链路品牌电商运营服务商，拥有300+运营团队、年直播6万+小时，海内外多地布局并在成都建有3000㎡直播基地，服务飞利浦等全球知名品牌。<strong>痛点问题</strong>：主播规模大再加上培养周期长，导致批量化的培养主播成本过高；直播复盘流程繁琐、效率低下，导致会消耗过多时间和精力；直播场次过于庞杂，面临经验资产难以沉淀和标准化。<strong>解决方案</strong>：①AI对比复盘——一键拆解同行、全维度对标直播间，精准定位差异，解决业绩增长难、提升无方向的痛点，输出可落地的优化方案；②高清自动录屏——告别手机录制直播间，工作提效8倍；③AI复盘——解决复盘耗时低效问题，大幅缩减时长，提升团队运营效率；④云空间——依托企业级云存储，沉淀直播复盘内容为可复用直播资产，云端随时调取，异地协同无需传文件。<strong>效果</strong>：直播业务提效<strong>78%</strong>；场均观看从<strong>1,463→2,535</strong>；场均销售额从<strong>0.25-0.5w→1-2.5w</strong>；工作提效<strong>8倍</strong>。</div>
+<div class="case-metrics">
+<span class="metric">业务提效78%</span>
+<span class="metric">场均观看1,463→2,535</span>
+<span class="metric">场均销售额0.25-0.5w→1-2.5w</span>
+<span class="metric">工作提效8倍</span>
+</div>
+</div>
+</div>
+</div>
+<div class="detail-section full-width">
+<div class="section-title">收费标准</div>
+<div class="pricing-box"><div class="pricing-item"><strong>企业版 — 12,800元/年</strong>：含授权1主账号+5子账号，6个视频号直播监控位，每月500小时AI复盘，每月500万算力AI助手分析量</div>
+<div class="pricing-item"><strong>旗舰版 — 25,800元/年</strong>：含授权1主账号+10子账号，12个视频号直播监控位，每月2000小时AI复盘，每月1000万算力AI助手分析量</div>
+<div class="pricing-item">• 一定条件下可申请<strong>15天免费试用</strong></div>
+<div class="pricing-item">• 官网：<a href="https://www.ifupan.com/" target="_blank">https://www.ifupan.com/</a></div>
+</div>
+</div>
+</div>
+</div></div>
+</div>
+<div style="text-align:center;padding:20px;color:#999;font-size:0.82em;">
+  教育行业直播代播资源梳理 | 数据来源于各服务商提供的官方资料 | 仅供参考
+</div>
+<script>
+function toggleAccordion(header) {
+  const item = header.parentElement;
+  const wasOpen = item.classList.contains('open');
+  // Close all
+  document.querySelectorAll('.accordion-item').forEach(i => i.classList.remove('open'));
+  // Toggle current
+  if (!wasOpen) {
+    item.classList.add('open');
+    // Scroll into view smoothly
+    setTimeout(() => {
+      item.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }, 100);
+  }
+}
+
+// ===== Fuzzy Search =====
+(function() {
+  const input = document.getElementById('searchInput');
+  const clearBtn = document.getElementById('searchClear');
+  const stats = document.getElementById('searchStats');
+  const items = document.querySelectorAll('.accordion-item');
+  let debounceTimer = null;
+
+  // Pre-build searchable text for each accordion-item (cache for performance)
+  const searchCache = [];
+  items.forEach((item, idx) => {
+    searchCache.push({
+      el: item,
+      text: item.textContent.toLowerCase()
+    });
+  });
+
+  function fuzzyMatch(query, text) {
+    // Fuzzy matching: each char in query must appear in order in text
+    const q = query.toLowerCase();
+    let qi = 0;
+    for (let i = 0; i < text.length && qi < q.length; i++) {
+      if (text[i] === q[qi]) qi++;
+    }
+    return qi === q.length;
+  }
+
+  function doSearch() {
+    const query = input.value.trim();
+
+    if (!query) {
+      // Reset all
+      items.forEach(item => {
+        item.classList.remove('search-hidden', 'search-match', 'open');
+      });
+      // Restore category filter state
+      var activeTab = document.querySelector('.category-tab.active');
+      if (activeTab) { activeTab.click(); }
+      clearBtn.classList.remove('show');
+      stats.classList.remove('show');
+      return;
+    }
+
+    clearBtn.classList.add('show');
+
+    let matchCount = 0;
+    searchCache.forEach(({ el, text }) => {
+      const matched = fuzzyMatch(query, text);
+      if (matched) {
+        el.classList.remove('search-hidden');
+        el.classList.add('search-match');
+        matchCount++;
+      } else {
+        el.classList.add('search-hidden');
+        el.classList.remove('search-match', 'open');
+      }
+    });
+
+    // Auto-expand first match and scroll to it
+    const firstMatch = document.querySelector('.accordion-item.search-match');
+    if (firstMatch && !firstMatch.classList.contains('open')) {
+      // Close all then open first match
+      items.forEach(i => i.classList.remove('open'));
+      firstMatch.classList.add('open');
+      setTimeout(() => {
+        firstMatch.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }, 150);
+    }
+
+    // Show stats
+    stats.classList.add('show');
+    stats.innerHTML = '找到 <strong>' + matchCount + '</strong> 家匹配的公司';
+  }
+
+  input.addEventListener('input', function() {
+    clearTimeout(debounceTimer);
+    debounceTimer = setTimeout(doSearch, 200);
+  });
+
+  // Enter key: jump to next match
+  input.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      doSearch();
+      const matches = document.querySelectorAll('.accordion-item.search-match.open');
+      if (matches.length === 0) {
+        const first = document.querySelector('.accordion-item.search-match');
+        if (first) {
+          items.forEach(i => i.classList.remove('open'));
+          first.classList.add('open');
+          setTimeout(() => {
+            first.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }, 150);
+        }
+      }
+    }
+    if (e.key === 'Escape') {
+      input.value = '';
+      doSearch();
+      input.blur();
+    }
+  });
+
+  clearBtn.addEventListener('click', function() {
+    input.value = '';
+    doSearch();
+    input.focus();
+  });
+
+  // Keyboard shortcut: Ctrl/Cmd+K to focus search
+  document.addEventListener('keydown', function(e) {
+    if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+      e.preventDefault();
+      input.focus();
+      input.select();
+    }
+  });
+})();
+</script>
+<script>
+// ===== Category Filter =====
+(function() {
+  var currentCategory = 'all';
+  var tabs = document.querySelectorAll('.category-tab');
+  tabs.forEach(function(tab) {
+    tab.addEventListener('click', function() {
+      var cat = this.getAttribute('data-cat');
+      if (cat === currentCategory) { cat = 'all'; }
+      currentCategory = cat;
+      tabs.forEach(function(t) { t.classList.remove('active'); });
+      if (cat === 'all') {
+        document.querySelector('.category-tab[data-cat="all"]').classList.add('active');
+      } else {
+        this.classList.add('active');
+      }
+      var groups = document.querySelectorAll('.category-group');
+      groups.forEach(function(g) {
+        if (cat === 'all' || g.getAttribute('data-group') === cat) {
+          g.classList.remove('category-hidden');
+        } else {
+          g.classList.add('category-hidden');
+        }
+      });
+      var searchInput = document.getElementById('searchInput');
+      if (searchInput && searchInput.value.trim()) {
+        searchInput.dispatchEvent(new Event('input'));
+      }
+    });
+  });
+})();
+</script>
+
+<!-- ===== Advanced Search JavaScript ===== -->
+<script>
+(function() {
+  // === Budget tier definitions per type ===
+  var budgetTiers = {
+    'all': {
+      unit: '（月度总预算）',
+      options: [
+        { label: '≤1万/月', value: 1 },
+        { label: '1-5万/月', value: 2 },
+        { label: '5-15万/月', value: 3 },
+        { label: '15万+/月', value: 4 },
+        { label: '面议/定制', value: 5 }
+      ]
+    },
+    '代理商': {
+      unit: '（月度服务费）',
+      options: [
+        { label: '≤5万/月', value: 1 },
+        { label: '5-15万/月', value: 2 },
+        { label: '15万+/月', value: 3 },
+        { label: '面议/定制', value: 4 }
+      ]
+    },
+    '三方代播公司': {
+      unit: '（小时报价）',
+      options: [
+        { label: '≤300元/h', value: 1 },
+        { label: '300-400元/h', value: 2 },
+        { label: '400-500元/h', value: 3 },
+        { label: '500元+/h', value: 4 },
+        { label: '面议/定制', value: 5 }
+      ]
+    },
+    '直播SaaS服务商': {
+      unit: '（年费）',
+      options: [
+        { label: '≤1万/年', value: 1 },
+        { label: '1-5万/年', value: 2 },
+        { label: '5万+/年', value: 3 },
+        { label: '面议/定制', value: 4 }
+      ]
+    }
+  };
+
+  var companyBudgetMap = {
+    '云景集团':        { '代理商': 2, '三方代播公司': null, '直播SaaS服务商': null, 'all': 3 },
+    '广联先锋':        { '代理商': 2, '三方代播公司': null, '直播SaaS服务商': null, 'all': 3 },
+    '云盟山海':        { '代理商': null, '三方代播公司': 2, '直播SaaS服务商': null, 'all': 2 },
+    '晴空':          { '代理商': null, '三方代播公司': 3, '直播SaaS服务商': null, 'all': 3 },
+    '嘉桥数科':        { '代理商': null, '三方代播公司': 3, '直播SaaS服务商': null, 'all': 3 },
+    '飞天经纬':        { '代理商': 5, '三方代播公司': null, '直播SaaS服务商': null, 'all': 5 },
+    '白云之外':        { '代理商': null, '三方代播公司': 5, '直播SaaS服务商': null, 'all': 4 },
+    '龙宜文化':        { '代理商': null, '三方代播公司': 5, '直播SaaS服务商': null, 'all': 4 },
+    '宝汇':            { '代理商': null, '三方代播公司': 5, '直播SaaS服务商': null, 'all': 2 },
+    '金鹃传媒':        { '代理商': null, '三方代播公司': 5, '直播SaaS服务商': null, 'all': 5 },
+    '麦克风':          { '代理商': null, '三方代播公司': 3, '直播SaaS服务商': null, 'all': 3 },
+    '涤涤卫':          { '代理商': null, '三方代播公司': null, '直播SaaS服务商': 1, 'all': 1 },
+    '百准':            { '代理商': null, '三方代播公司': null, '直播SaaS服务商': 3, 'all': 3 },
+    '私信通':          { '代理商': null, '三方代播公司': null, '直播SaaS服务商': 3, 'all': 3 },
+    '超级编导':        { '代理商': null, '三方代播公司': null, '直播SaaS服务商': 2, 'all': 2 },
+    '神绘数字人':      { '代理商': null, '三方代播公司': null, '直播SaaS服务商': 1, 'all': 1 },
+    '爱复盘':          { '代理商': null, '三方代播公司': null, '直播SaaS服务商': 1, 'all': 1 }
+  };
+
+  // === State ===
+  var selectedType = 'all';
+  var selectedCapabilities = [];
+  var customCapabilities = [];
+  var selectedSubtracks = [];
+  var selectedBudget = null;
+  var weights = { budget: 50, cap: 30, track: 20 };
+  var advSearchActive = false;
+
+  // === DOM refs ===
+  var advToggle = document.getElementById('advToggle');
+  var advPanel = document.getElementById('advPanel');
+  var typeRadios = document.getElementById('typeRadios');
+  var capCustomInput = document.getElementById('capCustomInput');
+  var capAddBtn = document.getElementById('capAddBtn');
+  var budgetRadios = document.getElementById('budgetRadios');
+  var budgetUnit = document.getElementById('budgetUnit');
+  var advSearchBtn = document.getElementById('advSearchBtn');
+  var advResetBtn = document.getElementById('advResetBtn');
+  var advResultHint = document.getElementById('advResultHint');
+  var allItems = document.querySelectorAll('.accordion-item');
+  var subtrackSection = document.getElementById('subtrackSection');
+  var subtrackChips = document.getElementById('subtrackChips');
+
+  // === Help guide toggle ===
+  var helpGuideBtn = document.getElementById('helpGuideBtn');
+  var helpGuidePopup = document.getElementById('helpGuidePopup');
+  helpGuideBtn.addEventListener('click', function() {
+    helpGuidePopup.classList.toggle('open');
+  });
+
+  // === Toggle panel ===
+  advToggle.addEventListener('click', function() {
+    if (advPanel.classList.contains('open')) {
+      advPanel.classList.remove('open');
+      advToggle.classList.remove('active');
+    } else {
+      advPanel.classList.add('open');
+      advToggle.classList.add('active');
+      renderBudgetOptions();
+      updateSubtrackVisibility();
+    }
+  });
+
+  // === Type selection ===
+  typeRadios.addEventListener('click', function(e) {
+    var radio = e.target.closest('.type-radio');
+    if (!radio) return;
+    typeRadios.querySelectorAll('.type-radio').forEach(function(r) { r.classList.remove('active'); });
+    radio.classList.add('active');
+    selectedType = radio.getAttribute('data-type');
+    renderBudgetOptions();
+    updateSubtrackVisibility();
+  });
+
+  // === Subtrack visibility (only for 代理商 + 三方代播) ===
+  function updateSubtrackVisibility() {
+    if (selectedType === 'all' || selectedType === '代理商' || selectedType === '三方代播公司') {
+      subtrackSection.style.display = '';
+    } else {
+      subtrackSection.style.display = 'none';
+    }
+  }
+  updateSubtrackVisibility();
+
+  // === Capability chip selection (all cap-chips groups) ===
+  document.addEventListener('click', function(e) {
+    var chip = e.target.closest('.cap-chip');
+    if (!chip) return;
+    var parent = chip.parentElement;
+    // Check if it's a subtrack chip
+    if (parent.id === 'subtrackChips') {
+      var track = chip.getAttribute('data-track');
+      if (chip.classList.contains('active')) {
+        chip.classList.remove('active');
+        selectedSubtracks = selectedSubtracks.filter(function(t) { return t !== track; });
+      } else {
+        chip.classList.add('active');
+        selectedSubtracks.push(track);
+      }
+      return;
+    }
+    // It's a capability chip
+    if (!parent.classList.contains('cap-chips')) return;
+    var cap = chip.getAttribute('data-cap');
+    if (chip.classList.contains('active')) {
+      chip.classList.remove('active');
+      selectedCapabilities = selectedCapabilities.filter(function(c) { return c !== cap; });
+    } else {
+      chip.classList.add('active');
+      selectedCapabilities.push(cap);
+    }
+  });
+
+  // === Custom capability input ===
+  function addCustomCap() {
+    var val = capCustomInput.value.trim();
+    if (!val) return;
+    if (customCapabilities.indexOf(val) === -1 && selectedCapabilities.indexOf(val) === -1) {
+      customCapabilities.push(val);
+      var chip = document.createElement('span');
+      chip.className = 'cap-chip active';
+      chip.setAttribute('data-cap', val);
+      chip.textContent = val;
+      chip.style.background = '#e3f2fd';
+      chip.style.borderColor = '#1565c0';
+      chip.style.color = '#1565c0';
+      // Add to last cap-chips group (工具/SaaS)
+      var lastGroup = document.getElementById('capChips5');
+      if (lastGroup) lastGroup.appendChild(chip);
+      selectedCapabilities.push(val);
+    }
+    capCustomInput.value = '';
+  }
+  capAddBtn.addEventListener('click', addCustomCap);
+  capCustomInput.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') { e.preventDefault(); addCustomCap(); }
+  });
+
+  var customSubtracks = [];
+  var trackCustomInput = document.getElementById('trackCustomInput');
+  var trackAddBtn = document.getElementById('trackAddBtn');
+
+  function addCustomTrack() {
+    var val = trackCustomInput.value.trim();
+    if (!val) return;
+    if (customSubtracks.indexOf(val) === -1 && selectedSubtracks.indexOf(val) === -1) {
+      customSubtracks.push(val);
+      var chip = document.createElement('span');
+      chip.className = 'cap-chip active';
+      chip.setAttribute('data-track', val);
+      chip.textContent = val;
+      chip.style.background = '#e3f2fd';
+      chip.style.borderColor = '#1565c0';
+      chip.style.color = '#1565c0';
+      subtrackChips.appendChild(chip);
+      selectedSubtracks.push(val);
+    }
+    trackCustomInput.value = '';
+  }
+  trackAddBtn.addEventListener('click', addCustomTrack);
+  trackCustomInput.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') { e.preventDefault(); addCustomTrack(); }
+  });
+
+  // === Budget options rendering ===
+  function renderBudgetOptions() {
+    var tiers = budgetTiers[selectedType];
+    budgetUnit.textContent = tiers.unit;
+    budgetRadios.innerHTML = '';
+    tiers.options.forEach(function(opt) {
+      var span = document.createElement('span');
+      span.className = 'budget-radio' + (selectedBudget === opt.value ? ' active' : '');
+      span.setAttribute('data-budget', opt.value);
+      span.textContent = opt.label;
+      budgetRadios.appendChild(span);
+    });
+  }
+  renderBudgetOptions();
+
+  budgetRadios.addEventListener('click', function(e) {
+    var radio = e.target.closest('.budget-radio');
+    if (!radio) return;
+    var val = parseInt(radio.getAttribute('data-budget'));
+    if (selectedBudget === val) {
+      selectedBudget = null;
+      radio.classList.remove('active');
+    } else {
+      budgetRadios.querySelectorAll('.budget-radio').forEach(function(r) { r.classList.remove('active'); });
+      radio.classList.add('active');
+      selectedBudget = val;
+    }
+  });
+
+  // === Weight inputs (预算 + 能力 editable, 细分赛道 auto = 100 - others) ===
+  var weightBudgetInput = document.getElementById('weightBudget');
+  var weightCapInput = document.getElementById('weightCap');
+  var weightTrackInput = document.getElementById('weightTrack');
+  var weightHint = document.getElementById('weightHint');
+
+  function syncWeights() {
+    var b = parseInt(weightBudgetInput.value) || 0;
+    var c = parseInt(weightCapInput.value) || 0;
+    b = Math.max(0, Math.min(100, b));
+    c = Math.max(0, Math.min(100, c));
+
+    if (b + c > 100) {
+      c = 100 - b;
+      weightCapInput.value = c;
+      weightCapInput.classList.add('error');
+      weightHint.classList.add('show');
+      setTimeout(function() {
+        weightCapInput.classList.remove('error');
+        weightHint.classList.remove('show');
+      }, 1500);
+    } else {
+      weightCapInput.classList.remove('error');
+      weightHint.classList.remove('show');
+    }
+
+    var t = 100 - b - c;
+    weightTrackInput.value = t;
+
+    weights.budget = b;
+    weights.cap = c;
+    weights.track = t;
+  }
+
+  weightBudgetInput.addEventListener('input', syncWeights);
+  weightCapInput.addEventListener('input', syncWeights);
+
+  document.getElementById('resetWeightsBtn').addEventListener('click', function() {
+    weights = { budget: 50, cap: 30, track: 20 };
+    weightBudgetInput.value = 50;
+    weightCapInput.value = 30;
+    weightTrackInput.value = 20;
+    weightBudgetInput.classList.remove('error');
+    weightCapInput.classList.remove('error');
+    weightHint.classList.remove('show');
+  });
+
+  // === Fuzzy keyword match ===
+  function keywordMatch(keywords, text) {
+    if (!keywords || keywords.length === 0) return 1;
+    var lower = text.toLowerCase();
+    var matched = 0;
+    keywords.forEach(function(kw) {
+      if (lower.indexOf(kw.toLowerCase()) !== -1) matched++;
+    });
+    return matched / keywords.length;
+  }
+
+  // === Budget distance scoring ===
+  function budgetScore(companyName) {
+    if (selectedBudget === null) return 1;
+    var map = companyBudgetMap[companyName];
+    if (!map) return 0.5;
+    var companyTier = map[selectedType];
+    if (companyTier === null || companyTier === undefined) return 0.1;
+
+    var maxTier = budgetTiers[selectedType].options.length;
+    var isCustomTier = (companyTier === maxTier);
+    var isSelectedCustom = (selectedBudget === maxTier);
+
+    if (isCustomTier && isSelectedCustom) return 0.7;
+    if (isSelectedCustom) return 0.7;
+    if (isCustomTier) return 0.5;
+
+    var distance = Math.abs(companyTier - selectedBudget);
+    if (distance === 0) return 1.0;
+    if (distance === 1) return 0.6;
+    if (distance === 2) return 0.3;
+    return 0.1;
+  }
+
+  // === Capability & Experience score (merged: capabilities + advantages) ===
+  function capExpScore(companyCaps, companyAdvs) {
+    if (selectedCapabilities.length === 0) return 1;
+    var combined = (companyCaps || '') + ',' + (companyAdvs || '');
+    var items = combined.split(',');
+    var matched = 0;
+    selectedCapabilities.forEach(function(sel) {
+      var selLower = sel.toLowerCase();
+      for (var i = 0; i < items.length; i++) {
+        var itemLower = items[i].trim().toLowerCase();
+        if (itemLower.indexOf(selLower) !== -1 || selLower.indexOf(itemLower) !== -1) {
+          matched++;
+          break;
+        }
+      }
+    });
+    return matched / selectedCapabilities.length;
+  }
+
+  // === Subtrack score ===
+  function subtrackScore(companyTracks) {
+    if (selectedSubtracks.length === 0) return 1;
+    if (!companyTracks) return 0;
+    var tracks = companyTracks.split(',');
+    var matched = 0;
+    selectedSubtracks.forEach(function(sel) {
+      var selLower = sel.toLowerCase();
+      for (var i = 0; i < tracks.length; i++) {
+        var tLower = tracks[i].trim().toLowerCase();
+        if (tLower.indexOf(selLower) !== -1 || selLower.indexOf(tLower) !== -1) {
+          matched++;
+          break;
+        }
+      }
+    });
+    return matched / selectedSubtracks.length;
+  }
+
+  // === Compute match color ===
+  function matchColor(pct) {
+    if (pct >= 0.8) return '#43a047';
+    if (pct >= 0.6) return '#fb8c00';
+    if (pct >= 0.4) return '#f4511e';
+    return '#e53935';
+  }
+
+  // === Add/Update match badge on item ===
+  function updateMatchBadge(item, totalScore, scores) {
+    var header = item.querySelector('.accordion-header');
+    var nameEl = item.querySelector('.company-name-inline');
+    var badge = item.querySelector('.match-badge');
+    var detail = item.querySelector('.match-detail');
+    if (!badge) {
+      badge = document.createElement('span');
+      badge.className = 'match-badge';
+      detail = document.createElement('div');
+      detail.className = 'match-detail';
+      if (nameEl && nameEl.nextSibling) {
+        nameEl.parentNode.insertBefore(badge, nameEl.nextSibling);
+      } else if (nameEl) {
+        nameEl.parentNode.appendChild(badge);
+      }
+      header.style.position = 'relative';
+      badge.parentNode.insertBefore(detail, badge.nextSibling);
+    }
+
+    if (!advSearchActive) {
+      badge.classList.remove('show');
+      detail.style.display = 'none';
+      return;
+    }
+
+    var pct = Math.round(totalScore * 100);
+    var color = matchColor(totalScore);
+    badge.innerHTML = '<span class="match-badge-text">匹配度</span> ' +
+      '<span class="match-badge-pct" style="color:' + color + '">' + pct + '%</span>' +
+      '<span class="match-badge-bar"><span class="match-badge-fill" style="width:' + pct + '%;background:' + color + '"></span></span>';
+    badge.classList.add('show');
+
+    var wSum = weights.budget + weights.cap + weights.track;
+    if (wSum === 0) wSum = 1;
+    var normalize = function(v) { return Math.round(v * 100); };
+
+    detail.innerHTML =
+      '<div class="match-detail-row"><span class="match-detail-label">预算匹配</span><span class="match-detail-value">' + normalize(scores.budget * weights.budget / wSum) + '%</span></div>' +
+      '<div class="match-detail-row"><span class="match-detail-label">能力&经验</span><span class="match-detail-value">' + normalize(scores.cap * weights.cap / wSum) + '%</span></div>' +
+      '<div class="match-detail-row"><span class="match-detail-label">细分赛道</span><span class="match-detail-value">' + normalize(scores.track * weights.track / wSum) + '%</span></div>';
+  }
+
+  // === Main advanced search ===
+  function doAdvancedSearch() {
+    var hasFilter = selectedCapabilities.length > 0 || selectedSubtracks.length > 0 || selectedBudget !== null || selectedType !== 'all';
+
+    if (!hasFilter) {
+      advSearchActive = false;
+      resetAdvancedDisplay();
+      advResultHint.innerHTML = '';
+      return;
+    }
+
+    advSearchActive = true;
+    var wSum = weights.budget + weights.cap + weights.track;
+    if (wSum === 0) wSum = 1;
+
+    var results = [];
+
+    allItems.forEach(function(item) {
+      var companyName = item.querySelector('.company-name-inline').textContent.trim();
+      var category = item.getAttribute('data-category');
+      var caps = item.getAttribute('data-capabilities') || '';
+      var advs = item.getAttribute('data-advantages') || '';
+      var tracks = item.getAttribute('data-subtracks') || '';
+
+      // Type is pure filter, not scored
+      if (selectedType !== 'all' && category !== selectedType) {
+        results.push({ el: item, score: 0, scores: { budget: 0, cap: 0, track: 0 }, hidden: true });
+        return;
+      }
+
+      var sBudget = budgetScore(companyName);
+      var sCap = capExpScore(caps, advs);
+      var sTrack = subtrackScore(tracks);
+
+      var total = (sBudget * weights.budget + sCap * weights.cap + sTrack * weights.track) / wSum;
+
+      // Education case bonus
+      var eduCases = item.querySelectorAll('.edu-case');
+      if (eduCases.length > 0) total = Math.min(1, total + 0.05);
+
+      results.push({ el: item, score: total, scores: { budget: sBudget, cap: sCap, track: sTrack }, hidden: false });
+    });
+
+    // Sort by score descending
+    results.sort(function(a, b) { return b.score - a.score; });
+
+    var matchCount = 0;
+    var parentGroups = document.querySelectorAll('.category-group');
+
+    results.forEach(function(r, idx) {
+      var item = r.el;
+
+      if (r.hidden) {
+        item.classList.add('search-hidden');
+        item.classList.remove('search-match', 'open');
+        updateMatchBadge(item, r.score, r.scores);
+        return;
+      }
+
+      item.classList.remove('search-hidden');
+      if (r.score > 0.1) {
+        item.classList.add('search-match');
+        matchCount++;
+      } else {
+        item.classList.remove('search-match', 'open');
+      }
+      updateMatchBadge(item, r.score, r.scores);
+      item.style.order = idx;
+    });
+
+    // Show/hide category groups based on type filter
+    parentGroups.forEach(function(g) {
+      if (selectedType === 'all' || g.getAttribute('data-group') === selectedType) {
+        g.classList.remove('category-hidden');
+      } else {
+        g.classList.add('category-hidden');
+      }
+    });
+
+    // Sync category tabs
+    var tabs = document.querySelectorAll('.category-tab');
+    tabs.forEach(function(t) {
+      t.classList.remove('active');
+      if (t.getAttribute('data-cat') === selectedType) t.classList.add('active');
+    });
+    if (selectedType === 'all') {
+      document.querySelector('.category-tab[data-cat="all"]').classList.add('active');
+    }
+
+    // Re-order DOM within category groups
+    parentGroups.forEach(function(group) {
+      if (group.classList.contains('category-hidden')) return;
+      var items = Array.from(group.querySelectorAll(':scope > .accordion-item'));
+      items.sort(function(a, b) {
+        var scoreA = results.find(function(r) { return r.el === a; });
+        var scoreB = results.find(function(r) { return r.el === b; });
+        return (scoreB ? scoreB.score : 0) - (scoreA ? scoreA.score : 0);
+      });
+      items.forEach(function(item) { group.appendChild(item); });
+    });
+
+    // Auto-expand top match
+    var topMatch = results.find(function(r) {
+      return !r.hidden && r.score > 0.1;
+    });
+    if (topMatch) {
+      allItems.forEach(function(i) { i.classList.remove('open'); });
+      topMatch.el.classList.add('open');
+      setTimeout(function() {
+        topMatch.el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }, 200);
+    }
+
+    advResultHint.innerHTML = '按匹配度排序，共 <strong>' + matchCount + '</strong> 家匹配';
+  }
+
+  function resetAdvancedDisplay() {
+    allItems.forEach(function(item) {
+      item.classList.remove('search-hidden', 'search-match', 'open');
+      item.style.order = '';
+      var badge = item.querySelector('.match-badge');
+      if (badge) badge.classList.remove('show');
+    });
+  }
+
+  // === Search button ===
+  advSearchBtn.addEventListener('click', function() {
+    doAdvancedSearch();
+    // Auto-close panel after search
+    advPanel.classList.remove('open');
+    advToggle.classList.remove('active');
+    // Update filter status bar
+    updateFilterStatusBar();
+    // Scroll to category nav after a short delay for panel animation
+    setTimeout(function() {
+      var navEl = document.querySelector('.category-nav');
+      if (navEl) navEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 300);
+  });
+
+  // === Filter status bar ===
+  var filterStatusBar = document.getElementById('filterStatusBar');
+  var filterStatusTags = document.getElementById('filterStatusTags');
+  var filterReopenBtn = document.getElementById('filterReopenBtn');
+  var filterClearBtn = document.getElementById('filterClearBtn');
+
+  function updateFilterStatusBar() {
+    if (!advSearchActive) {
+      filterStatusBar.classList.remove('show');
+      return;
+    }
+    var tags = [];
+    // Type
+    if (selectedType !== 'all') {
+      var typeLabels = { '代理商': '代理商', '三方代播公司': '三方代播', '直播SaaS服务商': 'SaaS' };
+      tags.push(typeLabels[selectedType] || selectedType);
+    }
+    // Capabilities
+    if (selectedCapabilities.length > 0) {
+      var capNames = selectedCapabilities.slice(0, 3).join('、');
+      if (selectedCapabilities.length > 3) capNames += '等' + selectedCapabilities.length + '项';
+      tags.push(capNames);
+    }
+    // Subtracks
+    if (selectedSubtracks.length > 0) {
+      var trackNames = selectedSubtracks.slice(0, 3).join('、');
+      if (selectedSubtracks.length > 3) trackNames += '等' + selectedSubtracks.length + '项';
+      tags.push(trackNames);
+    }
+    // Budget
+    if (selectedBudget !== null) {
+      var tierLabels = budgetTiers[selectedType].options;
+      var selectedOpt = tierLabels.find(function(o) { return o.value === selectedBudget; });
+      if (selectedOpt) tags.push('预算' + selectedOpt.label);
+    }
+
+    // Match count
+    var matchCount = document.querySelectorAll('.accordion-item.search-match').length;
+    var html = '';
+    tags.forEach(function(t, i) {
+      if (i > 0) html += '<span class="filter-status-sep"> · </span>';
+      html += '<span class="filter-status-tag">' + t + '</span>';
+    });
+    html += '<span class="filter-status-sep"> · </span><span style="color:var(--primary);font-weight:600;">匹配 ' + matchCount + ' 家</span>';
+    filterStatusTags.innerHTML = html;
+    filterStatusBar.classList.add('show');
+  }
+
+  filterReopenBtn.addEventListener('click', function() {
+    advPanel.classList.add('open');
+    advToggle.classList.add('active');
+  });
+
+  filterClearBtn.addEventListener('click', function() {
+    // Trigger reset
+    advResetBtn.click();
+  });
+
+  // === Reset button ===
+  advResetBtn.addEventListener('click', function() {
+    selectedType = 'all';
+    selectedCapabilities = [];
+    customCapabilities = [];
+    selectedSubtracks = [];
+    selectedBudget = null;
+    weights = { budget: 50, cap: 30, track: 20 };
+    advSearchActive = false;
+
+    // Reset UI
+    typeRadios.querySelectorAll('.type-radio').forEach(function(r) {
+      r.classList.remove('active');
+      if (r.getAttribute('data-type') === 'all') r.classList.add('active');
+    });
+    // Reset all cap-chips across all groups
+    document.querySelectorAll('.cap-chip').forEach(function(c) {
+      if (customCapabilities.indexOf(c.getAttribute('data-cap')) !== -1 || customSubtracks.indexOf(c.getAttribute('data-track')) !== -1) {
+        c.remove();
+      } else {
+        c.classList.remove('active');
+      }
+    });
+    customCapabilities = [];
+    customSubtracks = [];
+    capCustomInput.value = '';
+    trackCustomInput.value = '';
+    selectedBudget = null;
+    renderBudgetOptions();
+    updateSubtrackVisibility();
+
+    weights = { budget: 50, cap: 30, track: 20 };
+    weightBudgetInput.value = 50;
+    weightCapInput.value = 30;
+    weightTrackInput.value = 20;
+
+    resetAdvancedDisplay();
+    advResultHint.innerHTML = '';
+    filterStatusBar.classList.remove('show');
+
+    var allTab = document.querySelector('.category-tab[data-cat="all"]');
+    if (allTab) allTab.click();
+
+    var parentGroups = document.querySelectorAll('.category-group');
+    parentGroups.forEach(function(group) {
+      var items = Array.from(group.querySelectorAll(':scope > .accordion-item'));
+      items.forEach(function(item) { item.style.order = ''; });
+    });
+  });
+
+})();
+</script>
+
+<!-- ===== Kanban Board JavaScript ===== -->
+<script>
+(function() {
+  var kanbanContainer = document.getElementById('kanbanContainer');
+  var viewResourceBtn = document.getElementById('viewResourceBtn');
+  var viewKanbanBtn = document.getElementById('viewKanbanBtn');
+  var viewSwitcher = document.getElementById('viewSwitcher');
+  var categoryNav = document.querySelector('.category-nav');
+  var categoryGroups = document.querySelectorAll('.category-group');
+  var kanbanGroups = kanbanContainer.querySelectorAll('.kanban-group');
+  var filterChips = kanbanContainer.querySelectorAll('.kanban-filter-chip');
+  var searchContainer = document.querySelector('.search-container');
+  var isKanbanVisible = false;
+
+  function showKanban() {
+    isKanbanVisible = true;
+    kanbanContainer.classList.add('kanban-visible');
+    viewKanbanBtn.classList.add('active');
+    viewResourceBtn.classList.remove('active');
+    // Hide resource view elements
+    categoryGroups.forEach(function(g) { g.style.display = 'none'; });
+    categoryNav.style.display = 'none';
+    if (searchContainer) searchContainer.style.display = 'none';
+    var advPanel = document.getElementById('advPanel');
+    if (advPanel) advPanel.classList.remove('open');
+    var advToggle = document.getElementById('advToggle');
+    if (advToggle) advToggle.classList.remove('active');
+    var helpGuidePopup = document.getElementById('helpGuidePopup');
+    if (helpGuidePopup) helpGuidePopup.classList.remove('open');
+    if (helpGuideBtn) helpGuideBtn.style.display = 'none';
+    var filterStatusBar = document.getElementById('filterStatusBar');
+    if (filterStatusBar) filterStatusBar.classList.remove('show');
+  }
+
+  function showResource() {
+    isKanbanVisible = false;
+    kanbanContainer.classList.remove('kanban-visible');
+    viewResourceBtn.classList.add('active');
+    viewKanbanBtn.classList.remove('active');
+    // Show resource view elements
+    categoryGroups.forEach(function(g) { g.style.display = ''; });
+    categoryNav.style.display = '';
+    if (searchContainer) searchContainer.style.display = '';
+    if (helpGuideBtn) helpGuideBtn.style.display = '';
+  }
+
+  viewKanbanBtn.addEventListener('click', function() {
+    if (!isKanbanVisible) showKanban();
+  });
+
+  viewResourceBtn.addEventListener('click', function() {
+    if (isKanbanVisible) showResource();
+  });
+
+  // Dashboard card toggle
+  window.toggleDashboardCard = function(card) {
+    card.classList.toggle('collapsed');
+  };
+
+  // Filter chips
+  filterChips.forEach(function(chip) {
+    chip.addEventListener('click', function() {
+      filterChips.forEach(function(c) { c.classList.remove('active'); });
+      this.classList.add('active');
+      var filter = this.getAttribute('data-filter');
+      if (filter === 'all') {
+        kanbanGroups.forEach(function(g) { g.style.display = ''; });
+      } else {
+        kanbanGroups.forEach(function(g) {
+          if (g.getAttribute('data-group-status') === filter) {
+            g.style.display = '';
+          } else {
+            g.style.display = 'none';
+          }
+        });
+      }
+    });
+  });
+
+  // Click on provider name to scroll to accordion detail
+  kanbanContainer.addEventListener('click', function(e) {
+    var provider = e.target.closest('.kanban-provider.in-lib');
+    if (!provider) return;
+    var targetName = provider.getAttribute('data-target');
+    if (!targetName) return;
+
+    // Switch back to resource view
+    showResource();
+    document.querySelector('.category-tab[data-cat="all"]').classList.add('active');
+    categoryGroups.forEach(function(g) { g.classList.remove('category-hidden'); g.style.display = ''; });
+
+    // Find the accordion item
+    var allItems = document.querySelectorAll('.accordion-item');
+    var targetItem = null;
+    allItems.forEach(function(item) {
+      var nameEl = item.querySelector('.company-name-inline');
+      if (nameEl && nameEl.textContent.trim() === targetName) {
+        targetItem = item;
+      }
+    });
+
+    if (targetItem) {
+      allItems.forEach(function(i) { i.classList.remove('open'); });
+      targetItem.classList.add('open');
+      setTimeout(function() {
+        targetItem.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }, 200);
+    }
+  });
+
+})();
+</script>
+</body>
+</html>
